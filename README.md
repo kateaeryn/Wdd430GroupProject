@@ -9,3 +9,11 @@ Kate Christensen
 Mariana Eiterer Overbay
 Blake Kimball Torres
 Kimberly Leann Torres
+
+Technology required for project.
+
+Front-End: HTML, CSS, JavaScript, Next.js
+Back-End: Node.js, a database
+Project Management: GitHub Boards
+Code Management: Git and GitHub Repository
+Deployment / Cloud Platform: Vercel
