@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css"; 
 import Head from "next/head";
 import React from "react";
-import Header from "./components/header.js";
-import Footer from "./components/footer.js";
-import { roboto, shadows } from "./ui/fonts";
+import Header from "./ui/components/header.js";
+import Footer from "./ui/components/footer.js";
+import { roboto, shadows } from "./ui/fonts.js";
 
 export const metadata: Metadata = {
   title: "Create Next App",
