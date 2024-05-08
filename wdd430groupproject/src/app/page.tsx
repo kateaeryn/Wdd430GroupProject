@@ -16,9 +16,9 @@ export default function LandingPage() {
 			<h1
 				style={{
 					fontSize: "3.5rem",
-					fontWeight: "bold",
+					fontWeight: "400",
 					color: "#261B14",
-					textDecoration: "underline",
+					
           margin: "3rem",
 				}}
 			>
