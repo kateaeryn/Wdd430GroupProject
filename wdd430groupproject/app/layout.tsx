@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import "./globals.css"; 
+import "/app/ui/globals.css"; 
 import Head from "next/head";
 import React from "react";
 import Header from "./ui/components/header.js";
 import Footer from "./ui/components/footer.js";
-import { roboto, shadows } from "./ui/fonts.js";
+import { quattrocento } from '@/app/ui/fonts';
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -25,7 +25,7 @@ export default function RootLayout({
 					content="Welcome to the Handcrafted Haven online store"
 				/>
 			</Head>
-      <body className={`${shadows.className}`}>
+      <body className={`${quattrocento.className}`}>
         <div>
           <Header />
           <main>{children}</main>
