@@ -1,5 +1,6 @@
 import React from "react";
-import logo from "/app/images/logo.png";
+import logo from "/public/images/logo.png";
+import NavLinks from '/app/ui/dashboard/nav-links';
 
 export default function Header() {
 	return (
@@ -23,7 +24,11 @@ export default function Header() {
 			</div>
 
 			{/* Navigation links */}
-			<nav
+			<div className="flex grow flex-row justify-between space-x-2 md:flex-row md:space-x-0 md:space-y-2">
+			<NavLinks />
+			<div className="hidden h-auto w-full grow rounded-md bg-gray-50 md:block"></div>
+			</div>
+			{/* <nav
 				className="navigation"
 				style={{ padding: "20px", textAlign: "center", color: "#fff" }}
 			>
@@ -40,13 +45,13 @@ export default function Header() {
 						<a href="/">Home</a>
 					</li>
 					<li className="nav-links">
-						<a href="/">About</a>
+						<a href="/">Our Story</a>
 					</li>
 					<li className="nav-links">
 						<a href="/">Shop</a>
 					</li>
 				</ul>
-			</nav>
+			</nav> */}
 		</header>
 	);
 }

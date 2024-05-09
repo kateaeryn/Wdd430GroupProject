@@ -1,8 +1,8 @@
 export default function Page() {
-  return <p>Add products page</p>;
+  return <p>Landing Page</p>;
 }
 import { Metadata } from 'next';
  
 export const metadata: Metadata = {
-  title: 'Add Product',
+  title: 'Landing Page',
 };

@@ -1,6 +1,7 @@
 import React from "react";
-import image from "./images/blank-box.png";
-import blankBox from "./images/blank-box.png";
+// import image from "/public/images/blank-box.png";
+import blankBox from "/public/images/blank-box.png";
+import CatLinks from '../app/ui/dashboard/categories';
 
 export default function LandingPage() {
 	return (
@@ -25,22 +26,17 @@ export default function LandingPage() {
 				Handcrafted Haven
 			</h1>
 
-			<img
-				src={image.src}
-				width={500}
-				height={350}
-				className="hidden md:block"
-				alt="hero desktop image"
-			/>
-
-			<p>
+			<h3>
 				Handcrafted Haven is a place to find unique, handcrafted items.
-			</p>
+			</h3>
 
       <div className="categories-container">
 			<h2>Categories</h2>
-
-			<ul className="categories-home">
+		<div className="categories-home">
+			<CatLinks />
+			
+			</div>		
+			{/* <ul className="categories-home">
 				<li className="category-card">
 					<a href="/">
 						Home Decor
@@ -84,7 +80,7 @@ export default function LandingPage() {
 						/>
 					</a>
 				</li>
-			</ul>
+			</ul> */}
       </div>
 
       <div className="features-container">  
