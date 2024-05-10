@@ -1,90 +1,65 @@
 "use client";
 
 import React, { useState } from "react";
+import { Review } from "./types";
 
-interface ReviewFormProps {
-	onSubmit: (review: Review) => void;
-}
+const ProductReviewForm: React.FC = () => {
+const [review, setReview] = useState<Review>({
+    rating: 0,
+    comment: "",
+    title: "", // Add the missing 'title' property
+});
 
-interface Review {
-	title: string;
-	rating: number;
-	comment: string;
-}
+const handleRatingChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setReview({ ...review, rating: parseInt(event.target.value) });
+};
 
-const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmit }) => {
-	const [review, setReview] = useState<Review>({
-		title: "",
-		rating: 0,
-		comment: "",
-	});
+const handleCommentChange = (
+    event: React.ChangeEvent<HTMLTextAreaElement>
+) => {
+    setReview({ ...review, comment: event.target.value });
+};
 
 	const handleSubmit = (event: React.FormEvent) => {
 		event.preventDefault();
-		onSubmit(review);
+		// Handle form submission, e.g., submit review to backend
 	};
 
-	const handleInputChange = (
-		event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-	) => {
-		const { name, value } = event.target;
-		setReview((prevReview) => ({
-			...prevReview,
-			[name]: value,
-		}));
-	};
-
-	return (
-		<form
-			onSubmit={handleSubmit}
-			className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
-		>
-			<label className="rounded-md bg-gray-50 p-4 md:p-6">
-				Title:
-				<input
-					type="text"
-					name="title"
-					value={review.title}
-					onChange={handleInputChange}
-					className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-				/>
-			</label>
-			<br />
-			<label className="block text-red-700 text-sm font-bold mb-2">
-				Rating:
-				<select
-					name="rating"
-					value={review.rating}
-					onChange={handleInputChange}
-					className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-				>
-					<option value="">Select rating</option>
-					<option value="1">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
-					<option value="4">4</option>
-					<option value="5">5</option>
-				</select>
-			</label>
-			<br />
-			<label className="block text-gray-700 text-sm font-bold mb-2">
-				Comment:
-				<textarea
-					name="comment"
-					value={review.comment}
-					onChange={handleInputChange}
-					className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-				/>
-			</label>
-			<br />
-			<button
-				type="submit"
-				className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-			>
-				Submit Review
-			</button>
-		</form>
-	);
+    return (
+        <form onSubmit={handleSubmit} className="bg-white shadow-2xl w-80 border rounded px-8 pt-6 pb-8 mb-4">
+            <div className="mb-4">
+                <label htmlFor="rating" className="block text-black-700 text-xxl font-bold mb-2">
+                    Rating:
+                </label>
+                <input
+                    type="number"
+                    id="rating"
+                    min={1}
+                    max={5}
+                    value={review.rating}
+                    onChange={handleRatingChange}
+                    className="shadow appearance-none border rounded w-20 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                />
+            </div>
+            <div className="mb-4">
+                <label htmlFor="comment" className="block text-gray-700 text-xxl font-bold mb-2">
+                    Comment:
+                </label>
+                <textarea
+                    id="comment"
+                    value={review.comment}
+                    onChange={handleCommentChange}
+                    className="shadow appearance-none border rounded w-95 h-72 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                />
+            </div>
+            <button
+                type="submit"
+                className="bg-green hover:bg-tan text-white w-but text-xl hover:text-black font-bold py-4 px-4 rounded focus:outline-none focus:shadow-outline"
+            >
+                Submit Review
+            </button>
+        </form>
+    );
 };
 
-export default ReviewForm;
+export default ProductReviewForm;

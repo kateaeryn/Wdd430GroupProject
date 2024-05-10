@@ -1,11 +1,13 @@
 import React from 'react';
-import ReviewForm from './review-form';
+import ProductReviewForm from './review-form';
 
-export default function Page() {
-    return (
-        <main>
-            <h1>Review Your Product</h1>
-            < ReviewForm />
-        </main>
-    );
-}
+const ProductPage: React.FC = () => {
+  return (
+    <div>
+      <h2>Write a Review</h2>
+      <ProductReviewForm />
+    </div>
+  );
+};
+
+export default ProductPage;
