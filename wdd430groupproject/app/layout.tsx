@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import "/app/ui/globals.css"; 
+import '@/app/ui/globals.css';
 import Head from "next/head";
 import React from "react";
 import Header from "./ui/components/header.js";
