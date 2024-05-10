@@ -89,77 +89,83 @@ async function seedArtisans(client) {
   }
 }
 
-async function seedInvoices(client) {
+async function seedItems(client) {
   try {
     await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
 
-    // Create the "invoices" table if it doesn't exist
+    // Create the "items" table if it doesn't exist
     const createTable = await client.sql`
-    CREATE TABLE IF NOT EXISTS invoices (
+    CREATE TABLE IF NOT EXISTS items (
     id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
-    customer_id UUID NOT NULL,
-    amount INT NOT NULL,
+    artisan_id UUID NOT NULL,
+    price INT NOT NULL,
+    category VARCHAR(255) NOT NULL, 
+    description VARCHAR(255) NOT NULL, 
+    image_url VARCHAR(255) NOT NULL
     status VARCHAR(255) NOT NULL,
-    date DATE NOT NULL
   );
 `;
 
-    console.log(`Created "invoices" table`);
+    console.log(`Created "items" table`);
 
-    // Insert data into the "invoices" table
-    const insertedInvoices = await Promise.all(
-      invoices.map(
-        (invoice) => client.sql`
-        INSERT INTO invoices (customer_id, amount, status, date)
-        VALUES (${invoice.customer_id}, ${invoice.amount}, ${invoice.status}, ${invoice.date})
+    // Insert data into the "items" table
+    const insertedItems = await Promise.all(
+      items.map(
+        (item) => client.sql`
+        INSERT INTO items (artisan_id, price, category, description, image_url, status)
+        VALUES (${item.artisan_id}, ${item.price}, ${item.category}, ${item.description}, ${item.image_url}, ${item.status})
         ON CONFLICT (id) DO NOTHING;
       `
       )
     );
 
-    console.log(`Seeded ${insertedInvoices.length} invoices`);
+    console.log(`Seeded ${insertedItems.length} items`);
 
     return {
       createTable,
-      invoices: insertedInvoices,
+      items: insertedItems,
     };
   } catch (error) {
-    console.error("Error seeding invoices:", error);
+    console.error("Error seeding items:", error);
     throw error;
   }
 }
 
-async function seedRevenue(client) {
+async function seedReviews(client) {
   try {
-    // Create the "revenue" table if it doesn't exist
+    // Create the "reviews" table if it doesn't exist
     const createTable = await client.sql`
-      CREATE TABLE IF NOT EXISTS revenue (
-        month VARCHAR(4) NOT NULL UNIQUE,
-        revenue INT NOT NULL
+      CREATE TABLE IF NOT EXISTS reviews (
+        id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+        user_id UUID NOT NULL,
+        item_id UUID NOT NULL,
+        text VARCHAR(255) NOT NULL,
+        date DATE NOT NULL, 
+        rate INT NOT NULL,
       );
     `;
 
-    console.log(`Created "revenue" table`);
+    console.log(`Created "reviews" table`);
 
-    // Insert data into the "revenue" table
-    const insertedRevenue = await Promise.all(
-      revenue.map(
-        (rev) => client.sql`
-        INSERT INTO revenue (month, revenue)
-        VALUES (${rev.month}, ${rev.revenue})
-        ON CONFLICT (month) DO NOTHING;
+    // Insert data into the "reviews" table
+    const insertedReviews = await Promise.all(
+      reviews.map(
+        (review) => client.sql`
+        INSERT INTO reviews (user_id, item_id, text, date, rate)
+        VALUES (${review.user_id}, ${review.item_id}, ${review.text}, ${review.date}, ${review.rate})
+        ON CONFLICT (id) DO NOTHING;
       `
       )
     );
 
-    console.log(`Seeded ${insertedRevenue.length} revenue`);
+    console.log(`Seeded ${insertedReviews.length} reviews`);
 
     return {
       createTable,
-      revenue: insertedRevenue,
+      reviews: insertedReviews,
     };
   } catch (error) {
-    console.error("Error seeding revenue:", error);
+    console.error("Error seeding reviews:", error);
     throw error;
   }
 }
@@ -169,8 +175,8 @@ async function main() {
 
   await seedUsers(client);
   await seedArtisans(client);
-  await seedInvoices(client);
-  await seedRevenue(client);
+  await seedItems(client);
+  await seedReviews(client);
 
   await client.end();
 }
