@@ -249,10 +249,45 @@ const items = [
 const reviews = [
   {
     user_id: users[0].id,
-    item_id: items[0].id,
-    text: "",
-    date: "",
-    rate: 8,
+    item_id: items[1].id,
+    text: "I bought this hammock and it was amazing! Highly recommend it.",
+    date: "2023-12-06",
+    rate: 5,
+  },
+  {
+    user_id: users[1].id,
+    item_id: items[6].id,
+    text: "Beautiful bracelet, it matches different clothes.",
+    date: "2024-02-20",
+    rate: 4,
+  },
+  {
+    user_id: users[0].id,
+    item_id: items[8].id,
+    text: "I loved this painting! It brings me joy and peace when I looked at it!",
+    date: "2024-01-30",
+    rate: 5,
+  },
+  {
+    user_id: users[1].id,
+    item_id: items[7].id,
+    text: "I love this earrings! It's unique the way they were made!!",
+    date: "2024-04-23",
+    rate: 5,
+  },
+  {
+    user_id: users[2].id,
+    item_id: items[1].id,
+    text: "Loved the hammock and it's super nice to use it. The only downside is that you need to have a big space outside between walls to put it.",
+    date: "2024-02-17",
+    rate: 4,
+  },
+  {
+    user_id: users[2].id,
+    item_id: items[10].id,
+    text: "This painting looks super real! It brings a lot of light to my office and I love to look at it!",
+    date: "2023-12-06",
+    rate: 5,
   },
 ];
 
