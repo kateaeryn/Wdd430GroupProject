@@ -53,7 +53,7 @@ module.exports = {
       },
     },
   },
-  plugins: [require('@tailwindcss/forms')],
+  plugins: [],
   variants: {
     extend: {
       width: ['responsive'],
