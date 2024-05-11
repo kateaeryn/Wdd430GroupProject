@@ -16,7 +16,7 @@ async function seedUsers(client) {
         id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
         name VARCHAR(255) NOT NULL,
         email TEXT NOT NULL UNIQUE,
-        password TEXT NOT NULL
+        password TEXT NOT NULL,
         image_url VARCHAR(255) NOT NULL
       );
     `;
@@ -57,8 +57,8 @@ async function seedArtisans(client) {
         id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
         name VARCHAR(255) NOT NULL,
         email VARCHAR(255) NOT NULL,
-        password TEXT NOT NULL
-        story TEXT NOT NULL
+        password TEXT NOT NULL,
+        story TEXT NOT NULL,
         image_url VARCHAR(255) NOT NULL
       );
     `;
@@ -101,7 +101,7 @@ async function seedItems(client) {
     price INT NOT NULL,
     category VARCHAR(255) NOT NULL, 
     description VARCHAR(255) NOT NULL, 
-    image_url VARCHAR(255) NOT NULL
+    image_url VARCHAR(255) NOT NULL,
     status VARCHAR(255) NOT NULL,
   );
 `;

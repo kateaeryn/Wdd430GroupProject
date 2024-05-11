@@ -75,6 +75,7 @@ const artisans = [
 const items = [
   //Lauren Lautner arts
   {
+    id: "65836928-49b3-499a-a1d3-4437f2397efd",
     artisan_id: artisans[0].id,
     price: 6000,
     category: "textiles",
@@ -83,6 +84,7 @@ const items = [
     status: "available",
   },
   {
+    id: "aedc7eda-1bd6-4579-ad15-0e975417b9a9",
     artisan_id: artisans[0].id,
     price: 20000,
     category: "textiles",
@@ -92,6 +94,7 @@ const items = [
     status: "available",
   },
   {
+    id: "5c92efa6-adc4-4e58-94f0-c961b3965de9",
     artisan_id: artisans[0].id,
     price: 10000,
     category: "textiles",
@@ -101,6 +104,7 @@ const items = [
     status: "available",
   },
   {
+    id: "db5e7412-0841-459e-befd-dc88deca86c2",
     artisan_id: artisans[0].id,
     price: 8000,
     category: "textiles",
@@ -111,6 +115,7 @@ const items = [
   },
   //Anastasia Rollins arts
   {
+    id: "178c98fb-e191-478c-81b7-8188e3d1b254",
     artisan_id: artisans[1].id,
     price: 2000,
     category: "accessories",
@@ -119,6 +124,7 @@ const items = [
     status: "available",
   },
   {
+    id: "185a0416-c325-464a-aedc-cd78ed870a9a",
     artisan_id: artisans[1].id,
     price: 3000,
     category: "accessories",
@@ -127,6 +133,7 @@ const items = [
     status: "available",
   },
   {
+    id: "f6c07b45-05ee-4b71-895e-6bafd208cb04",
     artisan_id: artisans[1].id,
     price: 5000,
     category: "accessories",
@@ -136,6 +143,7 @@ const items = [
     status: "available",
   },
   {
+    id: "1d869bb2-09e1-4203-86a4-601d960e70a3",
     artisan_id: artisans[1].id,
     price: 4000,
     category: "accessories",
@@ -145,6 +153,7 @@ const items = [
   },
   //Ethan Smith arts
   {
+    id: "3f9c667a-2357-40b5-9313-bb76724cfefc",
     artisan_id: artisans[2].id,
     price: 40000,
     category: "arts",
@@ -154,6 +163,7 @@ const items = [
     status: "available",
   },
   {
+    id: "c0e150e4-c010-40fa-8732-220e5ec2b3ba",
     artisan_id: artisans[2].id,
     price: 30000,
     category: "arts",
@@ -163,6 +173,7 @@ const items = [
     status: "available",
   },
   {
+    id: "1d214321-bd09-4001-8006-506227420f0b",
     artisan_id: artisans[2].id,
     price: 150000,
     category: "arts",
@@ -171,6 +182,7 @@ const items = [
     status: "available",
   },
   {
+    id: "184519a0-31bb-4417-a965-bb5a5059a228",
     artisan_id: artisans[2].id,
     price: 15795,
     category: "arts",
@@ -180,6 +192,7 @@ const items = [
   },
   //Liam Baker arts
   {
+    id: "bfc40419-a440-49d6-a157-0389ef606501",
     artisan_id: artisans[3].id,
     price: 3000,
     category: "decor",
@@ -188,6 +201,7 @@ const items = [
     status: "available",
   },
   {
+    id: "21db1005-dd86-4ff5-a961-11ce7fc56b94",
     artisan_id: artisans[3].id,
     price: 8000,
     category: "decor",
@@ -196,6 +210,7 @@ const items = [
     status: "available",
   },
   {
+    id: "c720c179-48a8-4c15-8c25-1e7b89621e11",
     artisan_id: artisans[3].id,
     price: 5000,
     category: "decor",
@@ -204,6 +219,7 @@ const items = [
     status: "available",
   },
   {
+    id: "2c9c03ee-0531-4632-8adc-cace1eb9d0ce",
     artisan_id: artisans[3].id,
     price: 15000,
     category: "decor",
@@ -213,6 +229,7 @@ const items = [
   },
   //William Johnson arts
   {
+    id: "2dc6b2f9-0154-48f1-82cf-4621fef537bf",
     artisan_id: artisans[4].id,
     price: 60000,
     category: "art",
@@ -221,6 +238,7 @@ const items = [
     status: "available",
   },
   {
+    id: "2feb48a5-fd2d-4bfb-9a72-e5d6a117897b",
     artisan_id: artisans[4].id,
     price: 40000,
     category: "art",
@@ -229,6 +247,7 @@ const items = [
     status: "available",
   },
   {
+    id: "329914e5-55c4-4464-b338-53f4e5eeff9b",
     artisan_id: artisans[4].id,
     price: 120000,
     category: "art",
@@ -237,6 +256,7 @@ const items = [
     status: "available",
   },
   {
+    id: "2f79c270-de35-498d-ad9d-2d32f971be51",
     artisan_id: artisans[4].id,
     price: 75000,
     category: "art",
