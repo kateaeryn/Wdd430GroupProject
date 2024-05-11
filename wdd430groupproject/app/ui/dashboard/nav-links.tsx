@@ -5,12 +5,14 @@ import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
 
 const links = [
-    { name: 'Home', href: '/dashboard' },
+  { name: 'Home', href: '/' },
+  { name: 'Featured Items', href: '/dashboard' },
+  { name: 'Home Decor', href: '/dashboard/categories/decor' },
+  { name: 'Art', href: '/dashboard/categories/art' },
+  { name: 'Textiles', href: '/dashboard/categories/textiles' },
+    { name: 'Accessories', href: '/dashboard/categories/accessories' },
   {name: 'Our Story', href: '/dashboard/story'},
-  {
-    name: 'Shop',
-    href: '/dashboard/products',
-  },
+  
 ];
 
 export default function NavLinks() {
@@ -22,9 +24,9 @@ export default function NavLinks() {
           <Link
             key={link.name}
             href={link.href}
-            className={clsx('flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-sky-100 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3',
+            className={clsx('flex  grow items-center justify-center align-bottom gap-2 p-3 text-2xl font-serif font-medium hover:bg-beige hover:text-darkBrown md:flex-none md:justify-start md:p-2 ',
               {
-                'bg-sky-100 text-blue-600': pathname === link.href,
+                'bg-beige text-darkBrown': pathname === link.href,
               },
             )}
             >

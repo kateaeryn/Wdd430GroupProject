@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@tailwind forms;
+
 
 body {
   font-family: 'Roboto', sans-serif;
@@ -10,17 +10,14 @@ body {
   padding: 0;
 }
 header {
-  font-family: 'Quatrocento', serif;
+  font-family: 'Quattrocento', serif;
 }
 
 h1, h2, h3, h4, h5{
-  font-family: 'Quatrocento', serif;
+  font-family: 'Quattrocento', serif;
 }
 
 /* Header Styles */
-.nav-links:hover {
-  color: black;
-}
 
 
 h2{
