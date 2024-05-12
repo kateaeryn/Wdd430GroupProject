@@ -21,7 +21,7 @@ export default function Header() {
 				</div>
 				<Search placeholder="Search the Haven..." />
 				
-			<div className="flex flex-row justify-evenly sm:mt-10 sm:mr-6 md:mt-20">	
+			<div className="flex flex-row justify-evenly sm:self-center">	
 				<Link href="/dashboard/account/">
 				<UserCircleIcon className=" w-[40px] h-[40px] m-4 stroke-brown " />
 				</Link>
