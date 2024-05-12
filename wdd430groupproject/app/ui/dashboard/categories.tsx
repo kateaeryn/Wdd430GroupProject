@@ -34,7 +34,7 @@ export default function CatLinks() {
               },
             )}
             >
-              <Image src={blankBox} alt='blank box' height={100} width={150} />
+              <Image src={blankBox} alt='blank box' className="sm:w-[250px] sm:h-[150px] md:w-[350px] md:h-[200px] lg:w-[400px] lg:h-[350px]" height={100} width={150} />
             <p className=" text-2xl">{link.name}</p>
           </Link>
             </div>

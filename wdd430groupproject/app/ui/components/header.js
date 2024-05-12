@@ -23,10 +23,10 @@ export default function Header() {
 				
 			<div className="flex flex-row justify-evenly sm:self-center">	
 				<Link href="/dashboard/account/">
-				<UserCircleIcon className=" w-[40px] h-[40px] m-4 stroke-brown " />
+				<UserCircleIcon className=" w-[40px] h-[40px] m-4 stroke-brown xl:w-[50px] xl:h-[50px]" />
 				</Link>
 				<Link href="/dashboard/cart">
-				<ShoppingCartIcon className="w-[40px] h-[40px] m-4 stroke-brown" />
+				<ShoppingCartIcon className="w-[40px] h-[40px] m-4 stroke-brown xl:w-[50px] xl:h-[50px]" />
 				</Link>
 				</div>
 			</div>

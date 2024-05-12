@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 body {
   font-family: 'Roboto', sans-serif;
   font-size: 30px;
@@ -13,7 +12,11 @@ header {
   font-family: 'Quattrocento', serif;
 }
 
-h1, h2, h3, h4, h5{
+h1,
+h2,
+h3,
+h4,
+h5 {
   font-family: 'Quattrocento', serif;
 }
 

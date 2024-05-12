@@ -13,7 +13,7 @@ const links = [
     name: 'Item 3',
     href: '/'
     },
-  {name: 'Item 4', href: '/' },
+  
 ];
 
 export default function FeaturedLinks() {
@@ -34,7 +34,7 @@ export default function FeaturedLinks() {
               },
             )}
             >
-              <Image src={blankBox} alt='blank box' height={150} width={150} />
+              <Image src={blankBox} alt='blank box' className="md:w-[250px] md:h-[200px] lg:w-[350px] lg:h-[300px]" height={150} width={150} />
             <p className=" text-2xl">{link.name}</p>
           </Link>
             </div>
