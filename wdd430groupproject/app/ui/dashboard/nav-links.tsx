@@ -6,7 +6,7 @@ import clsx from 'clsx';
 
 const links = [
   { name: 'Home', href: '/' },
-  { name: 'Featured Items', href: '/dashboard' },
+  { name: 'Featured Items', href: '/dashboard/products' },
   { name: 'Home Decor', href: '/dashboard/categories/decor' },
   { name: 'Art', href: '/dashboard/categories/art' },
   { name: 'Textiles', href: '/dashboard/categories/textiles' },
@@ -24,13 +24,13 @@ export default function NavLinks() {
           <Link
             key={link.name}
             href={link.href}
-            className={clsx('flex  grow items-center justify-center align-bottom gap-2 p-3 text-2xl font-serif font-medium hover:bg-beige hover:text-darkBrown md:flex-none md:justify-start md:p-2 ',
+            className={clsx('flex grow h-full items-center justify-center align-bottom gap-2 p-3 text-brown text-xl font-serif font-medium hover:bg-brown hover:text-beige hover:rounded-md ',
               {
-                'bg-beige text-darkBrown': pathname === link.href,
+                'bg-brown text-beige rounded-t-md': pathname === link.href,
               },
             )}
             >
-            <p className="hidden md:block">{link.name}</p>
+            <p className="font-serif text-md">{link.name}</p>
           </Link>
         );
       })}

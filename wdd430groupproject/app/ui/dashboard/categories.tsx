@@ -23,19 +23,19 @@ export default function CatLinks() {
           {links.map((link) => {
         
         return (
-          <div className={'categories-home'}>
+          <div className="">
             
             <Link
             key={link.name}
             href={link.href}
-            className={clsx('category-card',
+            className={clsx('',
               {
                 'bg-sky-100 text-blue-600': pathname === link.href,
               },
             )}
             >
               <Image src={blankBox} alt='blank box' height={100} width={150} />
-            <p className="hidden md:block">{link.name}</p>
+            <p className=" text-2xl">{link.name}</p>
           </Link>
             </div>
         );

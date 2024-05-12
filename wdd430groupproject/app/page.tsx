@@ -1,42 +1,32 @@
 import React from "react";
-// import image from "/public/images/blank-box.png";
+import Image from "next/image";
 import blankBox from "/public/images/blank-box.png";
 import CatLinks from "../app/ui/dashboard/categories";
+import heroimage from "/public/images/heroimage.jpg";
 
 export default function LandingPage() {
     return (
-        <div
-            className="home-page"
-            style={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-            }}
-        >
-            <h1
-                style={{
-                    fontSize: "3.5rem",
-                    color: "#261B14",
-
-                    margin: "3rem",
-                }}
-            >
-                Handcrafted Haven
-            </h1>
-
-            <h3>
-                Handcrafted Haven is a place to find unique, handcrafted items.
+        <>
+        <div className="flex flex-col justify-center items-center h-600">
+          <div className=""> 
+           <h3 className="bg-beige text-center rounded-3xl font-serif text-2xl text-brown absolute m-8 z-index-10 p-1">
+                Handcrafted Haven is the place to find unique, handcrafted items.
             </h3>
-
-            <div className="categories-container">
+                    <Image src={heroimage} className="" alt="vintage crafting supplies"></Image>
+                </div>   
+                <div>
+            
+            
+                </div>
+            </div>
+            <div className="bg-tan flex flex-col text-5xl text-brown text-center">
                 <h2>Categories</h2>
-                <div className="categories-home">
+                <div className="flex flex-wrap flex-row justify-evenly p-3">
                     <CatLinks />
                 </div>
             </div>
-
-            <div className="features-container">
+</>
+            /* <div className="features-container">
                 <h2>Featured Items</h2>
                 <ul className="features-home">
                     <li className="features-card">
@@ -63,7 +53,7 @@ export default function LandingPage() {
                         </a>
                     </li>
                 </ul>
-            </div>
-        </div>
+            </div> */
+        
     );
 }
