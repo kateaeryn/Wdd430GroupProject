@@ -7,11 +7,11 @@ import blankBox from '/public/images/blank-box.png';
 import Image from 'next/image';
 
 const links = [
-    { name: 'Item 1', href: '/' },
-  {name: 'Item 2', href: '/' },
+    { name: 'Item 1', href: '/dashboard/products/' },
+  {name: 'Item 2', href: '/dashboard/products/' },
   {
     name: 'Item 3',
-    href: '/'
+    href: '/dashboard/products/'
     },
   
 ];
