@@ -7,18 +7,21 @@ import Link from 'next/link';
 
 export default function Header() {
 	return (
-		<header className="flex flex-col space-y-2 justify-between bg-tan ">
+		<header className="flex flex-col space-y-2 bg-tan ">
 			
-			<div className="flex flex-col sm:flex-row ">
-				<a  href="/">
-					<img className="w-full"
+			<div className="flex flex-col sm:flex-row  ">
+				<div className=" relative flex justify-center">
+				<a href="/">
+					<img className="w-full px-8 "
 						src={logo.src}
 						alt="Logo"
 						
 					/>
 				</a>
+				</div>
 				<Search placeholder="Search the Haven..." />
-			<div className="flex flex-row justify-evenly">	
+				
+			<div className="flex flex-row justify-evenly sm:mt-10 sm:mr-6 md:mt-20">	
 				<Link href="/dashboard/account/">
 				<UserCircleIcon className=" w-[40px] h-[40px] m-4 stroke-brown " />
 				</Link>
