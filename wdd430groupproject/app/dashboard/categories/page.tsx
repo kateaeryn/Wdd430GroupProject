@@ -3,7 +3,7 @@ import ProductGrid from '@/app/ui/dashboard/products';
 
  
 export const metadata: Metadata = {
-  title: 'Textiles',
+  title: 'Products',
 };
 
 export default function Page() {

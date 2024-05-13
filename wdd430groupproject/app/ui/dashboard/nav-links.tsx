@@ -6,11 +6,11 @@ import clsx from 'clsx';
 
 const links = [
   { name: 'Home', href: '/' },
-  { name: 'Featured Items', href: '/dashboard/featured' },
-  { name: 'Home Decor', href: '/dashboard/categories/decor' },
-  { name: 'Art', href: '/dashboard/categories/art' },
-  { name: 'Textiles', href: '/dashboard/categories/textiles' },
-    { name: 'Accessories', href: '/dashboard/categories/accessories' },
+  { name: 'Featured Items', href: '/dashboard/categories' },
+  { name: 'Home Decor', href: '/dashboard/categories' },
+  { name: 'Art', href: '/dashboard/categories' },
+  { name: 'Textiles', href: '/dashboard/categories' },
+    { name: 'Accessories', href: '/dashboard/categories' },
   {name: 'Our Story', href: '/dashboard/story'},
   
 ];
