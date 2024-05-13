@@ -4,6 +4,7 @@ module.exports = {
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
+    
   ],
   theme: {
     extend: {
@@ -17,6 +18,7 @@ module.exports = {
       width: {
         '10': '10%',
         '20': '20%',
+        '25': '25%',
         '30': '30%',
         '40': '40%',
         '50': '50%',
@@ -50,6 +52,7 @@ module.exports = {
         '3xl': '1.875rem',
         '4xl': '2.25rem',
         '5xl': '3rem',
+        '6xl': '4rem',
       },
     },
   },

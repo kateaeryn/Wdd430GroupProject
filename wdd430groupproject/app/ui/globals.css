@@ -1,7 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@tailwind forms;
 
 body {
   font-family: 'Roboto', sans-serif;
@@ -10,19 +9,20 @@ body {
   padding: 0;
 }
 header {
-  font-family: 'Quatrocento', serif;
+  font-family: 'Quattrocento', serif;
 }
 
-h1, h2, h3, h4, h5{
-  font-family: 'Quatrocento', serif;
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: 'Quattrocento', serif;
 }
 
 /* Header Styles */
-.nav-links:hover {
-  color: black;
-}
 
-
+/* 
 h2{
   font-size: 40px;
   font-weight: 700;
@@ -32,10 +32,10 @@ h3{
   font-size: 30px;
   font-weight: 300;
   margin: 0;
-}
+} */
 
 /* Home Page */
-.categories-container {
+/* .categories-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -94,4 +94,4 @@ h3{
   width: 100%;
   height: auto; 
   border-radius: 10px; 
-}
+} */

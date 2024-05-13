@@ -7,16 +7,16 @@ import blankBox from '/public/images/blank-box.png';
 import Image from 'next/image';
 
 const links = [
-    { name: 'Home Decor', href: '/dashboard/categories/decor' },
-  {name: 'Textiles', href: '/dashboard/categories/textiles' },
+    { name: 'Item 1', href: '/' },
+  {name: 'Item 2', href: '/' },
   {
-    name: 'Art',
-    href: '/dashboard/categories/art'
+    name: 'Item 3',
+    href: '/'
     },
-  {name: 'Accessories', href: '/dashboard/categories/accessories' },
+  
 ];
 
-export default function CatLinks() {
+export default function FeaturedLinks() {
     const pathname = usePathname();
   return (
     <>
@@ -28,13 +28,13 @@ export default function CatLinks() {
             <Link
             key={link.name}
             href={link.href}
-            className={clsx('',
+            className={clsx(' text-brown',
               {
                 'bg-brown text-beige': pathname === link.href,
               },
             )}
             >
-              <Image src={blankBox} alt='blank box' className="sm:w-[250px] sm:h-[150px] md:w-[350px] md:h-[200px] lg:w-[400px] lg:h-[350px]" height={100} width={150} />
+              <Image src={blankBox} alt='blank box' className="md:w-[250px] md:h-[200px] lg:w-[350px] lg:h-[300px]" height={150} width={150} />
             <p className=" text-2xl">{link.name}</p>
           </Link>
             </div>
