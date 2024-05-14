@@ -34,7 +34,7 @@ export default function FeaturedLinks() {
               },
             )}
             >
-              <Image src={blankBox} alt='blank box' className="md:w-[250px] md:h-[200px] lg:w-[350px] lg:h-[300px]" height={150} width={150} />
+              <Image src={blankBox} alt='blank box' className="md:w-[250px] md:h-[200px] lg:w-[350px] lg:h-[300px] lg:mb-8 mt-3" height={150} width={150} />
             <p className=" text-2xl">{link.name}</p>
           </Link>
             </div>
