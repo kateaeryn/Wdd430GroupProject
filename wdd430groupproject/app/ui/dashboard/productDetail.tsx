@@ -5,9 +5,11 @@ import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
 import blankBox from '/public/images/blank-box.png';
 import Image from 'next/image';
+import Button from '@/app/ui/button';
+import ImageCarousel from '@/app/ui/dashboard/carousel';
 
 const links = [
-    { title: 'Item 1', artist: 'Some Dude', href: '/dashboard/products/', price: "$$$", description: "Lorem Ipsum Lots of Words", reviews: "" },
+    { title: 'Item 1', artist: 'Some Dude', href: '/dashboard/products/', price: "$$$", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", reviews: "This is so awesome, I love it so much." },
  
   
 ];
@@ -19,33 +21,24 @@ export default function ProductDetail() {
           {links.map((link) => {
         
         return (
-          <div className="flex flex-col">
-                <h1>{link.title}</h1>
+          <div className="flex flex-col ">
+                <h1 className="text-5xl text-brown">{link.title}</h1>
                 <div className="flex flex-row justify-between">
-                <h3>{link.artist}</h3>
+                <h3 className="text-2xl text-brown">{link.artist}</h3>
                 <p>Star Rating</p>
 
                 </div>
                 
-            <Link
-            key={link.title}
-            href={link.href}
-            className={clsx('',
-              {
-                'bg-brown text-brown': pathname === link.href,
-              },
-            )}
-            >
-              <Image src={blankBox} alt='blank box' className=" height={400} width={450}" />
-                </Link>
+            <Image className="md:h-[600px] md:w-[700px]" src={blankBox} alt="blank box"/>
+               
                 <div className="flex flex-row justify-between">
-                  <h3>{link.price}</h3>
-                <button className="rounded-md bg-green px-4 py-2 text-md text-tan">Add to Cart</button>  
+                  <h3 className="text-brown">{link.price}</h3>
+                <Button>Add to Cart</Button>  
                 </div>
                 
-                <p>{link.description}</p>
-                <h2>Reviews</h2>
-                <p>{link.reviews}</p>
+                <p className="text-xl text-wrap md:w-[700px]">{link.description}</p>
+                <h2 className="text-brown mt-6">Reviews</h2>
+                <p className="text-brown text-xl">{link.reviews}</p>
             </div>
         );
       })}

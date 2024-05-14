@@ -1,0 +1,28 @@
+
+ 
+    {
+      "items": {
+        
+        "responsive": [
+          {
+            "id": 1,
+            "title": "Image 1",
+            
+            "imageUrl": "/wdd430groupproject/public/images/blank-box.png"
+          },
+          {
+            "id": 2,
+            "title": "Image 2",
+            
+            "imageUrl": "/public/images/blank-box.png"
+          },
+          {
+            "id": 3,
+            "title": "Image 3",
+           
+            "imageUrl": "/public/images/blank-box.png"
+          }
+        ]
+      }
+    }
+
