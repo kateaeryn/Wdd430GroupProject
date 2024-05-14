@@ -1,6 +1,5 @@
 import React from "react";
 import Image from "next/image";
-import blankBox from "/public/images/blank-box.png";
 import CatLinks from "../app/ui/dashboard/categories";
 import heroimage from "/public/images/heroimage.jpg";
 import FeaturedLinks from "../app/ui/dashboard/featured";
@@ -29,41 +28,14 @@ export default function LandingPage() {
                     
             
             </div>
-            <div className="bg-tan flex flex-col text-5xl text-brown text-center ">
+            <div className="bg-tan flex flex-col text-5xl text-brown text-center">
                 <h2>Categories</h2>
                 <div className="flex flex-wrap flex-row justify-evenly p-3">
                     <CatLinks />
                 </div>
             </div>
 </>
-            /* <div className="features-container">
-                <h2>Featured Items</h2>
-                <ul className="features-home">
-                    <li className="features-card">
-                        <a href="/">
-                            <img src={blankBox.src} alt="placeholder image" />
-                        </a>
-                    </li>
-
-                    <li className="features-card">
-                        <a href="/">
-                            <img src={blankBox.src} alt="placeholder image" />
-                        </a>
-                    </li>
-
-                    <li className="features-card">
-                        <a href="/">
-                            <img src={blankBox.src} alt="placeholder image" />
-                        </a>
-                    </li>
-
-                    <li className="features-card">
-                        <a href="/">
-                            <img src={blankBox.src} alt="placeholder image" />
-                        </a>
-                    </li>
-                </ul>
-            </div> */
+           
         
     );
 }

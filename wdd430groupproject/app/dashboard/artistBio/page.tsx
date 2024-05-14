@@ -1,17 +1,18 @@
 import { Metadata } from 'next';
-import ProductDetail from '@/app/ui/dashboard/productDetail';
+import ArtistDetail from '@/app/ui/dashboard/bio';
 
-
+ 
 export const metadata: Metadata = {
-  title: 'Add Product',
+  title: 'Artist Bio',
 };
 
 export default function Page() {
   return (
     <>
+ 
+  <ArtistDetail />
   
-<ProductDetail />
-
-</>
-)
+  
+  </>)
+  
 }
