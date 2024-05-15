@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import '@/app/ui/globals.css';
+import "@/app/ui/globals.css";
 import Head from "next/head";
 import React from "react";
 import Header from "./ui/components/header.js";
 import Footer from "./ui/components/footer.js";
-import { quattrocento } from '@/app/ui/fonts';
+import { quattrocento } from "@/app/ui/fonts";
 
 export const metadata: Metadata = {
   title: "Handcrafted Haven",
@@ -18,14 +18,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-			<Head>
-				<title>Handcrafted Haven</title>
-				<meta
-					name="description"
-					content="Welcome to the Handcrafted Haven online store"
+      <Head>
+        <title>Handcrafted Haven</title>
+        <meta
+          name="description"
+          content="Welcome to the Handcrafted Haven online store"
         />
-        
-			</Head>
+      </Head>
       <body className={`${quattrocento.className}`}>
         <div>
           <Header />
