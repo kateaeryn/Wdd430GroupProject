@@ -59,7 +59,7 @@ import Search from '/app/ui/dashboard/search';
 import { UserCircleIcon, ShoppingCartIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import Image from 'next/image';
-import Suspense from 'react';
+// import Suspense from 'react';
 
 export default function Header() {
 	return (
@@ -68,16 +68,16 @@ export default function Header() {
 			<div className="flex flex-col sm:flex-row  ">
 				<div className=" relative flex justify-center">
 				<a href="/">
-					<Image className="w-full px-8 "
+					{/* <Image className="w-full px-8 "
 						src={logo.src}
 						alt="Logo"
 						
-					/>
+					/> */}
 				</a>
 				</div>
-				<Suspense>
+				{/* <Suspense fallback={<p>Loading....</p>}> */}
 				<Search placeholder="Search the Haven..." />
-				</Suspense>
+				{/* </Suspense> */}
 			<div className="flex flex-row justify-evenly sm:self-center">	
 				<Link href="/dashboard/account/">
 				<UserCircleIcon className=" w-[40px] h-[40px] m-4 stroke-brown xl:w-[50px] xl:h-[50px]" />
