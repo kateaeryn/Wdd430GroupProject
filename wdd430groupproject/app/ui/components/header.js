@@ -14,11 +14,11 @@ export default function Header() {
 			<div className="flex flex-col sm:flex-row  ">
 				<div className=" relative flex justify-center">
 				<a href="/">
-					{/* <Image className="w-full px-8 "
+					<Image className="w-full px-8 "
 						src={logo.src}
 						alt="Logo"
 						
-					/> */}
+					/>
 				</a>
 				</div>
 				{/* <Suspense fallback={<p>Loading....</p>}> */}
