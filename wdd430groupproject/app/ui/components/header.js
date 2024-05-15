@@ -5,6 +5,7 @@ import Search from '/app/ui/dashboard/search';
 import { UserCircleIcon, ShoppingCartIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import Image from 'next/image';
+import Suspense from 'react';
 
 export default function Header() {
 	return (
@@ -20,8 +21,9 @@ export default function Header() {
 					/>
 				</a>
 				</div>
+				<Suspense>
 				<Search placeholder="Search the Haven..." />
-				
+				</Suspense>
 			<div className="flex flex-row justify-evenly sm:self-center">	
 				<Link href="/dashboard/account/">
 				<UserCircleIcon className=" w-[40px] h-[40px] m-4 stroke-brown xl:w-[50px] xl:h-[50px]" />
