@@ -23,7 +23,7 @@ export default function FeaturedLinks() {
           {links.map((link) => {
         
         return (
-          <div className="">
+          <div className="" key={link.name}>
             
             <Link
             key={link.name}

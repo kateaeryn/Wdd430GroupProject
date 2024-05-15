@@ -4,6 +4,7 @@ import NavLinks from '/app/ui/dashboard/nav-links';
 import Search from '/app/ui/dashboard/search';
 import { UserCircleIcon, ShoppingCartIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Header() {
 	return (
@@ -12,7 +13,7 @@ export default function Header() {
 			<div className="flex flex-col sm:flex-row  ">
 				<div className=" relative flex justify-center">
 				<a href="/">
-					<img className="w-full px-8 "
+					<Image className="w-full px-8 "
 						src={logo.src}
 						alt="Logo"
 						
