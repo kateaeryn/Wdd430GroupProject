@@ -23,6 +23,7 @@ export default function CatLinks() {
       {links.map((link) => {
         return (
 <<<<<<< HEAD
+<<<<<<< HEAD
           <div key={link.name} className={"categories-home"}>
             <Link
               key={link.name}
@@ -37,6 +38,9 @@ export default function CatLinks() {
           </div>
 =======
           <div className="">
+=======
+          <div className="" key={link.name}>
+>>>>>>> 9beedc2e9eafb23b329b9b183ea31932586d12ac
             
             <Link
             key={link.name}
