@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { Review } from "./types";
-import { Button } from "@/app/ui/button";
+import  Button  from "@/app/ui/button";
 
 const ProductReviewForm: React.FC = () => {
     const [review, setReview] = useState<Review>({

@@ -21,7 +21,7 @@ export default function ProductDetail() {
           {links.map((link) => {
         
         return (
-          <div className="flex flex-col ">
+          <div className="flex flex-col " key={link.title}>
                 <h1 className="text-5xl text-brown">{link.title}</h1>
                 <div className="flex flex-row justify-between">
                 <h3 className="text-2xl text-brown">{link.artist}</h3>

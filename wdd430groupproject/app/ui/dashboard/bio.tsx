@@ -21,7 +21,7 @@ export default function ArtistDetail() {
           {links.map((link) => {
         
         return (
-            <div className="flex flex-col">
+            <div className="flex flex-col" key={link.name}>
                 
                 <div className="md:flex md:flex-row md:justify-between">
                 <h1 className="text-5xl text-brown ">{link.name}</h1>

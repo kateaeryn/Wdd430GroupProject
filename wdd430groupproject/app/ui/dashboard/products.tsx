@@ -23,7 +23,7 @@ export default function ProductGrid() {
           {links.map((link) => {
         
         return (
-          <div className="flex md:flex-row justify-center">
+          <div className="flex md:flex-row justify-center" key={link.name}>
             
             <Link
             key={link.name}
