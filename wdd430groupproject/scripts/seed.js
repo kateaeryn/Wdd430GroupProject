@@ -102,7 +102,7 @@ async function seedItems(client) {
     category VARCHAR(255) NOT NULL, 
     description VARCHAR(255) NOT NULL, 
     image_url VARCHAR(255) NOT NULL,
-    status VARCHAR(255) NOT NULL,
+    status VARCHAR(255) NOT NULL
   );
 `;
 
@@ -141,7 +141,7 @@ async function seedReviews(client) {
         item_id UUID NOT NULL,
         text VARCHAR(255) NOT NULL,
         date DATE NOT NULL, 
-        rate INT NOT NULL,
+        rate INT NOT NULL
       );
     `;
 
