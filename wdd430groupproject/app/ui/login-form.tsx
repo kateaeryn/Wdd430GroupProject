@@ -24,7 +24,7 @@ export default function LoginForm() {
             className="bg-white shadow-2xl w-30 min-w-96 border rounded px-8 pt-6 pb-8 mb-4"
         >
             <div className="block text-black-700 font-bold mb-2">
-                <h1 className="mb-3 text-base text-gray-500 mb-10">Please log in to continue.</h1>
+                <h1 className="text-base text-gray-500 mb-10">Please log in to continue.</h1>
                 <div className="w-full">
                     <div>
                         <label
