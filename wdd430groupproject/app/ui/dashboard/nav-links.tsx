@@ -5,12 +5,14 @@ import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
 
 const links = [
-    { name: 'Home', href: '/dashboard' },
+  { name: 'Home', href: '/' },
+  { name: 'Featured Items', href: '/dashboard/categories' },
+  { name: 'Home Decor', href: '/dashboard/categories' },
+  { name: 'Art', href: '/dashboard/categories' },
+  { name: 'Textiles', href: '/dashboard/categories' },
+    { name: 'Accessories', href: '/dashboard/categories' },
   {name: 'Our Story', href: '/dashboard/story'},
-  {
-    name: 'Shop',
-    href: '/dashboard/products',
-  },
+  
 ];
 
 export default function NavLinks() {
@@ -22,13 +24,13 @@ export default function NavLinks() {
           <Link
             key={link.name}
             href={link.href}
-            className={clsx('flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-sky-100 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3',
+            className={clsx('flex grow h-full items-center justify-center align-bottom gap-2 p-3 text-brown text-xl lg:text-2xl xl:text-3xl font-serif font-medium hover:bg-brown hover:text-beige hover:rounded-md ',
               {
-                'bg-sky-100 text-blue-600': pathname === link.href,
+                'bg-green bg-opacity-30 text-darkBrown rounded-t-md': pathname === link.href,
               },
             )}
             >
-            <p className="hidden md:block">{link.name}</p>
+            <p className="font-serif text-md">{link.name}</p>
           </Link>
         );
       })}

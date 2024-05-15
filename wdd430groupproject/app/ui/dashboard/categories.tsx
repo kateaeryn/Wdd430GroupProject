@@ -22,6 +22,7 @@ export default function CatLinks() {
     <>
       {links.map((link) => {
         return (
+<<<<<<< HEAD
           <div key={link.name} className={"categories-home"}>
             <Link
               key={link.name}
@@ -34,6 +35,23 @@ export default function CatLinks() {
               <p className="hidden md:block">{link.name}</p>
             </Link>
           </div>
+=======
+          <div className="">
+            
+            <Link
+            key={link.name}
+            href={link.href}
+            className={clsx('',
+              {
+                'bg-brown text-beige': pathname === link.href,
+              },
+            )}
+            >
+              <Image src={blankBox} alt='blank box' className="sm:w-[250px] sm:h-[150px] md:w-[350px] md:h-[200px] lg:w-[400px] lg:h-[350px]" height={100} width={150} />
+            <p className=" text-2xl">{link.name}</p>
+          </Link>
+            </div>
+>>>>>>> 6dec4fb4305712cafe0b5611fff3fdaaee19aa52
         );
       })}
     </>
