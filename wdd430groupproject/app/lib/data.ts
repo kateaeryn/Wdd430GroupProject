@@ -40,7 +40,7 @@ export async function getProductDetail(id: string) {
 export async function getItemReviews(id: string) {
     try {
         const review = await sql
-        `SELECT reviews.user_id, reviews.item_id, reviews.text,reviews.date, reviews.rate, users.name
+        `SELECT reviews.id, reviews.user_id, reviews.item_id, reviews.text,reviews.date, reviews.rate, users.name
         FROM reviews
         JOIN users on users.id = reviews.user_id
         WHERE reviews.item_id = ${id};`

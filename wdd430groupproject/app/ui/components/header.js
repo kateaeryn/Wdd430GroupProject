@@ -15,8 +15,9 @@ export default function Header() {
 				<div className=" relative flex justify-center">
 				<a href="/">
 
-					<img className="w-full px-4 "
-
+					<Image className="w-full px-4 "
+							width="1562"
+							height="1562"
 						src={logo.src}
 						alt="Logo"
 						

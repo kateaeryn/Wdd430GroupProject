@@ -12,7 +12,7 @@ export default async function ProductDetail({params}: {params: {id: string}}) {
   const id = params as unknown as string;
   const links = await getProductDetail(id);
   const reviews = await getItemReviews(id);
-  console.log(reviews);
+  
   return (
     <>
       

@@ -9,7 +9,7 @@ import {getAllProductImages} from '@/app/lib/data';
 export default async function FeaturedLinks() {
     const list = await getAllProductImages(); 
   const links = list.sort(() => Math.random() - 0.5);
-  console.log(list);
+ 
   return (
     <>
           {links.slice(0,3).map((link) => {
