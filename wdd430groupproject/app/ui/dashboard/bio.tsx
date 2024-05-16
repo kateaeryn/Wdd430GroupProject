@@ -36,7 +36,9 @@ export default function ArtistDetail() {
                 </div>              
                 <h2 className="text-brown mt-6">Featured Creations</h2>
                 <div className="flex flex-wrap flex-row justify-evenly space-x-4">
-                <FeaturedLinks />
+                {/*The below comment line is preventing an error between typescript and async/await*/}
+              {/* @ts-expect-error Async Server Compnent*/}   
+              <FeaturedLinks />
                 </div>
             </div>
         );
