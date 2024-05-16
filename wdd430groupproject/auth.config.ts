@@ -1,24 +1,59 @@
-import NextAuthConfig from 'next-auth';
+import NextAuth from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
+import { findUser } from "./app/lib/data";
+import bcrypt from "bcryptjs";
 
-export const authConfig = {
-  pages: {
-    signIn: '/login',
-  },
+export default NextAuth({
   providers: [
-    // added later in auth.ts since it requires bcrypt 
-  ],
-callbacks: {
-    async authorized({ request }: { request: any }) {
-        const { auth, nextUrl } = request; 
-        const isLoggedIn = !!auth?.user;
-        const isOnDashboard = nextUrl?.pathname.startsWith('/dashboard'); 
-        if (isOnDashboard) {
-            if (isLoggedIn) return true;
-            return false; 
-        } else if (isLoggedIn) {
-            return Response.redirect(new URL('/dashboard', nextUrl));
+    CredentialsProvider({
+      name: "Credentials",
+      credentials: {
+        email: { label: "Email", type: "text" },
+        password: { label: "Password", type: "password" },
+      },
+      async authorize(credentials, req) {
+        console.log("authorize function called"); // Add console.log statement
+        const user = await findUser(credentials?.email || "");
+        if (user) {
+          const isValid = await bcrypt.compare(
+            credentials?.password || "",
+            user.passwordHash
+          );
+          if (isValid) {
+            // Return user object containing id, name, and email
+            console.log("User authenticated"); // Add console.log statement
+            return {
+              id: user.id.toString(),
+              name: user.name,
+              email: user.email,
+            };
+          }
         }
-        return true;
+        console.log("User not authenticated"); // Add console.log statement
+        return null;
+      },
+    }),
+  ],
+  pages: {
+    signIn: "/login",
+  },
+  callbacks: {
+    async jwt({ token, user }) {
+      console.log("jwt callback called"); // Add console.log statement
+      if (user) {
+        token.id = user.id;
+      }
+      return token;
     },
-},
-};
+    async session({ session, token }) {
+      console.log("session callback called"); // Add console.log statement
+      if (token?.id) {
+        session.user = {
+          ...session.user,
+          id: token.id,
+        };
+      }
+      return session;
+    },
+  },
+});
