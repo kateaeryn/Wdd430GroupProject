@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Button from '@/app/ui/button';
 import { getProductDetail, getItemReviews } from '@/app/lib/data';
 import React from 'react';
+import moment from 'moment';
 
 export default async function ProductDetail({params}: {params: {id: string}}) {
   //this looks weird because it is a workaround to let us use the passed parameter
@@ -38,20 +39,30 @@ export default async function ProductDetail({params}: {params: {id: string}}) {
               {reviews.length == 0 &&
                 <h4>Be the first to leave a review!</h4>
                 }
-                <a
+                {reviews.map((review) => {
+                  return (
+                    <div className="flex flex-col ">
+                      <div className="flex flex-row justify-between">
+                        <p className="text-3xl">{review.name}</p>  
+                        <p>Rating: {review.rate} Stars</p>
+                      </div>
+                      <div className="text-xl">
+                        {moment(review.date).format('MM/DD/YYYY')}
+                        </div>
+                      <p className="text-brown text-xl">{review.text}</p>
+                     </div> 
+                  );
+                   
+                })}
+                
+              </div>
+             <a
                   href={'/dashboard/products/' + link.id + '/detail/review'}>
                   <Button>Review this Item
                 </Button>
 
                 </a>
                 
-              </div>
-              <p className="text-brown text-xl">{link.reviews}</p>
-              
-              
-                
-
-
             </div>
            
             </div>

@@ -14,7 +14,6 @@ export async function getUser(email: string) {
 export async function getAllProductImages() {
     try {
         const product = await sql`SELECT id, items.image_url, items.title FROM items`;
-        console.log(product);
 
         return product.rows; 
     } catch (error) {
@@ -41,7 +40,7 @@ export async function getProductDetail(id: string) {
 export async function getItemReviews(id: string) {
     try {
         const review = await sql
-        `SELECT reviews.user_id, reviews.item_id, reviews.text,reviews.date, reviews.rate, users.name, users.image_url
+        `SELECT reviews.user_id, reviews.item_id, reviews.text,reviews.date, reviews.rate, users.name
         FROM reviews
         JOIN users on users.id = reviews.user_id
         WHERE reviews.item_id = ${id};`
