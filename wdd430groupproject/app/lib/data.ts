@@ -13,7 +13,9 @@ export async function getUser(email: string) {
 
 export async function getAllProductImages() {
     try {
-        const product = await sql`SELECT items.id, items.image_url, items.name FROM items`;
+        const product = await sql`SELECT id, items.image_url, items.title FROM items`;
+        console.log(product);
+
         return product.rows; 
     } catch (error) {
         console.error("Database Error", error);
@@ -23,7 +25,9 @@ export async function getAllProductImages() {
 
 export async function getProductDetail(id: string) {
     try {
-        const product = await sql`SELECT items.id, items.artisan_id, items.title, items.price, items.category, items.description, items.image_url, items.status, artisans.name
+        const product = await sql
+        `SELECT items.id, items.artisan_id, items.title, items.price,
+        items.category, items.description, items.image_url, items.status, artisans.name
         FROM items
         JOIN artisans on artisans.id = items.artisan_id
         WHERE items.id = ${id}`;
@@ -33,3 +37,20 @@ export async function getProductDetail(id: string) {
         throw new Error("Failed to fetch Product Details")
     }
 }
+
+export async function getItemReviews(id: string) {
+    try {
+        const review = await sql
+        `SELECT reviews.user_id, reviews.item_id, reviews.text,reviews.date, reviews.rate, users.name, users.image_url
+        FROM reviews
+        JOIN users on users.id = reviews.user_id
+        WHERE reviews.item_id = ${id};`
+        return review.rows;
+    } catch (error) {
+        console.error("Database Error", error);
+        throw new Error("Failed to retrieve reviews");
+    }
+}
+
+//aedc7eda - 1bd6 - 4579 - ad15 - 0e975417b9a9
+//72fb94c3-9518-49f7-a561-e7c108ab2625

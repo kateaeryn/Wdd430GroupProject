@@ -9,11 +9,13 @@ import {getAllProductImages} from '@/app/lib/data';
 export default async function FeaturedLinks() {
     const list = await getAllProductImages(); 
   const links = list.sort(() => Math.random() - 0.5);
+  console.log(list);
   return (
     <>
           {links.slice(0,3).map((link) => {
-            console.log(links);
+
         return (
+
           <div className="" key={link.id}>
             
             <Link
@@ -23,8 +25,8 @@ export default async function FeaturedLinks() {
               
             )}
             >
-              <Image src={link.image_url} alt={link.id} className="sm:size-44 md:size-72 xl:size-96 2xl:size-[36rem]"  width={2250} height={4000} />
-            <p className=" text-2xl">{link.name}</p>
+              <Image src={link.image_url} alt={link.id} priority={true} className="md:my-4 sm:size-44 md:size-72 xl:size-96 2xl:size-[36rem]"  width={2250} height={4000} />
+            <p className=" text-2xl">{link.title}</p>
           </Link>
             </div>
         );
