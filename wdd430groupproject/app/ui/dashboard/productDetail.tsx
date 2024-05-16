@@ -41,7 +41,7 @@ export default async function ProductDetail({params}: {params: {id: string}}) {
                 }
                 {reviews.map((review) => {
                   return (
-                    <div className="flex flex-col ">
+                    <div className="flex flex-col " key={review.id}>
                       <div className="flex flex-row justify-between">
                         <p className="text-3xl">{review.name}</p>  
                         <p>Rating: {review.rate} Stars</p>
