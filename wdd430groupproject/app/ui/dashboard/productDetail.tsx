@@ -1,38 +1,33 @@
-'use client';
 
-import { usePathname } from 'next/navigation';
-import blankBox from '/public/images/blank-box.png';
+
 import Image from 'next/image';
 import Button from '@/app/ui/button';
-// import Carousel from '@/app/ui/dashboard/carousel';
+import { getProductDetail } from '@/app/lib/data';
+import React from 'react';
+import { useParams } from 'react-router-dom';
 
-
-const links = [
-    { title: 'Item 1', artist: 'Some Dude', href: '/dashboard/products/', price: "$$$", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", reviews: "This is so awesome, I love it so much." },
- 
-  
-];
-
-
-export default function ProductDetail() {
-    const pathname = usePathname();
+export default async function ProductDetail({params}: {params: {id: string}}) {
+  //this looks weird because it is a workaround to let us use the passed parameter
+  //as a string, even though it is already a string
+  const id = params as unknown as string;
+  console.log(params);
+    const links = await getProductDetail(id);
+  console.log(links);
   return (
     <>
           {links.map((link) => {
-        
+            
         return (
-          <div className="flex flex-col " key={link.title}>
-                <h1 className="text-5xl text-brown">{link.title}</h1>
+          <div className="flex flex-col " key={link.id}>
+                <h1 className="text-5xl text-brown">{link.name}</h1>
                 <div className="flex flex-row justify-between">
-                <h3 className="text-2xl text-brown">{link.artist}</h3>
+                <h3 className="text-2xl text-brown">{link.artisan}</h3>
                 <p>Star Rating</p>
 
                 </div>
                 
-            <Image className="md:h-[600px] md:w-[700px]" src={blankBox} alt="blank box"/>
-            {/* <div className="flex flex-col items-center justify-center text-center">
-              <Carousel data={Idata} />
-            </div> */}
+            <Image className="md:h-[600px] md:w-[700px]" priority={true} src={link.image_url} alt="blank box" width={2250} height={4000} />
+            
             
                 <div className="flex flex-row justify-between">
                   <h3 className="text-brown">{link.price}</h3>

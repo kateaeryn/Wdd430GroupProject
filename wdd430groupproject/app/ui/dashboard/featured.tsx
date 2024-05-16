@@ -1,40 +1,29 @@
-'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
-import blankBox from '/public/images/blank-box.png';
 import Image from 'next/image';
+import {getAllProductImages} from '@/app/lib/data';
 
-const links = [
-    { name: 'Item 1', href: '/' },
-  {name: 'Item 2', href: '/' },
-  {
-    name: 'Item 3',
-    href: '/'
-    },
-  
-];
 
-export default function FeaturedLinks() {
-    const pathname = usePathname();
+
+export default async function FeaturedLinks() {
+    const list = await getAllProductImages(); 
+  const links = list.sort(() => Math.random() - 0.5);
   return (
     <>
-          {links.map((link) => {
-        
+          {links.slice(0,3).map((link) => {
+            console.log(links);
         return (
-          <div className="" key={link.name}>
+          <div className="" key={link.id}>
             
             <Link
-            key={link.name}
-            href={link.href}
-            className={clsx(' text-brown',
-              {
-                'bg-brown text-beige': pathname === link.href,
-              },
+              key={link.id}
+              href={'/dashboard/products/' + link.id + '/detail'}
+              className={clsx(' text-brown ',
+              
             )}
             >
-              <Image src={blankBox} alt='blank box' className="md:w-[250px] md:h-[200px] lg:w-[350px] lg:h-[300px] lg:mb-8 mt-3" height={150} width={150} />
+              <Image src={link.image_url} alt={link.id} className="sm:size-44 md:size-72 xl:size-96 2xl:size-[36rem]"  width={2250} height={4000} />
             <p className=" text-2xl">{link.name}</p>
           </Link>
             </div>
