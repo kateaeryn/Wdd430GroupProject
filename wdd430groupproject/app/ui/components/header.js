@@ -1,19 +1,20 @@
 import React from "react";
 import logo from "/public/images/title-logo.png";
-import NavLinks from "/app/ui/dashboard/nav-links";
+import NavLinks from "@/app/ui/dashboard/nav-links";
 import { UserCircleIcon, ShoppingCartIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import Image from "next/image";
-// import Suspense from 'react';
+
 
 export default function Header() {
+ 
   return (
     <header className="flex flex-col space-y-2 bg-tan ">
-      <div className="flex flex-col sm:flex-row  ">
+      <div className="flex flex-col sm:flex-row  justify-between">
         <div className=" relative flex justify-center">
           <a href="/">
             <Image
-              className="w-full px-4 "
+              className="w-full"
               width="1562"
               height="1562"
               src={logo.src}
@@ -21,22 +22,21 @@ export default function Header() {
             />
           </a>
         </div>
-        {/* <Suspense fallback={<p>Loading....</p>}> */}
-
-        <p className="relative flex justify-center sm:h-60 sm:w-95 sm:justify-start sm:self-center "></p>
-        {/* </Suspense> */}
-        <div className="flex flex-row justify-evenly sm:self-center">
+        <div className="hidden sm:flex justify-evenly grow flex-wrap flex-row ">
+        <NavLinks />
+      </div>
+        <div className="flex flex-row justify-evenly self-center mr-8 space-x-6">
           <Link href="/dashboard/account/">
-            <UserCircleIcon className=" w-[40px] h-[40px] m-4 stroke-brown xl:w-[50px] xl:h-[50px]" />
+            <UserCircleIcon className=" w-[50px] h-[50px] mb-4 stroke-brown lg:w-[75px] lg:h-[75px]" />
           </Link>
           <Link href="/dashboard/cart">
-            <ShoppingCartIcon className="w-[40px] h-[40px] m-4 stroke-brown xl:w-[50px] xl:h-[50px]" />
+            <ShoppingCartIcon className="w-[50px] h-[50px] mb-4 stroke-brown lg:w-[75px] lg:h-[75px]" />
           </Link>
         </div>
       </div>
 
       {/* Navigation links */}
-      <div className="flex justify-evenly grow flex-wrap flex-row ">
+      <div className="sm:hidden flex justify-evenly grow flex-wrap flex-row ">
         <NavLinks />
       </div>
     </header>

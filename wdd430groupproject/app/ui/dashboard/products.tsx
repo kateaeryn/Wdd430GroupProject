@@ -15,7 +15,7 @@ export default function ProductGrid({ items }: { items: Item[] }) {
     <>
       {items.map((item) => {
         return (
-          <div className="flex md:flex-row justify-center" key={item.title}>
+          <div className="flex  " key={item.title}>
             <Link
               key={item.id}
               href={"/dashboard/products/" + item.id + "/detail"}
@@ -26,11 +26,11 @@ export default function ProductGrid({ items }: { items: Item[] }) {
               <Image
                 src={item.image_url}
                 alt="Product Image"
-                className="md:w-[300px] md:h-[250px] 2xl:w-[350px] 2xl:h-[300px]"
-                height={300}
-                width={350}
+                className="object-fill size-24 sm:size-96"
+                height={4000}
+                width={2250}
               />
-              <p className="text-brown text-3xl pt-2 pb-10">{item.title}</p>
+              <p className="text-brown text-lg pt-2 pb-10 sm:text-xl md:text-2xl xl:text-3xl">{item.title}</p>
             </Link>
           </div>
         );

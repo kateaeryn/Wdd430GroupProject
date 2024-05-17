@@ -32,12 +32,12 @@ export default function Search({ placeholder }: { placeholder: string }) {
   }
 
   return (
-    <div className="relative flex justify-center sm:h-60 sm:w-95 sm:justify-start sm:self-center ">
+    <div className="flex justify-center  ">
       <label htmlFor="search" className="sr-only">
         Search
       </label>
       <input
-        className="flex w-5/6 h-3/4 border bg-tan border-brown text-3xl outline-2 placeholder:text-brown  rounded-md p-2"
+        className="flex w-5/6 h-full border  bg-tan border-brown text-2xl lg:text-3xl outline-2 placeholder:text-brown  rounded-md p-2"
         placeholder={placeholder}
         onChange={(e) => {
           handleSearch(e.target.value);
