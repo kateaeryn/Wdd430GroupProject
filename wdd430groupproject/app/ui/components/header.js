@@ -1,48 +1,44 @@
 import React from "react";
 import logo from "/public/images/title-logo.png";
-import NavLinks from '/app/ui/dashboard/nav-links';
-import Search from '/app/ui/dashboard/search';
-import { UserCircleIcon, ShoppingCartIcon } from '@heroicons/react/24/outline';
-import Link from 'next/link';
-import Image from 'next/image';
+import NavLinks from "/app/ui/dashboard/nav-links";
+import { UserCircleIcon, ShoppingCartIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
+import Image from "next/image";
 // import Suspense from 'react';
 
 export default function Header() {
-	return (
-		<header className="flex flex-col space-y-2 bg-tan ">
-			
-			<div className="flex flex-col sm:flex-row  ">
-				<div className=" relative flex justify-center">
-				<a href="/">
+  return (
+    <header className="flex flex-col space-y-2 bg-tan ">
+      <div className="flex flex-col sm:flex-row  ">
+        <div className=" relative flex justify-center">
+          <a href="/">
+            <Image
+              className="w-full px-4 "
+              width="1562"
+              height="1562"
+              src={logo.src}
+              alt="Logo"
+            />
+          </a>
+        </div>
+        {/* <Suspense fallback={<p>Loading....</p>}> */}
 
-					<Image className="w-full px-4 "
-							width="1562"
-							height="1562"
-						src={logo.src}
-						alt="Logo"
-						
-					/>
-				</a>
-				</div>
-				{/* <Suspense fallback={<p>Loading....</p>}> */}
-				<Search placeholder="Search the Haven..." />
-				{/* </Suspense> */}
-			<div className="flex flex-row justify-evenly sm:self-center">	
-				<Link href="/dashboard/account/">
-				<UserCircleIcon className=" w-[40px] h-[40px] m-4 stroke-brown xl:w-[50px] xl:h-[50px]" />
-				</Link>
-				<Link href="/dashboard/cart">
-				<ShoppingCartIcon className="w-[40px] h-[40px] m-4 stroke-brown xl:w-[50px] xl:h-[50px]" />
-				</Link>
-				</div>
-			</div>
+        <p className="relative flex justify-center sm:h-60 sm:w-95 sm:justify-start sm:self-center "></p>
+        {/* </Suspense> */}
+        <div className="flex flex-row justify-evenly sm:self-center">
+          <Link href="/dashboard/account/">
+            <UserCircleIcon className=" w-[40px] h-[40px] m-4 stroke-brown xl:w-[50px] xl:h-[50px]" />
+          </Link>
+          <Link href="/dashboard/cart">
+            <ShoppingCartIcon className="w-[40px] h-[40px] m-4 stroke-brown xl:w-[50px] xl:h-[50px]" />
+          </Link>
+        </div>
+      </div>
 
-			{/* Navigation links */}
-			<div className="flex justify-evenly grow flex-wrap flex-row ">
-			<NavLinks />
-			
-			</div>
-			
-		</header>
-	);
+      {/* Navigation links */}
+      <div className="flex justify-evenly grow flex-wrap flex-row ">
+        <NavLinks />
+      </div>
+    </header>
+  );
 }

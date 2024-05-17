@@ -1,43 +1,38 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import clsx from 'clsx';
-import blankBox from '/public/images/blank-box.png';
-import Image from 'next/image';
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import clsx from "clsx";
+import blankBox from "/public/images/blank-box.png";
+import Image from "next/image";
+import { Item } from "@/app/lib/definitions";
+import { fetchItems } from "@/app/lib/data";
 
-const links = [
-    { name: 'Item 1', href: '/dashboard/products/' },
-  {name: 'Item 2', href: '/dashboard/products/' },
-  {
-    name: 'Item 3',
-    href: '/dashboard/products/'
-    },
-  
-];
+export default function ProductGrid({ items }: { items: Item[] }) {
+  const pathname = usePathname();
 
-export default function ProductGrid() {
-    const pathname = usePathname();
   return (
     <>
-          {links.map((link) => {
-        
+      {items.map((item) => {
         return (
-          <div className="flex md:flex-row justify-center" key={link.name}>
-            
+          <div className="flex md:flex-row justify-center" key={item.title}>
             <Link
-            key={link.name}
-            href={link.href}
-            className={clsx('',
-              {
-                'bg-brown text-brown': pathname === link.href,
-              },
-            )}
+              key={item.id}
+              href={"/dashboard/products/" + item.id + "/detail"}
+              className={clsx("", {
+                "bg-brown text-brown": pathname === item.image_url,
+              })}
             >
-              <Image src={blankBox} alt='blank box' className="md:w-[300px] md:h-[250px] 2xl:w-[450px] 2xl:h-[400px]" height={400} width={450} />
-            <p className="text-brown text-3xl">{link.name}</p>
-          </Link>
-            </div>
+              <Image
+                src={item.image_url}
+                alt="Product Image"
+                className="md:w-[300px] md:h-[250px] 2xl:w-[350px] 2xl:h-[300px]"
+                height={300}
+                width={350}
+              />
+              <p className="text-brown text-3xl pt-2 pb-10">{item.title}</p>
+            </Link>
+          </div>
         );
       })}
     </>
