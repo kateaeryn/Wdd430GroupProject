@@ -10,6 +10,8 @@ export const metadata: Metadata = {
 //category page needs to be keyed to take the category id or name
 //or something to filter by category, so which ever category is clicked
 //on the landing page brings up the right group of items
+//Or we delete this page and put that functionality into the all products page
+//Since this is a duplicate of that code
 export default async function Page({
   searchParams,
 }: {
