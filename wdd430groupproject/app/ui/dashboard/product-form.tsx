@@ -69,8 +69,16 @@ export default function AddProductForm({
                 type="string"
                 placeholder="Enter Title"
                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-5 text-xl outline-2 placeholder:text-darkBrown"
-                aria-describedby="customer-error"
+                aria-describedby="title-error"
               />
+              <div id="title-error" aria-live="polite" aria-atomic="true">
+                {state.errors?.title &&
+                  state.errors.title.map((error: string) => (
+                    <p className="mt-2 text-sm text-red-500" key={error}>
+                      {error}
+                    </p>
+                  ))}
+              </div>
             </div>
           </div>
         </div>
@@ -88,9 +96,17 @@ export default function AddProductForm({
                 step=".01"
                 placeholder="Enter Price"
                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-5 text-xl outline-2 placeholder:text-darkBrown"
-                aria-describedby="customer-error"
+                aria-describedby="price-error"
               />
             </div>
+          </div>
+          <div id="price-error" aria-live="polite" aria-atomic="true">
+            {state.errors?.price &&
+              state.errors.price.map((error: string) => (
+                <p className="mt-2 text-sm text-red-500" key={error}>
+                  {error}
+                </p>
+              ))}
           </div>
         </div>
         {/* Category */}
@@ -103,7 +119,7 @@ export default function AddProductForm({
             name="category"
             className="peer block w-full cursor-pointer rounded-md border  border-gray-200 py-2 pl-10 text-xl outline-2 placeholder:text-darkBrown"
             defaultValue=""
-            aria-describedby="artisan-error"
+            aria-describedby="category-error"
           >
             <option value="" disabled>
               Select a Category
@@ -114,6 +130,14 @@ export default function AddProductForm({
               </option>
             ))}
           </select>
+          <div id="category-error" aria-live="polite" aria-atomic="true">
+            {state.errors?.category &&
+              state.errors.category.map((error: string) => (
+                <p className="mt-2 text-sm text-red-500" key={error}>
+                  {error}
+                </p>
+              ))}
+          </div>
         </div>
         {/* Description */}
         <div className="mb-4">
@@ -127,8 +151,16 @@ export default function AddProductForm({
                 name="description"
                 placeholder="Enter item description"
                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-5 text-xl outline-2 placeholder:text-darkBrown"
-                aria-describedby="customer-error"
+                aria-describedby="description-error"
               />
+              <div id="description-error" aria-live="polite" aria-atomic="true">
+                {state.errors?.description &&
+                  state.errors.description.map((error: string) => (
+                    <p className="mt-2 text-sm text-red-500" key={error}>
+                      {error}
+                    </p>
+                  ))}
+              </div>
             </div>
           </div>
         </div>
@@ -145,8 +177,16 @@ export default function AddProductForm({
                 type="string"
                 placeholder="Enter url"
                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-5 text-xl outline-2 placeholder:text-darkBrown"
-                aria-describedby="customer-error"
+                aria-describedby="image-error"
               />
+            </div>
+            <div id="image-error" aria-live="polite" aria-atomic="true">
+              {state.errors?.description &&
+                state.errors.description.map((error: string) => (
+                  <p className="mt-2 text-sm text-red-500" key={error}>
+                    {error}
+                  </p>
+                ))}
             </div>
           </div>
         </div>
