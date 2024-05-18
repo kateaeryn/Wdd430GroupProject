@@ -27,3 +27,9 @@ export type ArtisanList = {
   id: string;
   name: string;
 }
+
+export type ArtisanGrid = {
+  id: string;
+  name: string;
+  image_url: string;
+}

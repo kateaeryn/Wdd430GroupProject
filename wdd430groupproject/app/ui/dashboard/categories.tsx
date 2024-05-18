@@ -3,44 +3,70 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
-import blankBox from "/public/images/blank-box.png";
 import Image from "next/image";
-
-const links = [
-  { name: "Home Decor", href: "/dashboard/categories/decor" },
-  { name: "Textiles", href: "/dashboard/categories/textiles" },
-  {
-    name: "Art",
-    href: "/dashboard/categories/art",
-  },
-  { name: "Accessories", href: "/dashboard/categories/accessories" },
-];
+import homedecor from '@/public/images/homedecor.png';
+import art from '@/public/images/art.png';
+import textiles from '@/public/images/textiles.png';
+import accessories from '@/public/images/accessories.png';
 
 export default function CatLinks() {
   const pathname = usePathname();
   return (
     <>
-      {links.map((link) => {
-        return (
-
-          <div className="" key={link.name}>
+      
+      <div className="" >
+            
+            <Link
+              href="/dashboard/category/all-products"
+              className={clsx('',
+                
+              )}
+            >
+              <Image src={homedecor} alt='home decor' className="size-36 lg:size-48" height={500} width={500} />
+             
+            </Link>
+      </div>
+      <div className="" >
 
             
             <Link
-              key={link.name}
-              href={link.href}
+              href="/dashboard/categories/all-products"
               className={clsx('',
-                {
-                  'bg-brown text-beige': pathname === link.href,
-                },
+                
               )}
             >
-              <Image src={blankBox} alt='blank box' className="sm:w-[250px] sm:h-[150px] md:w-[350px] md:h-[200px] lg:w-[400px] lg:h-[350px]" height={100} width={150} />
-              <p className=" text-2xl">{link.name}</p>
+              <Image src={art} alt='art' className="size-36 lg:size-48" height={500} width={500} />
             </Link>
-          </div>
-        );
-      })}
+      </div>
+      <div className="">
+
+            
+            <Link
+              href="/dashboard/categories/all-products"
+              className={clsx('',
+                
+              )}
+            >
+              <Image src={textiles} alt='textiles' className="size-36 lg:size-48" height={500} width={500} />
+              
+            </Link>
+      </div>
+      <div className="" >
+
+            
+            <Link
+              
+              href="/dashboard/categories/all-products"
+              className={clsx('',
+                
+              )}
+            >
+              <Image src={accessories} alt='accessories' className="size-36 lg:size-48" height={500} width={500} />
+              
+            </Link>
+      </div>
+
+        
     </>
        
    

@@ -8,9 +8,8 @@ import { createProduct }  from '@/app/lib/actions';
 
 
 export default function AddProductForm({ artisans }: { artisans: ArtisanList[] }) {
-     const initialState:state = { message: null };
-    
-    const [ state, dispatch] = useFormState(createProduct, initialState);
+    const initialState = { message: null, errors: {} };
+    const [state, dispatch] = useFormState(createProduct, initialState);
   return (
     <form action={dispatch}>
       <div className=" rounded-md bg-tan p-4 md:p-6 text-darkBrown">
@@ -153,7 +152,7 @@ export default function AddProductForm({ artisans }: { artisans: ArtisanList[] }
                   id="available"
                   name="status"
                   type="radio"
-                  value="pending"
+                  value="available"
                   className="h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2"
                 />
                 <label
@@ -168,7 +167,7 @@ export default function AddProductForm({ artisans }: { artisans: ArtisanList[] }
                   id="unavailable"
                   name="status"
                   type="radio"
-                  value="paid"
+                  value="unavailable"
                   className="h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2"
                 />
                 <label

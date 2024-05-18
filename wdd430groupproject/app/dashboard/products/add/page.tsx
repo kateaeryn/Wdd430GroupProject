@@ -19,16 +19,7 @@ export default async function Page() {
         {/* @ts-expect-error Async Server Compnent*/}    
           <AddProductForm artisans={artisans} />
           
-        
-
-
-
-
-
-
-
-
-
+       
 
     </div>
     

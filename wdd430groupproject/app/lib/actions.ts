@@ -19,7 +19,7 @@ import { redirect } from 'next/navigation';
 //     }
 // }
   
-const FormSchema = z.object({
+const newProduct = z.object({
     id: z.string(),
     artisan_id: z.string(),
     title: z.string(),
@@ -30,22 +30,20 @@ const FormSchema = z.object({
     status: z.string()
 });
 
-const newProduct = FormSchema.omit({ id:true });
-
 export type State = {
     errors?: {
-        artisan_id: string[],
-        title: string[],
-        price: number[],
-        category: string[],
-        description: string[],
-        image_url: string[],
-        status: string[],
+        artisan_id?: string[] | "",
+        title?: string[] | "",
+        price?: number[] | 0,
+        category?: string[] | "",
+        description?: string[] | "",
+        image_url?: string[] | "",
+        status?: string[] | "",
     };
     message?: string | null;
 }
-export async function createProduct( formData: FormData) {
- 
+export async function createProduct(formData: FormData) {
+    console.log(formData);
     const validatedFields = newProduct.safeParse({
         artisan_id: formData.get('artisan_id'),
         title: formData.get('title'),
@@ -56,6 +54,7 @@ export async function createProduct( formData: FormData) {
         status: formData.get('status')
         
     });
+   
     if (!validatedFields.success) {
         return {
             errors: validatedFields.error.flatten().fieldErrors,
@@ -70,10 +69,10 @@ export async function createProduct( formData: FormData) {
     VALUES (${artisan_id}, ${title}, ${price}, ${category}, ${description}, ${image_url}, ${status})`;
     } catch (error) {
         return {
-            message: 'Databse Error: Failed to create Invoice'
+            message: 'Database Error: Failed to create product'
         };
     }
         
-        redirect('/dashboard/account');
+    redirect('/dashboard/account');
     
 }
