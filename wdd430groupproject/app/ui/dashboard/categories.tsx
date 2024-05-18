@@ -1,5 +1,8 @@
 import Link from "next/link";
-
+import homedecor from '@/public/images/homedecor.png';
+import art from '@/public/images/art.png';
+import textiles from '@/public/images/textiles.png';
+import accessories from '@/public/images/accessories.png';
 import Image from "next/image";
 import { fetchCategory } from "@/app/lib/data";
 
@@ -9,13 +12,7 @@ export default async function CatLinks() {
   const artCategory = await fetchCategory("art");
   const accessoriesCategory = await fetchCategory("accessories");
 
-import { usePathname } from "next/navigation";
-import clsx from "clsx";
-import Image from "next/image";
-import homedecor from '@/public/images/homedecor.png';
-import art from '@/public/images/art.png';
-import textiles from '@/public/images/textiles.png';
-import accessories from '@/public/images/accessories.png';
+
 
 
   return (

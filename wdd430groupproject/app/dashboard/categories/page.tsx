@@ -19,7 +19,7 @@ export default async function Page({
 }) {
   const query = searchParams?.query || "";
   const items = await fetchFilteredItems(query);
-
+  
   return (
     <>
       <div className="flex flex-col space-y-10 ">
