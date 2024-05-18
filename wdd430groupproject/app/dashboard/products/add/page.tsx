@@ -13,7 +13,7 @@ export default async function Page() {
     <>
       <div className="flex flex-col grow max-w-4xl  text-center">
         <h1>Add Products</h1>
-        {/*The below comment line is preventing an error between typescript and async/await*/}
+       
 
         <AddProductForm artisans={artisans} />
       </div>
