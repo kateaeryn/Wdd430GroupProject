@@ -16,6 +16,8 @@ export default async function ProductDetail({
   const links = await getProductDetail(id);
   const reviews = await getItemReviews(id);
 
+  console.log(links);
+
   return (
     <>
       {links.map((link) => {

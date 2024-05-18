@@ -25,7 +25,7 @@ export default async function FeaturedLinks() {
               
             )}
             >
-              <Image src={link.image_url} alt={link.id} priority={true} className="md:my-4 sm:size-44 md:size-72 xl:size-96 2xl:size-[36rem]"  width={2250} height={4000} />
+              <Image src={link.image_url} alt={link.id} priority={true} className="md:my-4 sm:size-44 md:size-60 xl:size-80 2xl:size-[24rem]"  width={2250} height={4000} />
             <p className=" text-2xl">{link.title}</p>
           </Link>
             </div>

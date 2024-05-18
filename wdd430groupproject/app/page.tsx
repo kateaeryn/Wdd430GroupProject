@@ -24,6 +24,7 @@ export default function LandingPage() {
                     <h2>Featured Items</h2>
                 <div className="flex flex-wrap flex-row justify-evenly p-3 md:p-8 ">
                     {/*The below comment line is preventing an error between typescript and async/await*/}
+                    {/* We probably need to add suspense boundaries around the links*/}
                     {/* @ts-expect-error Async Server Compnent*/}   
                     <FeaturedLinks /> 
                 </div>
