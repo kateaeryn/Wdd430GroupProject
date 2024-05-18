@@ -17,13 +17,16 @@ export default function LandingPage() {
                     <Image src={heroimage} className="w-full h-full" alt="vintage crafting supplies"></Image>
                 </div>   
                 <div className="hidden md:flex w-full h-full md:justify-center">
-                <Image src={logo} alt="Handcrafted Haven Logo"></Image>
+                <Image src={logo} priority={true} alt="Handcrafted Haven Logo"></Image>
                 </div>
             </div>
-                <div className=" hidden sm:flex flex-col flex-wrap bg-tan text-5xl text-brown text-center   ">
+                <div className=" hidden sm:flex flex-col flex-wrap bg-tan text-5xl text-brown text-center ">
                     <h2>Featured Items</h2>
-                    <div className="flex flex-wrap flex-row justify-evenly p-3 md:p-8 ">
-                       <FeaturedLinks /> 
+                <div className="flex flex-wrap flex-row justify-evenly p-3 md:p-8 ">
+                    {/*The below comment line is preventing an error between typescript and async/await*/}
+                    {/* We probably need to add suspense boundaries around the links*/}
+                    {/* @ts-expect-error Async Server Compnent*/}   
+                    <FeaturedLinks /> 
                 </div>
                     
             

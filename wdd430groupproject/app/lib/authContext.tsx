@@ -1,3 +1,4 @@
+import React from 'react';
 import { createContext, useContext, useState } from "react";
 
 // Define the shape of the user object

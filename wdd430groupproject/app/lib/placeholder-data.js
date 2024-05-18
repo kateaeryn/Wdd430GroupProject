@@ -24,6 +24,7 @@ const users = [
   },
 ];
 
+
 const artisans = [
   {
     id: "50ca3e18-62cd-11ee-8c99-0242ac120002",
@@ -77,6 +78,7 @@ const items = [
   {
     id: "65836928-49b3-499a-a1d3-4437f2397efd",
     artisan_id: artisans[0].id,
+    title: "Dream Catcher",
     price: 6000,
     category: "textiles",
     description: "Beautiful pink dream catcher",
@@ -86,6 +88,7 @@ const items = [
   {
     id: "aedc7eda-1bd6-4579-ad15-0e975417b9a9",
     artisan_id: artisans[0].id,
+    title: "Hammock",
     price: 20000,
     category: "textiles",
     description:
@@ -96,6 +99,7 @@ const items = [
   {
     id: "5c92efa6-adc4-4e58-94f0-c961b3965de9",
     artisan_id: artisans[0].id,
+    title: "Purse",
     price: 10000,
     category: "textiles",
     description:
@@ -106,17 +110,19 @@ const items = [
   {
     id: "db5e7412-0841-459e-befd-dc88deca86c2",
     artisan_id: artisans[0].id,
+    title: "Straw Mat",
     price: 8000,
     category: "textiles",
     description:
       "Straw carpet perfect to use inside or outside the house. To choose a different color contact me",
-    image_url: "/arts/textile-straw-carpet.pnd",
+    image_url: "/arts/textile-straw-carpet.png",
     status: "available",
   },
   //Anastasia Rollins arts
   {
     id: "178c98fb-e191-478c-81b7-8188e3d1b254",
     artisan_id: artisans[1].id,
+    title: "Bracelets",
     price: 2000,
     category: "accessories",
     description: "Bracelets with different shapes and colors. Adjustable. ",
@@ -126,6 +132,7 @@ const items = [
   {
     id: "185a0416-c325-464a-aedc-cd78ed870a9a",
     artisan_id: artisans[1].id,
+    title: "Earrings",
     price: 3000,
     category: "accessories",
     description: "Purple earrings, delicate and simple.",
@@ -135,6 +142,7 @@ const items = [
   {
     id: "f6c07b45-05ee-4b71-895e-6bafd208cb04",
     artisan_id: artisans[1].id,
+    title: "Bracelets",
     price: 5000,
     category: "accessories",
     description:
@@ -145,6 +153,7 @@ const items = [
   {
     id: "1d869bb2-09e1-4203-86a4-601d960e70a3",
     artisan_id: artisans[1].id,
+    title: "Earrings",
     price: 4000,
     category: "accessories",
     description: "Exclusive earrings",
@@ -155,6 +164,7 @@ const items = [
   {
     id: "3f9c667a-2357-40b5-9313-bb76724cfefc",
     artisan_id: artisans[2].id,
+    title: "Cabana", 
     price: 40000,
     category: "arts",
     description:
@@ -165,6 +175,7 @@ const items = [
   {
     id: "c0e150e4-c010-40fa-8732-220e5ec2b3ba",
     artisan_id: artisans[2].id,
+    title: "Ocean",
     price: 30000,
     category: "arts",
     description:
@@ -175,6 +186,7 @@ const items = [
   {
     id: "1d214321-bd09-4001-8006-506227420f0b",
     artisan_id: artisans[2].id,
+    title: "Painting",
     price: 150000,
     category: "arts",
     description: "My most recent painting, realist and photo type.",
@@ -184,6 +196,7 @@ const items = [
   {
     id: "184519a0-31bb-4417-a965-bb5a5059a228",
     artisan_id: artisans[2].id,
+    title: "Trail",
     price: 15795,
     category: "arts",
     description: "This a trail that I go often to think and get inspired.",
@@ -194,6 +207,7 @@ const items = [
   {
     id: "bfc40419-a440-49d6-a157-0389ef606501",
     artisan_id: artisans[3].id,
+    title: "Pillow",
     price: 3000,
     category: "decor",
     description: "Decorative Throw Pillow",
@@ -203,15 +217,17 @@ const items = [
   {
     id: "21db1005-dd86-4ff5-a961-11ce7fc56b94",
     artisan_id: artisans[3].id,
+    title: "Flower Pots",
     price: 8000,
     category: "decor",
     description: "Ceramic Flower Pots",
-    image_url: "/arts/decor-ceramic-flower-pots.png",
+    image_url: "/arts/decor-ceramic-flower-pots.jpg",
     status: "available",
   },
   {
     id: "c720c179-48a8-4c15-8c25-1e7b89621e11",
     artisan_id: artisans[3].id,
+    title: "Woven Bowls",
     price: 5000,
     category: "decor",
     description: "Woven bowls in different sizes",
@@ -221,6 +237,7 @@ const items = [
   {
     id: "2c9c03ee-0531-4632-8adc-cace1eb9d0ce",
     artisan_id: artisans[3].id,
+    title: "Storage Tower",
     price: 15000,
     category: "decor",
     description: "Woven 3 Tier Storage Tower",
@@ -231,6 +248,7 @@ const items = [
   {
     id: "2dc6b2f9-0154-48f1-82cf-4621fef537bf",
     artisan_id: artisans[4].id,
+    title: "Birds",
     price: 60000,
     category: "art",
     description: "Free",
@@ -240,6 +258,7 @@ const items = [
   {
     id: "2feb48a5-fd2d-4bfb-9a72-e5d6a117897b",
     artisan_id: artisans[4].id,
+    title: "Emotions",
     price: 40000,
     category: "art",
     description: "Emotions",
@@ -249,6 +268,7 @@ const items = [
   {
     id: "329914e5-55c4-4464-b338-53f4e5eeff9b",
     artisan_id: artisans[4].id,
+    title: "Mountain",
     price: 120000,
     category: "art",
     description: "The Mountain",
@@ -258,6 +278,7 @@ const items = [
   {
     id: "2f79c270-de35-498d-ad9d-2d32f971be51",
     artisan_id: artisans[4].id,
+    title: "Universe",
     price: 75000,
     category: "art",
     description: "Universe",

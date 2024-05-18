@@ -2,13 +2,12 @@
 
 import React, { useContext } from "react";
 import { useRouter } from "next/navigation";
-import { Metadata } from "next";
-import FilteredProducts from "@/app/ui/dashboard/filtered";
+import FilteredProducts from "../../ui/dashboard/filtered";
 import { AuthContext } from "../../lib/authContext";
 import Button from "../../ui/button";
 import Link from "next/link";
 
-export default function AccountPage() {
+export default function Page() {
 	const router = useRouter();
 	const { isLoggedIn, logout } = useContext(AuthContext);
 
