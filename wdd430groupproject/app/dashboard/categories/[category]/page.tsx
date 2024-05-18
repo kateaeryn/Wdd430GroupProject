@@ -1,10 +1,9 @@
 import { Metadata } from "next";
 import ProductGrid from "@/app/ui/dashboard/products";
-import { fetchCategory, filteredCategory } from "@/app/lib/data";
+import { filteredCategory } from "@/app/lib/data";
 import Search from "@/app/ui/dashboard/search";
 import { Suspense } from "react";
 import { ProductsSkeleton } from "@/app/ui/skeletons";
-import { tuple } from "zod";
 
 export const metadata: Metadata = {
   title: "Category",

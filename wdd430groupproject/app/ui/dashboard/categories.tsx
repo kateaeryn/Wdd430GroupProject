@@ -1,6 +1,4 @@
 import Link from "next/link";
-import clsx from "clsx";
-import blankBox from "/public/images/blank-box.png";
 import Image from "next/image";
 import { fetchCategory } from "@/app/lib/data";
 
