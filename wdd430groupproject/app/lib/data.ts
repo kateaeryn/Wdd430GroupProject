@@ -114,6 +114,63 @@ export async function fetchFilteredItems(query: string) {
     return items;
   } catch (error) {
     console.error("Database Error:", error);
-    throw new Error("Failed to fetch total number of invoices.");
+    throw new Error("Failed to fetch items.");
+  }
+}
+
+export async function fetchCategory(category: string) {
+  noStore();
+  try {
+    const data = await sql<Item>`
+    SELECT 
+    id,
+    artisan_id,
+    title,
+    price,
+    category,
+    description,
+    image_url,
+    status
+      FROM items
+      WHERE
+        category = ${category} 
+    `;
+
+    const items = data.rows;
+    return items;
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch categories.");
+  }
+}
+
+export async function filteredCategory(category: string, query: string) {
+  noStore();
+  try {
+    const data = await sql<Item>`
+    SELECT 
+    id,
+    artisan_id,
+    title,
+    price,
+    category,
+    description,
+    image_url,
+    status
+      FROM items
+      WHERE
+        category = ${category}
+        AND
+          (title ILIKE ${`%${query}%`} OR
+          price::text ILIKE ${`%${query}%`} OR
+          description ILIKE ${`%${query}%`} OR
+          status ILIKE ${`%${query}%`})
+    `;
+
+    const items = data.rows;
+    return items;
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch items.");
   }
 }
