@@ -20,16 +20,7 @@ import { revalidatePath } from "next/cache";
 //     }
 // }
 
-const newProduct = z.object({
-  id: z.string(),
-  artisan_id: z.string(),
-  title: z.string(),
-  price: z.number(),
-  category: z.string(),
-  description: z.string(),
-  image_url: z.string(),
-  status: z.string(),
-});
+
 
 const FormNewProductSchema = z.object({
   id: z.string(),
@@ -67,18 +58,18 @@ export type State = {
 };
 
 export async function createProduct(prevState: State, formData: FormData) {
-  console.log(formData);
+  
   // Validate form fields using Zod
   const validatedFields = CreateProduct.safeParse({
     artisan_id: formData.get("artisan_id"),
-    title: formData.get("title"),
-    price: formData.get("price"),
+    title: formData.get("title") ,
+    price: formData.get("price") ,
     category: formData.get("category"),
     description: formData.get("description"),
-    image_url: formData.get("image_url"),
-    status: formData.get("status"),
+    image_url: formData.get("image_url") ,
+    status: formData.get("status") ,
   });
-
+console.log(formData);
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
@@ -103,6 +94,6 @@ export async function createProduct(prevState: State, formData: FormData) {
     };
   }
   // Revalidate the cache for the invoices page and redirect the user.
-  revalidatePath("/");
-  redirect("/");
+  revalidatePath("/dashboard/account");
+  redirect("/dashboard/account");
 }

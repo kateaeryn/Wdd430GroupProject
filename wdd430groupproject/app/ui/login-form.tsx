@@ -46,7 +46,7 @@ export default function LoginForm() {
 			className="bg-white shadow-2xl w-30 min-w-96 border rounded px-8 pt-6 pb-8 mb-4"
 		>
 			<div className="block text-black-700 font-bold mb-2">
-				<h1 className="text-base text-gray-500 mb-10">
+				<h1 className="text-2xl text-gray-500 mb-10">
 					Please log in to continue.
 				</h1>
 				<div className="w-full">
@@ -59,7 +59,7 @@ export default function LoginForm() {
 						</label>
 						<div className="relative">
 							<input
-								className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-400"
+								className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-xl outline-2 placeholder:text-gray-400"
 								id="email"
 								type="email"
 								name="email"
@@ -79,7 +79,7 @@ export default function LoginForm() {
 						</label>
 						<div className="relative">
 							<input
-								className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-400"
+								className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-xl outline-2 placeholder:text-gray-400"
 								id="password"
 								type="password"
 								name="password"

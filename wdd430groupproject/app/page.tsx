@@ -23,9 +23,7 @@ export default function LandingPage() {
                 <div className=" hidden sm:flex flex-col flex-wrap bg-tan text-5xl text-brown text-center ">
                     <h2>Featured Items</h2>
                 <div className="flex flex-wrap flex-row justify-evenly p-3 md:p-8 ">
-                    {/*The below comment line is preventing an error between typescript and async/await*/}
-                    {/* We probably need to add suspense boundaries around the links*/}
-                    {/* @ts-expect-error Async Server Compnent*/}   
+                    
                     <FeaturedLinks /> 
                 </div>
                     
@@ -35,8 +33,7 @@ export default function LandingPage() {
                 <h2>Categories</h2>
                 <div className="flex flex-wrap flex-row justify-evenly p-3">
 {/*The below comment line is preventing an error between typescript and async/await*/}
-                    {/* We probably need to add suspense boundaries around the links*/}
-                    {/* @ts-expect-error Async Server Compnent*/}   
+                    
                     <CatLinks />
                 </div>
             </div>
