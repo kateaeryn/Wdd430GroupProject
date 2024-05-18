@@ -1,39 +1,48 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
-import { signIn } from "next-auth/react";
+import { useState, useContext } from "react";
 import Button from "./button";
+import { AuthContext } from "../lib/authContext";
 
 export default function LoginForm() {
-    console.log("Form loaded"); // Add console.log statement
-
+    const { login } = useContext(AuthContext) as { login: (token: string) => void };
+    
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState<string | null>(null);
 
-    const handleSubmit = async (event: React.FormEvent) => {
-        event.preventDefault();
-        console.log("Form submitted"); // Add console.log statement
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setError(null);
 
-        const result = await signIn("credentials", {
-            redirect: false,
-            email,
-            password,
-        });
+        try {
+            const response = await fetch("/api/login/route", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    email,
+                    password,
+                }),
+            });
 
-        if (result?.error) {
-            setError(result.error);
-            console.log("Error:", result.error); // Add console.log statement
-        } else {
-            setError(null);
-            console.log("Login successful"); // Add console.log statement
-            // Redirect to the home page
-            window.location.href = "/";}
+            if (response.ok) {
+                const { token } = await response.json();
+                login(token); // Call login function from context
+                window.location.href = "/";
+            } else {
+                setError("Invalid credentials");
+            }
+        } catch (error) {
+            setError("Internal server error");
+        }
     };
-
 	return (
 		<form
+            id="login-form"
 			onSubmit={handleSubmit}
+            method="post"
 			className="bg-white shadow-2xl w-30 min-w-96 border rounded px-8 pt-6 pb-8 mb-4"
 		>
 			<div className="block text-black-700 font-bold mb-2">
@@ -84,16 +93,16 @@ export default function LoginForm() {
 					</div>
 				</div>
 				<Button type="submit">Log in</Button>
-				<div className="flex h-8 items-end space-x-1">
-					{error && (
+				{error && (
+					<div className="flex h-8 items-end space-x-1">
 						<p
 							aria-live="polite"
 							className="text-sm text-red-500"
 						>
 							{error}
 						</p>
-					)}
-				</div>
+					</div>
+				)}
 			</div>
 		</form>
 	);
