@@ -1,15 +1,25 @@
-'use client';
+"use client";
 
-import { useFormState } from 'react-dom';
-import { ArtisanList } from '@/app/lib/definitions';
-import Link from 'next/link';
-import  Button from '@/app/ui/button';
-import { createProduct }  from '@/app/lib/actions';
+import { ArtisanList } from "@/app/lib/definitions";
+import Link from "next/link";
+import Button from "@/app/ui/button";
+import { createProduct } from "../../lib/actions";
+import { useFormState } from "react-dom";
 
+const category = [
+  { id: "decor", name: "Home Decor" },
+  { id: "accessories", name: "Accessories" },
+  { id: "art", name: "Art" },
+  { id: "textiles", name: "Textiles" },
+];
+export default function AddProductForm({
+  artisans,
+}: {
+  artisans: ArtisanList[];
+}) {
+  const initialState = { message: null, errors: {} };
+  const [state, dispatch] = useFormState(createProduct, initialState);
 
-export default function AddProductForm({ artisans }: { artisans: ArtisanList[] }) {
-    const initialState = { message: null, errors: {} };
-    const [state, dispatch] = useFormState(createProduct, initialState);
   return (
     <form action={dispatch}>
       <div className=" rounded-md bg-tan p-4 md:p-6 text-darkBrown">
@@ -24,7 +34,7 @@ export default function AddProductForm({ artisans }: { artisans: ArtisanList[] }
               name="artisan_id"
               className="peer block w-full cursor-pointer rounded-md border  border-gray-200 py-2 pl-10 text-xl outline-2 placeholder:text-darkBrown"
               defaultValue=""
-              aria-describedby="customer-error"
+              aria-describedby="artisan-error"
             >
               <option value="" disabled>
                 Select an artist
@@ -35,7 +45,14 @@ export default function AddProductForm({ artisans }: { artisans: ArtisanList[] }
                 </option>
               ))}
             </select>
-            
+            <div id="artisan-error" aria-live="polite" aria-atomic="true">
+              {state.errors?.artisan_id &&
+                state.errors.artisan_id.map((error: string) => (
+                  <p className="mt-2 text-sm text-red-500" key={error}>
+                    {error}
+                  </p>
+                ))}
+            </div>
           </div>
         </div>
 
@@ -52,12 +69,18 @@ export default function AddProductForm({ artisans }: { artisans: ArtisanList[] }
                 type="string"
                 placeholder="Enter Title"
                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-5 text-xl outline-2 placeholder:text-darkBrown"
-                aria-describedby="customer-error"
+                aria-describedby="title-error"
               />
-              
+              <div id="title-error" aria-live="polite" aria-atomic="true">
+                {state.errors?.title &&
+                  state.errors.title.map((error: string) => (
+                    <p className="mt-2 text-sm text-red-500" key={error}>
+                      {error}
+                    </p>
+                  ))}
+              </div>
             </div>
           </div>
-          
         </div>
         {/* Price */}
         <div className="mb-4">
@@ -73,34 +96,50 @@ export default function AddProductForm({ artisans }: { artisans: ArtisanList[] }
                 step=".01"
                 placeholder="Enter Price"
                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-5 text-xl outline-2 placeholder:text-darkBrown"
-                aria-describedby="customer-error"
+                aria-describedby="price-error"
               />
-              
             </div>
           </div>
-          
+          <div id="price-error" aria-live="polite" aria-atomic="true">
+            {state.errors?.price &&
+              state.errors.price.map((error: string) => (
+                <p className="mt-2 text-sm text-red-500" key={error}>
+                  {error}
+                </p>
+              ))}
+          </div>
         </div>
-              {/* Category */}
+        {/* Category */}
+        <label htmlFor="artist" className="mb-2 block text-2xl">
+          Choose a Category
+        </label>
         <div className="mb-4">
-          <label htmlFor="title" className="mb-2 block text-2xl font-medium">
-            Enter a Category
-          </label>
-          <div className="relative mt-2 rounded-md">
-            <div className="relative">
-              <input
-                id="category"
-                name="category"
-                type="string"
-                placeholder="Enter Category"
-                className="peer block w-full rounded-md border border-gray-200 py-2 pl-5 text-xl outline-2 placeholder:text-darkBrown"
-                aria-describedby="customer-error"
-              />
-              
-            </div>
+          <select
+            id="category"
+            name="category"
+            className="peer block w-full cursor-pointer rounded-md border  border-gray-200 py-2 pl-10 text-xl outline-2 placeholder:text-darkBrown"
+            defaultValue=""
+            aria-describedby="category-error"
+          >
+            <option value="" disabled>
+              Select a Category
+            </option>
+            {category.map((category) => (
+              <option key={category.id} value={category.id}>
+                {category.name}
+              </option>
+            ))}
+          </select>
+          <div id="category-error" aria-live="polite" aria-atomic="true">
+            {state.errors?.category &&
+              state.errors.category.map((error: string) => (
+                <p className="mt-2 text-sm text-red-500" key={error}>
+                  {error}
+                </p>
+              ))}
           </div>
-          
         </div>
-              {/* Description */}
+        {/* Description */}
         <div className="mb-4">
           <label htmlFor="title" className="mb-2 block text-2xl font-medium">
             Enter a Description
@@ -112,14 +151,20 @@ export default function AddProductForm({ artisans }: { artisans: ArtisanList[] }
                 name="description"
                 placeholder="Enter item description"
                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-5 text-xl outline-2 placeholder:text-darkBrown"
-                aria-describedby="customer-error"
+                aria-describedby="description-error"
               />
-              
+              <div id="description-error" aria-live="polite" aria-atomic="true">
+                {state.errors?.description &&
+                  state.errors.description.map((error: string) => (
+                    <p className="mt-2 text-sm text-red-500" key={error}>
+                      {error}
+                    </p>
+                  ))}
+              </div>
             </div>
           </div>
-          
         </div>
-              {/* Image */}
+        {/* Image */}
         <div className="mb-4">
           <label htmlFor="title" className="mb-2 block text-2xl font-medium">
             Enter a URL for the image
@@ -132,12 +177,18 @@ export default function AddProductForm({ artisans }: { artisans: ArtisanList[] }
                 type="string"
                 placeholder="Enter url"
                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-5 text-xl outline-2 placeholder:text-darkBrown"
-                aria-describedby="customer-error"
+                aria-describedby="image-error"
               />
-              
+            </div>
+            <div id="image-error" aria-live="polite" aria-atomic="true">
+              {state.errors?.description &&
+                state.errors.description.map((error: string) => (
+                  <p className="mt-2 text-sm text-red-500" key={error}>
+                    {error}
+                  </p>
+                ))}
             </div>
           </div>
-          
         </div>
 
         {/*  Status */}
@@ -158,8 +209,8 @@ export default function AddProductForm({ artisans }: { artisans: ArtisanList[] }
                 <label
                   htmlFor="available"
                   className="ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-tan bg-opacity-50 px-3 py-1.5 text-xl  text-gray-600"
-                >Available
-                  
+                >
+                  Available
                 </label>
               </div>
               <div className="flex items-center">
@@ -173,8 +224,8 @@ export default function AddProductForm({ artisans }: { artisans: ArtisanList[] }
                 <label
                   htmlFor="unavailable"
                   className="ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-tan bg-opacity-50 px-3 py-1.5 text-xl  text-gray-600"
-                >Unavailable
-                 
+                >
+                  Unavailable
                 </label>
               </div>
             </div>
