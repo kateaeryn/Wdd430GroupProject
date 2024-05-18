@@ -17,7 +17,7 @@ export default function AddProductForm({
 }: {
   artisans: ArtisanList[];
 }) {
-  const initialState = { message: null, errors: {} };
+  const initialState = { message: "", errors: {} };
   const [state, dispatch] = useFormState(createProduct, initialState);
 
   return (
