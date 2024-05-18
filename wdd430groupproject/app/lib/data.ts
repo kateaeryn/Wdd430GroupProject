@@ -53,8 +53,7 @@ export async function getItemReviews(id: string) {
   }
 }
 
-//aedc7eda - 1bd6 - 4579 - ad15 - 0e975417b9a9
-//72fb94c3-9518-49f7-a561-e7c108ab2625
+
 
 export async function fetchItems() {
   try {
@@ -80,13 +79,30 @@ export async function fetchArtisan() {
         FROM artisans
         `;
 
+    
+    return data.rows;
+  } catch (err) {
+    console.error("Database Error:", err);
+    throw new Error("Failed to fetch all artisans.");
+  }
+}
+
+export async function getSingleArtisan(id:string) {
+  try {
+    const data = await sql`
+        SELECT id, name, story, image_url
+        FROM artisans
+        WHERE id=${id}
+        `;
+
     const items = data.rows;
     return items;
   } catch (err) {
     console.error("Database Error:", err);
-    throw new Error("Failed to fetch all items.");
+    throw new Error("Failed to fetch artisan.");
   }
 }
+
 
 export async function fetchFilteredItems(query: string) {
   noStore();
@@ -114,6 +130,16 @@ export async function fetchFilteredItems(query: string) {
     return items;
   } catch (error) {
     console.error("Database Error:", error);
-    throw new Error("Failed to fetch total number of invoices.");
+    throw new Error("Failed to fetch items.");
+  }
+}
+
+export async function fetchArtistItems(id: string) {
+  try {
+    const data = await sql`SELECT id, title, image_url FROM items WHERE artisan_id=${id}`
+    return data.rows;
+  } catch (error) {
+    console.error("database error", error);
+    throw new Error("failed to fetch artist's creations")
   }
 }

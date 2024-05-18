@@ -8,18 +8,18 @@ import { Item } from "@/app/lib/definitions";
 import { fetchItems } from "@/app/lib/data";
 
 export default function ProductGrid({ items }: { items: Item[] }) {
-  const pathname = usePathname();
+  // const pathname = usePathname();
 
   return (
     <>
       {items.map((item) => {
         return (
-          <div className="flex  " key={item.title}>
+          <div className="flex  " key={item.id}>
             <Link
               key={item.id}
               href={"/dashboard/products/" + item.id + "/detail"}
               className={clsx("", {
-                "bg-brown text-brown": pathname === item.image_url,
+               
               })}
             >
               <Image
