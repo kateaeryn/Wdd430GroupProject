@@ -1,5 +1,5 @@
 import { sql } from "@vercel/postgres";
-import { User, Item } from "./definitions";
+import { User, Item, Artisans } from "./definitions";
 import { unstable_noStore as noStore } from "next/cache";
 
 export async function getUser(email: string) {
@@ -25,6 +25,7 @@ export async function getAllProductImages() {
 }
 
 export async function getProductDetail(id: string) {
+  noStore();
   try {
     const product =
       await sql`SELECT items.id, items.artisan_id, items.title, items.price,
@@ -40,6 +41,7 @@ export async function getProductDetail(id: string) {
 }
 
 export async function getItemReviews(id: string) {
+  noStore();
   try {
     const review =
       await sql`SELECT reviews.id, reviews.user_id, reviews.item_id, reviews.text,reviews.date, reviews.rate, users.name
@@ -53,9 +55,8 @@ export async function getItemReviews(id: string) {
   }
 }
 
-
-
 export async function fetchItems() {
+  noStore();
   try {
     const data = await sql<Item>`
       SELECT * FROM items`;
@@ -70,7 +71,7 @@ export async function fetchItems() {
 
 export async function fetchArtisan() {
   try {
-    const data = await sql`
+    const data = await sql<Artisans>`
         SELECT 
         id, 
         name, 
@@ -79,7 +80,6 @@ export async function fetchArtisan() {
         FROM artisans
         `;
 
-    
     return data.rows;
   } catch (err) {
     console.error("Database Error:", err);
@@ -87,7 +87,7 @@ export async function fetchArtisan() {
   }
 }
 
-export async function getSingleArtisan(id:string) {
+export async function getSingleArtisan(id: string) {
   try {
     const data = await sql`
         SELECT id, name, story, image_url
@@ -102,7 +102,6 @@ export async function getSingleArtisan(id:string) {
     throw new Error("Failed to fetch artisan.");
   }
 }
-
 
 export async function fetchFilteredItems(query: string) {
   noStore();
@@ -131,7 +130,6 @@ export async function fetchFilteredItems(query: string) {
   } catch (error) {
     console.error("Database Error:", error);
     throw new Error("Failed to fetch items.");
-
   }
 }
 
@@ -189,17 +187,17 @@ export async function filteredCategory(category: string, query: string) {
   } catch (error) {
     console.error("Database Error:", error);
     throw new Error("Failed to fetch items.");
-
-
   }
 }
 
 export async function fetchArtistItems(id: string) {
+  noStore();
   try {
-    const data = await sql`SELECT id, title, image_url FROM items WHERE artisan_id=${id}`
+    const data =
+      await sql`SELECT id, title, image_url FROM items WHERE artisan_id=${id}`;
     return data.rows;
   } catch (error) {
     console.error("database error", error);
-    throw new Error("failed to fetch artist's creations")
+    throw new Error("failed to fetch artist's creations");
   }
 }
