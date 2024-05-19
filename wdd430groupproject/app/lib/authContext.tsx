@@ -1,20 +1,16 @@
-import React from "react";
-import { createContext, useContext, useState } from "react";
-import user from "../../pages/api/login/route";
+import React, { createContext, useContext, useState, useEffect } from "react";
 
-// Define the shape of the user object
 interface User {
 	id: string;
 	name: string;
 	email: string;
-	image_url?: string; // Make image_url optional
+	image_url?: string;
 }
 
-// Define the shape of the context value
 interface AuthContextType {
 	isLoggedIn: boolean;
 	user: User | null;
-	userType: string | null; // Add userType to the context
+	userType: string | null;
 	login: (token: string, userType: string) => void;
 	logout: () => void;
 }
@@ -22,7 +18,7 @@ interface AuthContextType {
 export const AuthContext = createContext<AuthContextType>({
 	isLoggedIn: false,
 	user: null,
-	userType: null, // Initialize userType
+	userType: null,
 	login: () => {},
 	logout: () => {},
 });
@@ -36,35 +32,57 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 	});
 
 	const [user, setUser] = useState<User | null>(null);
-	const [userType, setUserType] = useState<string | null>(null); // Add userType state
+	const [userType, setUserType] = useState<string | null>(() => {
+		if (typeof window !== "undefined") {
+			return localStorage.getItem("userType");
+		}
+		return null;
+	});
+
+	useEffect(() => {
+		if (isLoggedIn) {
+			fetchUserData();
+		}
+	}, [isLoggedIn]);
 
 	const login = (token: string, userType: string) => {
 		localStorage.setItem("token", token);
-		localStorage.setItem("userType", userType); // Store userType in localStorage
+		localStorage.setItem("userType", userType);
 		setIsLoggedIn(true);
-		setUserType(userType); // Set userType state
+		setUserType(userType);
 		fetchUserData();
 	};
 
 	const logout = () => {
 		localStorage.removeItem("token");
-		localStorage.removeItem("userType"); // Clear userType from localStorage
+		localStorage.removeItem("userType");
 		setIsLoggedIn(false);
 		setUser(null);
-		setUserType(null); // Clear userType state
+		setUserType(null);
 	};
 
 	const fetchUserData = async () => {
 		try {
-			const response = await fetch("/api/login", {
+			const token = localStorage.getItem("token");
+			if (!token) {
+				throw new Error("No token found");
+			}
+
+			const response = await fetch("/api/login/route", {
 				headers: {
-					Authorization: `Bearer ${localStorage.getItem("token")}`,
+					Authorization: `Bearer ${token}`,
 				},
 			});
+
 			if (response.ok) {
 				const userData = await response.json();
 				setUser(userData);
-        console.log("userData", userData);
+			} else {
+				const errorData = await response.json();
+				console.error(
+					"Error fetching user data:",
+					errorData.message || response.statusText
+				);
 			}
 		} catch (error) {
 			console.error("Error fetching user data:", error);

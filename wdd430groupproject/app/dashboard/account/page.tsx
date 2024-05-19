@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import FilteredProducts from "../../ui/dashboard/filtered";
 import { AuthContext } from "../../lib/authContext";
@@ -10,22 +10,29 @@ import Link from "next/link";
 export default function Page() {
 	const router = useRouter();
 	const { isLoggedIn, logout, user, userType } = useContext(AuthContext);
+	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
 		if (!isLoggedIn) {
 			router.push("/dashboard/login");
+		} else {
+			setLoading(false);
 		}
 	}, [isLoggedIn, router]);
-	
+
 	const handleLogout = () => {
 		logout();
-		router.push("/dashboard/login"); // Redirect to login page
+		router.push("/dashboard/login");
 	};
+
+	if (loading) {
+		return <div>Loading...</div>;
+	}
 
 	return (
 		<div className="flex flex-col">
 			<h1 className="text-5xl leading-tight mb-6">
-				Welcome, {user?.email}!
+				Welcome, {user?.name}!
 			</h1>
 			<div className="flex flex-col sm:flex-row sm:justify-between">
 				{userType === "artisan" && (

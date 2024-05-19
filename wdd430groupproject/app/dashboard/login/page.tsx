@@ -4,7 +4,6 @@ import React from "react";
 import LoginForm from "../../ui/login-form";
 
 export default function LoginPage() {
-	console.log("LoginPage rendered"); // Add this line
 
 	return (
 		<div className="flex flex-col items-center">
