@@ -10,15 +10,8 @@ import { AuthContext } from "../../lib/authContext";
 import Image from "next/image";
 
 export default function Header() {
-	const { isLoggedIn, logout } = useContext(AuthContext);
-	const [showLogoutButton, setShowLogoutButton] = useState(true);
+	const { isLoggedIn } = useContext(AuthContext);
 	const router = useRouter();
-
-	const handleLogout = () => {
-		logout();
-		setShowLogoutButton(false);
-		router.push("/dashboard/login"); // Redirect to login page
-	};
 
 	return (
 		<header className="flex flex-col space-y-2 bg-tan">
