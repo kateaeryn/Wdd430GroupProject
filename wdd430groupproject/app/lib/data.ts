@@ -12,6 +12,16 @@ export async function getUser(email: string) {
   }
 }
 
+export async function getArtisan(email: string) {
+  try {
+      const artisan = await sql`SELECT * FROM artisans WHERE email=${email}`;
+      return artisan.rows[0] as Artisans;
+  } catch (error) {
+      console.error("Failed to fetch artisan:", error);
+      throw new Error("Failed to fetch artisan.");
+  }
+}
+
 export async function getAllProductImages() {
   try {
     const product =
