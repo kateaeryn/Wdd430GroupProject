@@ -59,4 +59,6 @@ export async function processRegistration({
     console.error('Postgre insertion error:', error);
     return NextResponse.json({ error: 'Internal Server Error' });
   }
+
+  redirect('/dashboard/account');
 }
