@@ -16,7 +16,7 @@ export default async function ArtistDetail({params}: {params: {id: string}}) {
               <div className="flex flex-col" key={link.id}>
                 
                 <div className="md:flex md:flex-row md:justify-between">
-                  <h1 className="text-5xl text-brown ">{link.name}</h1>
+                  <h1 className="text-5xl text-brown ">{link.first_name +" "+link.last_name}</h1>
                   <p className="text-base md:self-center">Star Rating</p>
                 </div>
                 <div className="md:flex md:flex-row">

@@ -14,7 +14,8 @@ async function seedUsers(client) {
     const createTable = await client.sql`
       CREATE TABLE IF NOT EXISTS users (
         id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
-        name VARCHAR(255) NOT NULL,
+        first_name VARCHAR(255) NOT NULL,
+        last_name VARCHAR(255) NOT NULL,
         email TEXT NOT NULL UNIQUE,
         password TEXT NOT NULL,
         image_url VARCHAR(255) NOT NULL
@@ -28,8 +29,8 @@ async function seedUsers(client) {
       users.map(async (user) => {
         const hashedPassword = await bcrypt.hash(user.password, 10);
         return client.sql`
-        INSERT INTO users (id, name, email, password, image_url)
-        VALUES (${user.id}, ${user.name}, ${user.email}, ${hashedPassword}, ${user.image_url})
+        INSERT INTO users (id, first_name, last_name, email, password, image_url)
+        VALUES (${user.id}, ${user.first_name}, ${user.last_name}, ${user.email}, ${hashedPassword}, ${user.image_url})
         ON CONFLICT (id) DO NOTHING;
       `;
       })
@@ -55,7 +56,8 @@ async function seedArtisans(client) {
     const createTable = await client.sql`
       CREATE TABLE IF NOT EXISTS artisans (
         id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
-        name VARCHAR(255) NOT NULL,
+        first_name VARCHAR(255) NOT NULL,
+        last_name VARCHAR(255) NOT NULL,
         email VARCHAR(255) NOT NULL,
         password TEXT NOT NULL,
         story TEXT NOT NULL,
@@ -70,8 +72,8 @@ async function seedArtisans(client) {
       artisans.map(async (artisan) => {
         const hashedPassword = await bcrypt.hash(artisan.password, 10);
         return client.sql`
-        INSERT INTO artisans (id, name, email, password, story, image_url)
-        VALUES (${artisan.id}, ${artisan.name}, ${artisan.email}, ${hashedPassword}, ${artisan.story}, ${artisan.image_url})
+        INSERT INTO artisans (id, first_name, last_name, email, password, story, image_url)
+        VALUES (${artisan.id}, ${artisan.first_name}, ${artisan.last_name}, ${artisan.email}, ${hashedPassword}, ${artisan.story}, ${artisan.image_url})
         ON CONFLICT (id) DO NOTHING;
       `;
       })

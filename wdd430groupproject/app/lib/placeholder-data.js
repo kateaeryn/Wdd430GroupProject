@@ -3,21 +3,24 @@
 const users = [
   {
     id: "3958dc9e-712f-4377-85e9-fec4b6a6442a",
-    name: "John Doe",
+    first_name: "John ",
+    last_name:  "Doe",
     email: "joedoe@nextmail.com",
     password: "123456",
     image_url: "/users/john-doe.png",
   },
   {
     id: "3958dc9e-742f-4377-85e9-fec4b6a6442a",
-    name: "Mary Smith",
+    first_name: "Mary",
+    last_name: "Smith",
     email: "marysmith@nextmail.com",
     password: "789123",
     image_url: "/users/mary-smith.png",
   },
   {
     id: "3958dc9e-737f-4377-85e9-fec4b6a6442a",
-    name: "Jane Robinson",
+    first_name: "Jane",
+    last_name: "Robinson",
     email: "jane@nextmail.com",
     password: "456789",
     image_url: "/users/jane-robinson.png",
@@ -28,7 +31,8 @@ const users = [
 const artisans = [
   {
     id: "50ca3e18-62cd-11ee-8c99-0242ac120002",
-    name: "Lauren Lautner",
+    first_name: "Lauren",
+    last_name: "Lautner",
     email: "lauren@nextmail.com",
     password: "333444",
     story:
@@ -37,7 +41,8 @@ const artisans = [
   },
   {
     id: "3958dc9e-787f-4377-85e9-fec4b6a6442a",
-    name: "Anastasia Rollins",
+    first_name: "Anastasia",
+    last_name: "Rollins",
     email: "anastasiarollins@nextmail.com",
     password: "567555",
     story:
@@ -46,7 +51,8 @@ const artisans = [
   },
   {
     id: "76d65c26-f784-44a2-ac19-586678f7c2f2",
-    name: "Ethan Smith",
+    first_name: "Ethan",
+    last_name: "Smith",
     email: "ethan@nextmail.com",
     password: "999999",
     story:
@@ -55,7 +61,8 @@ const artisans = [
   },
   {
     id: "d6e15727-9fe1-4961-8c5b-ea44a9bd81aa",
-    name: "Liam Baker",
+    first_name: "Liam",
+    last_name: "Baker",
     email: "liambaker@nextmail.com",
     password: "888888",
     story:
@@ -64,7 +71,8 @@ const artisans = [
   },
   {
     id: "126eed9c-c90c-4ef6-a4a8-fcf7408d3c66",
-    name: "William Johnson",
+    first_name: "William",
+    last_name: "Johnson",
     email: "william@nextmail.com",
     password: "876876",
     story:

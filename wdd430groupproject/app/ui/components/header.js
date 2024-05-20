@@ -39,9 +39,11 @@ export default function Header() {
 					{hydrated ? (
 						isLoggedIn ? (
 							<Link href="/dashboard/account">
-								<img
+								<Image
 									src={user?.image_url}
 									alt="User Image"
+									width={500}
+									height={500}
 									className="w-[40px] h-[40px] m-4 stroke-brown xl:w-[50px] xl:h-[50px] rounded-full hover:shadow-black hover:shadow-md cursor-pointer"
 								/>
 							</Link>

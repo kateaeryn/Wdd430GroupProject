@@ -9,7 +9,7 @@ import { ArtisanGrid } from "@/app/lib/definitions";
 
 export default function ArtistGrid({ artisans }: { artisans: ArtisanGrid[] }) {
 //   const pathname = usePathname();
-
+  console.log(artisans);
   return (
     <>
       {artisans.map((artist) => {
@@ -29,7 +29,7 @@ export default function ArtistGrid({ artisans }: { artisans: ArtisanGrid[] }) {
                 height={3700}
                 width={3700}
               />
-              <p className="text-brown text-center text-lg pt-2 pb-10 sm:text-xl md:text-2xl xl:text-3xl">{artist.name}</p>
+              <p className="text-brown text-center text-lg pt-2 pb-10 sm:text-xl md:text-2xl xl:text-3xl">{artist.first_name + " " + artist.last_name}</p>
             </Link>
           </div>
         );

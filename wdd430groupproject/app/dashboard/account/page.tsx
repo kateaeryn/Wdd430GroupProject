@@ -32,7 +32,7 @@ export default function Page() {
 	return (
 		<div className="flex flex-col">
 			<h1 className="text-5xl leading-tight mb-6">
-				Welcome, {user?.name}!
+				Welcome, {user?.first_name +" "+user?.last_name}!
 			</h1>
 			<div className="flex flex-col sm:flex-row sm:justify-between">
 				{userType === "artisan" && (

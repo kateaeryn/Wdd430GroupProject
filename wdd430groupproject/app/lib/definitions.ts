@@ -1,6 +1,7 @@
 export type User = {
   id: string;
-  name: string;
+  first_name: string;
+  last_name: string;
   email: string;
   password: string;
   image_url: string;
@@ -8,7 +9,8 @@ export type User = {
 
 export type Artisans = {
   id: string;
-  name: string;
+  first_name: string;
+  last_name: string;
   email: string;
   password: string;
   image_url: string;
@@ -27,12 +29,14 @@ export type Item = {
 
 export type ArtisanList = {
   id: string;
-  name: string;
+  first_name: string;
+  last_name: string;
 };
 
 export type ArtisanGrid = {
   id: string;
-  name: string;
+  first_name: string;
+  last_name: string;
   image_url: string;
 };
 
