@@ -24,6 +24,7 @@ export default function RegistrationForm() {
         firstName: data.firstName,
         lastName: data.lastName,
         email: data.email,
+        image: data.image,
         password: data.password,
         confirmPassword: data.confirmPassword,
       }),
@@ -54,6 +55,11 @@ export default function RegistrationForm() {
         setError('email', {
           type: 'server',
           message: errors.email,
+        });
+      } else if (errors.image) {
+        setError('image', {
+          type: 'server',
+          message: errors.image,
         });
       } else if (errors.password) {
         setError('password', {
@@ -128,6 +134,15 @@ export default function RegistrationForm() {
         <p className="text-red-500">{`${errors.email.message}`}</p>
       )}
       <input
+        {...register('image')}
+        type="url"
+        placeholder="image/url"
+        className="block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-400"
+      />
+      {errors.image && (
+        <p className="text-red-500">{`${errors.image.message}`}</p>
+      )}
+      <input
         {...register('password')}
         type="password"
         placeholder="Password"
@@ -145,7 +160,6 @@ export default function RegistrationForm() {
       {errors.confirmPassword && (
         <p className="text-red-500">{`${errors.confirmPassword.message}`}</p>
       )}
-
       <button
         disabled={isSubmitting}
         type="submit"
