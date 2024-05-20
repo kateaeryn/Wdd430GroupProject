@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
+import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
 
 // Schema to validate registration
 export const registrationSchema = z
@@ -71,5 +73,6 @@ export async function processRegistration({
     return NextResponse.json({ error: 'Internal Server Error' });
   }
 
-  redirect('/dashboard/account');
+  revalidatePath("/dashboard/account");
+  redirect("/dashboard/account");
 }
