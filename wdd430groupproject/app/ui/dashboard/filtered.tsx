@@ -1,38 +1,29 @@
-'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+
 import clsx from 'clsx';
 import blankBox from '/public/images/blank-box.png';
 import Image from 'next/image';
+import { fetchArtistItems } from '@/app/lib/data';
 
-const links = [
-    { name: 'Item 1', href: '/' },
-  {name: 'Item 2', href: '/' },
-  {
-    name: 'Item 3',
-    href: '/'
-    },
-  {name: 'Item 4', href: '/'}
-  
-];
 
-export default function FilteredProducts() {
-    const pathname = usePathname();
+export default async function FilteredProducts({params}: {params: {id: string}}) {
+ 
+  const id = params as unknown as string;
+  const items = await fetchArtistItems(id);
+
   return (
     <>
-          {links.map((link) => {
+          {items.map((link) => {
         
         return (
-          <div className="" key={link.name}>
+          <div className="" key={link.id}>
             
             <Link
-            key={link.name}
+            key={link.title}
             href={link.href}
             className={clsx(' text-brown',
-              {
-                'bg-brown text-beige': pathname === link.href,
-              },
+             
             )}
             >
               

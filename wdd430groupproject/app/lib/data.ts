@@ -62,7 +62,7 @@ export async function getProductDetail(id: string) {
 	try {
 		const product =
 			await sql`SELECT items.id, items.artisan_id, items.title, items.price,
-        items.category, items.description, items.image_url, items.status, artisans.name
+        items.category, items.description, items.image_url, items.status, artisans.first_name, artisans.last_name
         FROM items
         JOIN artisans on artisans.id = items.artisan_id
         WHERE items.id = ${id}`;
@@ -77,7 +77,7 @@ export async function getItemReviews(id: string) {
 	noStore();
 	try {
 		const review =
-			await sql`SELECT reviews.id, reviews.user_id, reviews.item_id, reviews.text,reviews.date, reviews.rate, users.name
+			await sql`SELECT reviews.id, reviews.user_id, reviews.item_id, reviews.text,reviews.date, reviews.rate, users.first_name, users.last_name
         FROM reviews
         JOIN users on users.id = reviews.user_id
         WHERE reviews.item_id = ${id};`;
@@ -107,7 +107,8 @@ export async function fetchArtisan() {
 		const data = await sql<Artisans>`
         SELECT 
         id, 
-        name, 
+        first_name,
+		last_name, 
         email, 
         image_url
         FROM artisans
@@ -123,7 +124,7 @@ export async function fetchArtisan() {
 export async function getSingleArtisan(id: string) {
 	try {
 		const data = await sql`
-        SELECT id, name, story, image_url
+        SELECT id, first_name, last_name, story, image_url
         FROM artisans
         WHERE id=${id}
         `;
@@ -232,5 +233,15 @@ export async function fetchArtistItems(id: string) {
 	} catch (error) {
 		console.error("database error", error);
 		throw new Error("failed to fetch artist's creations");
+	}
+}
+
+export async function getCustomerReviews(id: string) {
+	try {
+		const data = await sql`SELECT * FROM reviews WHERE user_id=${id}`;
+		return data.rows;
+	} catch (error) {
+		console.error("Database Error", error);
+		throw new Error("Failed to fetch customer's reviews");
 	}
 }

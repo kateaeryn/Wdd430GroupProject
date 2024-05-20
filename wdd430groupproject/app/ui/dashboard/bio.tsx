@@ -17,7 +17,7 @@ export default async function ArtistDetail({params}: {params: {id: string}}) {
                 
                 <div className="md:flex md:flex-row md:justify-between">
                   <h1 className="text-5xl text-brown ">{link.first_name +" "+link.last_name}</h1>
-                  <p className="text-base md:self-center">Star Rating</p>
+                  
                 </div>
                 <div className="md:flex md:flex-row">
                   <Image className="object-scale-down md:size-96 lg:size-[36rem] xl:size-[40rem]" src={link.image_url} alt="person placeholder" height={3700}
