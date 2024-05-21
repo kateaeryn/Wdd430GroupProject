@@ -68,7 +68,7 @@ const ProductReviewForm: React.FC = () => {
 	return (
 		<form
 			onSubmit={handleSubmit}
-			className="bg-white shadow-2xl w-40 min-w-96 border rounded px-8 pt-6 pb-8 mb-4"
+			className="bg-tan shadow-2xl w-auto border rounded px-8 pt-6 pb-8 mb-4"
 		>
 			<div className="mb-4">
 				<label
