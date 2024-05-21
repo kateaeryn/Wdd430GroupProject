@@ -1,3 +1,4 @@
+import React from 'react';
 import { Metadata } from 'next';
 import ProductDetail from '@/app/ui/dashboard/productDetail';
 import { useParams } from 'react-router-dom';

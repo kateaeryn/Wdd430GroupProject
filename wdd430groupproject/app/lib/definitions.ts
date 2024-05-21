@@ -49,4 +49,13 @@ export type Product = {
   description: string;
   image_url: string;
   status: "available" | "unavailable";
+}
+
+export type Review = {
+  id: string;
+  item_id: string;
+  user_id: string;
+  rate: number;
+  date: Date;
+  text: string;
 };
