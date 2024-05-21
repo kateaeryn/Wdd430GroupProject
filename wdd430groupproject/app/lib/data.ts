@@ -265,3 +265,13 @@ export async function postItemReview(
 		throw new Error("Failed to post review");
 	}
 }
+
+export async function getRating(id: string) {
+	try {
+		const data = await sql`SELECT rate from reviews WHERE item_id=${id}`;
+		return data.rows;
+	} catch (error) {
+		console.error("Database Error", error);
+		throw new Error("Failed to get Ratings");
+	}
+}

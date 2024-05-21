@@ -15,8 +15,7 @@ export default function Page() {
 	const router = useRouter();
 	const { isLoggedIn, logout, user, userType } = useContext(AuthContext);
 	const [loading, setLoading] = useState(true);
-	console.log(userType);
-		
+	
 	useEffect(() => {
 		if (!isLoggedIn) {
 			router.push("/dashboard/login");
