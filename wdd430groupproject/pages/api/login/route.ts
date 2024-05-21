@@ -49,7 +49,7 @@ async function handleLogin(req: NextApiRequest, res: NextApiResponse) {
 				email: user.email,
 				id: user.id,
 				userType,
-				name: user.name,
+				name: user.first_name + user.last_name,
 				image_url: user.image_url,
 			},
 			JWT_SECRET,

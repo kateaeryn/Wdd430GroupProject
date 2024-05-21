@@ -123,7 +123,7 @@ export async function fetchArtisan() {
 export async function getSingleArtisan(id: string) {
   try {
     const data = await sql`
-        SELECT id, firt_name, last_name, story, image_url
+        SELECT id, first_name, last_name, story, image_url
         FROM artisans
         WHERE id=${id}
         `;
@@ -257,5 +257,15 @@ export async function fetchArtistItems(id: string) {
   } catch (error) {
     console.error("database error", error);
     throw new Error("failed to fetch artist's creations");
+  }
+}
+
+export async function getCustomerReviews(id: string) {
+  try {
+    const data = await sql`SELECT * FROM reviews WHERE user_id=${id}`;
+    return data.rows;
+  } catch (error) {
+    console.error("Database Error", error);
+    throw new Error("Failed to fetch customer's reviews");
   }
 }
