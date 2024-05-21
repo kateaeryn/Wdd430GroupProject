@@ -1,5 +1,5 @@
 import { sql } from "@vercel/postgres";
-import { User, Item, Artisans } from "./definitions";
+import { User, Item, Artisans, Review } from "./definitions";
 import { unstable_noStore as noStore } from "next/cache";
 
 export async function getUser(email: string) {
@@ -24,25 +24,25 @@ export async function getArtisan(email: string) {
 }
 
 export async function getUserById(id: string) {
-  try {
-    // Check users table first
-    let user = await sql`SELECT * FROM users WHERE id = ${id}`;
-    if (user.rows.length > 0) {
-      return user.rows[0] as User;
-    }
+	try {
+		// Check users table first
+		let user = await sql`SELECT * FROM users WHERE id = ${id}`;
+		if (user.rows.length > 0) {
+			return user.rows[0] as User;
+		}
 
-    // If not found in users table, check artisans table
-    let artisan = await sql`SELECT * FROM artisans WHERE id = ${id}`;
-    if (artisan.rows.length > 0) {
-      return artisan.rows[0] as Artisans;
-    }
+		// If not found in users table, check artisans table
+		let artisan = await sql`SELECT * FROM artisans WHERE id = ${id}`;
+		if (artisan.rows.length > 0) {
+			return artisan.rows[0] as Artisans;
+		}
 
-    // If user not found in both tables
-    throw new Error("User not found");
-  } catch (error) {
-    console.error("Failed to fetch user by ID:", error);
-    throw new Error("Failed to fetch user by ID.");
-  }
+		// If user not found in both tables
+		throw new Error("User not found");
+	} catch (error) {
+		console.error("Failed to fetch user by ID:", error);
+		throw new Error("Failed to fetch user by ID.");
+	}
 }
 
 export async function getAllProductImages() {
@@ -243,5 +243,25 @@ export async function getCustomerReviews(id: string) {
 	} catch (error) {
 		console.error("Database Error", error);
 		throw new Error("Failed to fetch customer's reviews");
+	}
+}
+
+export async function postItemReview(
+	item_id: string,
+	user_id: string,
+	text: string,
+	rate: number,
+	date: Date
+) {
+	try {
+		const data = await sql`
+	  INSERT INTO reviews (item_id, user_id, text, rate, date)
+	  VALUES (${item_id}, ${user_id}, ${text}, ${rate}, ${date.toISOString()})
+	  RETURNING *;
+	  `;
+		return data.rows[0];
+	} catch (error) {
+		console.error("Database Error", error);
+		throw new Error("Failed to post review");
 	}
 }

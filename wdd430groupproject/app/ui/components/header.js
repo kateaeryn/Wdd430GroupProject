@@ -2,8 +2,8 @@
 
 import React, { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import logo from "/public/images/title-logo.png";
-import NavLinks from "/app/ui/dashboard/nav-links";
+import logo from "@/public/images/title-logo.png";
+import NavLinks from "@/app/ui/dashboard/nav-links";
 import { UserCircleIcon, ShoppingCartIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { AuthContext } from "../../lib/authContext";
@@ -12,6 +12,7 @@ import Image from "next/image";
 export default function Header() {
 	const { isLoggedIn, user } = useContext(AuthContext);
 	const [hydrated, setHydrated] = useState(false);
+	const image = user?.image_url;
 
 	useEffect(() => {
 		setHydrated(true);
@@ -26,7 +27,7 @@ export default function Header() {
 							className="w-full"
 							width="1562"
 							height="1562"
-							src={logo.src}
+							src={logo}
 							alt="Logo"
 							priority
 						/>
@@ -40,7 +41,7 @@ export default function Header() {
 						isLoggedIn ? (
 							<Link href="/dashboard/account">
 								<Image
-									src={user?.image_url}
+									src={image}
 									alt="User Image"
 									width={500}
 									height={500}
