@@ -17,7 +17,7 @@ export default function Header() {
 	useEffect(() => {
 		setHydrated(true);
 	}, []);
-
+	console.log(image);
 	return (
 		<header className="flex flex-col space-y-2 bg-tan">
 			<div className="flex flex-col sm:flex-row">
@@ -40,13 +40,17 @@ export default function Header() {
 					{hydrated ? (
 						isLoggedIn ? (
 							<Link href="/dashboard/account">
+								{user?.image_url &&
 								<Image
+									className="w-[40px] h-[40px] m-4 stroke-brown xl:w-[50px] xl:h-[50px] rounded-full hover:shadow-black hover:shadow-md cursor-pointer"
 									src={image}
 									alt="User Image"
 									width={500}
 									height={500}
-									className="w-[40px] h-[40px] m-4 stroke-brown xl:w-[50px] xl:h-[50px] rounded-full hover:shadow-black hover:shadow-md cursor-pointer"
+									
 								/>
+								}
+								
 							</Link>
 						) : (
 							<Link href="/dashboard/login">

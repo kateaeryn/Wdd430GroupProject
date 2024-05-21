@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Button from "@/app/ui/button";
-import { getProductDetail, getItemReviews } from "@/app/lib/data";
+import { getProductDetail, getItemReviews, getRating } from "@/app/lib/data";
 import { formatCurrency } from "@/app/lib/utils";
 import React from "react";
 import moment from "moment";
@@ -15,7 +15,16 @@ export default async function ProductDetail({
   const id = params as unknown as string;
   const links = await getProductDetail(id);
   const reviews = await getItemReviews(id);
-  //Need to add code to get the average from the ratings of the reviews
+  let rating = 0;
+  //messy but functional calculating the rating and adding it to the product details
+  const rate = await getRating(id);
+  const array = rate.map((num) => num.rate);
+  const sum = array.reduce((num, curr) => num + curr, 0);
+  const average = sum / rate.length;
+  if (average > 0) {
+    rating = average;
+  }
+  console.log(average);
   return (
     <>
       {links.map((link) => {
@@ -27,7 +36,7 @@ export default async function ProductDetail({
                 {link.first_name + " " + link.last_name}
               </h3>
 
-              <p className="text-base self-center">Rating: {} Stars</p>
+              <p className="text-base self-center">Rating: {rating} Stars</p>
             </div>
 
             <Image
