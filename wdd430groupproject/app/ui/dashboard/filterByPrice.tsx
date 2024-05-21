@@ -30,11 +30,11 @@ export default function FilterByPrice({
   });
 
   return (
-    <div className="flex justify-center  ">
+    <div className="flex ">
       <select
         id="filter"
         name="filter"
-        className="peer block w-full cursor-pointer rounded-md border  border-gray-200 py-2 pl-10 text-xl outline-2 placeholder:text-darkBrown"
+        className="peer block w-3/8 cursor-pointer rounded-md border  border-gray-200 py-2 pl-5 text-xl outline-2 placeholder:text-darkBrown"
         defaultValue="Filter by Price"
         onChange={(e) => {
           handleFilter(e.target.value);

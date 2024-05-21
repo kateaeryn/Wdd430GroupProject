@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import ProductGrid from "@/app/ui/dashboard/products";
-import { fetchFilteredItems, fetchByPrice } from "@/app/lib/data";
+import { fetchItemsByPriceOrSearch } from "@/app/lib/data";
 import Search from "@/app/ui/dashboard/search";
 import { Suspense } from "react";
 import { ProductsSkeleton } from "@/app/ui/skeletons";
@@ -20,11 +20,9 @@ export default async function Page({
   };
 }) {
   const query = searchParams?.query || "";
-  const items = await fetchFilteredItems(query);
   const price = searchParams?.price || "";
 
-  const itemsPrice = await fetchByPrice(price);
-  console.log(itemsPrice);
+  const items = await fetchItemsByPriceOrSearch(query, price);
 
   return (
     <>
@@ -34,7 +32,7 @@ export default async function Page({
         <h1 className="text-brown text-5xl text-center">All Products</h1>
         <div className="flex flex-row flex-wrap justify-between sm:justify-center md:justify-evenly">
           <Suspense key={query} fallback={<ProductsSkeleton />}>
-            <ProductGrid items={itemsPrice} />
+            <ProductGrid items={items} />
           </Suspense>
         </div>
       </div>

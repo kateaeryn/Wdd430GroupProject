@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
-import { useDebouncedCallback } from 'use-debounce';
+import { useDebouncedCallback } from "use-debounce";
 
 export default function Search({ placeholder }: { placeholder: string }) {
   const params = new URLSearchParams();
@@ -9,20 +9,17 @@ export default function Search({ placeholder }: { placeholder: string }) {
   const pathname = usePathname();
   const { replace } = useRouter();
 
-    const handleSearch = useDebouncedCallback((term) => {
-        console.log(`Searching...${term}`);
-      
-      params.set('page', '1');
-        if (term) {
-          params.set('query', term);
-        } else {
-          params.delete('query');
-        }
-        replace(`${pathname}?${params.toString()}`);
+  const handleSearch = useDebouncedCallback((term) => {
+    console.log(`Searching...${term}`);
 
-      }, 300);
+    if (term) {
+      params.set("query", term);
+    } else {
+      params.delete("query");
+    }
+    replace(`${pathname}?${params.toString()}`);
+  }, 300);
 
-  
   return (
     <div className="flex justify-center  ">
       <label htmlFor="search" className="sr-only">
@@ -34,7 +31,7 @@ export default function Search({ placeholder }: { placeholder: string }) {
         onChange={(e) => {
           handleSearch(e.target.value);
         }}
-         defaultValue={params.get("query")?.toString()}
+        defaultValue={params.get("query")?.toString()}
       />
     </div>
   );
