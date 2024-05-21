@@ -1,5 +1,5 @@
 import { sql } from "@vercel/postgres";
-import { User, Item, Artisans } from "./definitions";
+import { User, Item, Artisans, Review } from "./definitions";
 import { unstable_noStore as noStore } from "next/cache";
 
 export async function getUser(email: string) {
@@ -267,5 +267,25 @@ export async function getCustomerReviews(id: string) {
   } catch (error) {
     console.error("Database Error", error);
     throw new Error("Failed to fetch customer's reviews");
+  }
+}
+
+export async function postItemReview(
+  item_id: string,
+  user_id: string,
+  text: string,
+  rate: number,
+  date: Date
+) {
+  try {
+    const data = await sql`
+	  INSERT INTO reviews (item_id, user_id, text, rate, date)
+	  VALUES (${item_id}, ${user_id}, ${text}, ${rate}, ${date.toISOString()})
+	  RETURNING *;
+	  `;
+    return data.rows[0];
+  } catch (error) {
+    console.error("Database Error", error);
+    throw new Error("Failed to post review");
   }
 }

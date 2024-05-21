@@ -50,7 +50,7 @@ export default function LoginForm() {
 			id="login-form"
 			onSubmit={handleSubmit}
 			method="post"
-			className="bg-white shadow-2xl w-30 min-w-96 border rounded px-8 pt-6 pb-8 mb-4"
+			className="bg-tan shadow-2xl w-auto border rounded px-8 pt-6 pb-8 mb-4"
 		>
 			<div className="block text-black-700 font-bold mb-2">
 				<h1 className="text-2xl text-gray-500 mb-10">
