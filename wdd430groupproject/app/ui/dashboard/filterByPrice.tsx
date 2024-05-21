@@ -1,30 +1,49 @@
-// "use client";
-// export default function FilterByPrice() {
-//   function filter() {
+"use client";
 
-//     if (e.target.value === "LowToHigh") {
-//       value = "LowToHigh";
-//     }
-//     if (e.target.value === "HighToLow") {
-//       value = "HighToLow";
-//     }
-//     if (e.target.value === "FilterByPrice") {
-//       value = "FilterByPrice";
-//     }
-//   }
+import { usePathname, useRouter } from "next/navigation";
+import { useDebouncedCallback } from "use-debounce";
 
-//   return (
-//     <form onChange={filter}>
-//       <select
-//         id="filter"
-//         name="filter"
-//         className="peer block w-full cursor-pointer rounded-md border  border-gray-200 py-2 pl-10 text-xl outline-2 placeholder:text-darkBrown"
-//         defaultValue="Filter by Price"
-//       >
-//         <option value="FilterByPrice">Filter by Price</option>
-//         <option value="LowToHigh">Low To High</option>
-//         <option value="HighToLow">High To Low</option>
-//       </select>
-//     </form>
-//   );
-// }
+export default function FilterByPrice({
+  placeholder,
+}: {
+  placeholder: string;
+}) {
+  const params = new URLSearchParams();
+  const pathname = usePathname();
+  const { replace } = useRouter();
+
+  const handleFilter = useDebouncedCallback((term) => {
+    let value: string = "";
+    if (term === "LowToHigh") {
+      value = "LowToHigh";
+      params.set("price", value);
+    }
+    if (term === "HighToLow") {
+      value = "HighToLow";
+      params.set("price", value);
+    }
+    if (term === "FilterByPrice") {
+      params.delete("price");
+    }
+
+    replace(`${pathname}?${params.toString()}`);
+  });
+
+  return (
+    <div className="flex justify-center  ">
+      <select
+        id="filter"
+        name="filter"
+        className="peer block w-full cursor-pointer rounded-md border  border-gray-200 py-2 pl-10 text-xl outline-2 placeholder:text-darkBrown"
+        defaultValue="Filter by Price"
+        onChange={(e) => {
+          handleFilter(e.target.value);
+        }}
+      >
+        <option value="FilterByPrice">Filter by Price</option>
+        <option value="LowToHigh">Low To High</option>
+        <option value="HighToLow">High To Low</option>
+      </select>
+    </div>
+  );
+}

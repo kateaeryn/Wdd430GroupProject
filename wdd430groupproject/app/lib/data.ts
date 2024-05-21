@@ -166,6 +166,31 @@ export async function fetchFilteredItems(query: string) {
   }
 }
 
+export async function fetchByPrice(price: string) {
+  noStore();
+  try {
+    const data = await sql<Item>`
+    SELECT 
+    id,
+    artisan_id,
+    title,
+    price,
+    category,
+    description,
+    image_url,
+    status
+      FROM items
+      Order by CAST(price AS Float)  asc
+    `;
+
+    const items = data.rows;
+    return items;
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch items.");
+  }
+}
+
 export async function fetchCategory(category: string) {
   noStore();
   try {
