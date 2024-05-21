@@ -4,7 +4,7 @@ const users = [
   {
     id: "3958dc9e-712f-4377-85e9-fec4b6a6442a",
     first_name: "John ",
-    last_name:  "Doe",
+    last_name: "Doe",
     email: "joedoe@nextmail.com",
     password: "123456",
     image_url: "/users/john-doe.png",
@@ -26,7 +26,6 @@ const users = [
     image_url: "/users/jane-robinson.png",
   },
 ];
-
 
 const artisans = [
   {
@@ -172,9 +171,9 @@ const items = [
   {
     id: "3f9c667a-2357-40b5-9313-bb76724cfefc",
     artisan_id: artisans[2].id,
-    title: "Cabana", 
+    title: "Cabana",
     price: 40000,
-    category: "arts",
+    category: "art",
     description:
       "This painting represents my childhood vacations in our cabana.",
     image_url: "/arts/art-cabana.png",
@@ -185,7 +184,7 @@ const items = [
     artisan_id: artisans[2].id,
     title: "Ocean",
     price: 30000,
-    category: "arts",
+    category: "art",
     description:
       "Ocean abstract painting. The place that most brings me peace.",
     image_url: "/arts/art-ocean.png",
@@ -196,7 +195,7 @@ const items = [
     artisan_id: artisans[2].id,
     title: "Painting",
     price: 150000,
-    category: "arts",
+    category: "art",
     description: "My most recent painting, realist and photo type.",
     image_url: "/arts/art-river.png",
     status: "available",
@@ -206,7 +205,7 @@ const items = [
     artisan_id: artisans[2].id,
     title: "Trail",
     price: 15795,
-    category: "arts",
+    category: "art",
     description: "This a trail that I go often to think and get inspired.",
     image_url: "/arts/art-trail.png",
     status: "available",

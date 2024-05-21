@@ -25,7 +25,9 @@ export default async function ProductDetail({
           <div className="flex flex-col " key={link.id}>
             <h1 className="text-5xl text-brown">{link.title}</h1>
             <div className="flex flex-row justify-between">
-              <h3 className="text-2xl text-brown">{link.name}</h3>
+              <h3 className="text-2xl text-brown">
+                {link.first_name} {link.last_name}
+              </h3>
               <p>Star Rating</p>
             </div>
 
@@ -55,7 +57,7 @@ export default async function ProductDetail({
                   return (
                     <div className="flex flex-col " key={review.id}>
                       <div className="flex flex-row justify-between">
-                        <p className="text-3xl">{review.name}</p>
+                        <p className="text-3xl">{review.first_name}</p>
                         <p>Rating: {review.rate} Stars</p>
                       </div>
                       <div className="text-xl">
