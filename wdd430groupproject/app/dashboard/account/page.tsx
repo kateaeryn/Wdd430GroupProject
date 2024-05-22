@@ -2,22 +2,19 @@
 
 import React, { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import FilteredItems from "../../ui/dashboard/filtered";
 import { AuthContext } from "../../lib/authContext";
 import Button from "../../ui/button";
 import Link from "next/link";
 import ReviewGrid from '@/app/ui/dashboard/reviews';
-import FilteredLinks from '@/app/ui/dashboard/filtered';
-
+import FilteredItems from "../../ui/dashboard/filtered";
 
 export default function Page() {
-	//need to find way to access artist id number to show their products on account page
-	
-
 	const router = useRouter();
 	const { isLoggedIn, logout, user, userType } = useContext(AuthContext);
 	const [loading, setLoading] = useState(true);
-	
+	const [products, setProducts] = useState([]);
+	const [reviews, setReviews] = useState([]);
+
 	useEffect(() => {
 		if (!isLoggedIn) {
 			router.push("/dashboard/login");
@@ -25,6 +22,24 @@ export default function Page() {
 			setLoading(false);
 		}
 	}, [isLoggedIn, router]);
+
+	useEffect(() => {
+		const fetchData = async () => {
+			if (userType === "artisan") {
+				const response = await fetch(`/api/artisan-acc/route?id=${user?.id}`);
+				const data = await response.json();
+				setProducts(data);
+			} else if (userType === "user") {
+				const response = await fetch(`/api/user-acc/route?id=${user?.id}`);
+				const data = await response.json();
+				setReviews(data);
+			}
+		};
+
+		if (user && user.id) {
+			fetchData();
+		}
+	}, [user, userType]);
 
 	const handleLogout = () => {
 		logout();
@@ -34,54 +49,36 @@ export default function Page() {
 	if (loading) {
 		return <div>Loading...</div>;
 	}
-	
-	console.log(user?.id);
-	
-	const id = user?.id as unknown as string;
+
 	return (
-		
 		<div className="flex flex-col">
 			<h1 className="text-4xl leading-tight mb-6">
-				Welcome, {user?.first_name +" "+user?.last_name}!
+				Welcome, {user?.first_name} {user?.last_name}!
 			</h1>
-			<div className="flex flex-col sm:flex-row sm:justify-between">
-				{userType === "artisan" && (
-					<div className="flex flex-col">
-					<h2>Your Products</h2>
-					<div className="flex flex-col mb-6">
-							
-								{/* <FilteredItems params={user?.id} /> */}
-						
-							
-							
-					</div>
-				</div>
-
-				)}
-				{userType === "artisan" && (
-					<Link href="/dashboard/products/add">
-						<Button>Add Products</Button>
-					</Link>
-				)}
-			</div>
-			
-			{userType === "user" && (
-			<div className="flex flex-col">
-				<h2>Your Reviews</h2>
-					{/* <ReviewGrid params={id} /> */}
-				
-			</div>
-
-			)}
-			
 			{isLoggedIn && (
-				<Button
-					onClick={handleLogout}
-					className="mt-4"
-				>
+				<Button onClick={handleLogout} className="mt-4">
 					Logout
 				</Button>
 			)}
+			<div className="flex flex-col sm:flex-row sm:justify-between">
+				{userType === "artisan" && (
+					<div className="flex flex-col">
+						<h2>Your Products</h2>
+						<div className="flex flex-col mb-6">
+							<FilteredItems items={products} />
+						</div>
+						<Link href="/dashboard/products/add">
+							<Button>Add Products</Button>
+						</Link>
+					</div>
+				)}
+				{userType === "user" && (
+					<div className="flex flex-col">
+						<h2>Your Reviews</h2>
+						<ReviewGrid reviews={reviews} />
+					</div>
+				)}
+			</div>
 		</div>
 	);
 }
