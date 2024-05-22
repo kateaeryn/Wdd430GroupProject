@@ -17,16 +17,16 @@ export default function Header() {
 	useEffect(() => {
 		setHydrated(true);
 	}, []);
-	console.log(image);
+	
 	return (
-		<header className="flex flex-col space-y-2 bg-tan">
+		<header className="flex flex-col space-y-2 bg-tan max-height-[170px]">
 			<div className="flex flex-col sm:flex-row">
-				<div className="relative flex justify-center">
+				<div className="relative flex justify-center -mt-8 -mb-10 2xl:ml-5">
 					<Link href="/">
 						<Image
-							className="w-full"
-							width="1562"
-							height="1562"
+							className="object-scale-down size-60 "
+							width="1000"
+							height="800"
 							src={logo}
 							alt="Logo"
 							priority

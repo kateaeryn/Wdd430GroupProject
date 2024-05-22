@@ -16,8 +16,11 @@ export default function LandingPage() {
 					</h3>
 					<Image
 						src={heroimage}
+						
 						className="w-full h-full"
 						alt="vintage crafting supplies"
+						priority={true}
+
 					></Image>
 				</div>
 				<div className="hidden md:flex w-full h-full md:justify-center">
@@ -25,6 +28,8 @@ export default function LandingPage() {
 						src={logo}
 						priority={true}
 						alt="Handcrafted Haven Logo"
+						width={1000}
+						height={750}
 					></Image>
 				</div>
 			</div>
@@ -36,9 +41,7 @@ export default function LandingPage() {
 			</div>
 			<div className="bg-tan flex flex-col text-5xl text-brown text-center">
 				<h2>Categories</h2>
-				<div className="flex flex-wrap flex-row justify-evenly p-3">
-					{/*The below comment line is preventing an error between typescript and async/await*/}
-
+				<div className="flex flex-wrap flex-row justify-evenly">
 					<CatLinks />
 				</div>
 			</div>
