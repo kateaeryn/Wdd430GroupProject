@@ -25,7 +25,7 @@ export default function Search({ placeholder }: { placeholder: string }) {
   
   return (
     <div className="flex justify-center  ">
-      <label htmlFor="search" className="sr-only">
+      <label htmlFor="search" className="sr-only" >
         Search
       </label>
       <input
@@ -34,7 +34,8 @@ export default function Search({ placeholder }: { placeholder: string }) {
         onChange={(e) => {
           handleSearch(e.target.value);
         }}
-         defaultValue={params.get("query")?.toString()}
+        defaultValue={params.get("query")?.toString()}
+        name="search bar"
       />
     </div>
   );

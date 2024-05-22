@@ -29,6 +29,8 @@ export default function Header() {
 							alt="Logo"
 							priority
 							sizes="240px"
+							width={240}
+							height={240}
 						/>
 					</Link>
 				</div>
@@ -44,8 +46,8 @@ export default function Header() {
 									className="w-[40px] h-[40px] m-4 stroke-brown xl:w-[50px] xl:h-[50px] rounded-full hover:shadow-black hover:shadow-md cursor-pointer"
 									src={image}
 									alt="User Image"
-									width={500}
-									height={500}
+									width={640}
+									height={640}
 									
 								/>
 								}
@@ -59,7 +61,7 @@ export default function Header() {
 					) : (
 						<UserCircleIcon className="w-[40px] h-[40px] m-4 stroke-brown xl:w-[50px] xl:h-[50px]" />
 					)}
-					<Link href="/dashboard/cart">
+					<Link href="/dashboard/cart" aria-label="shopping cart">
 						<ShoppingCartIcon className="w-[40px] h-[40px] m-4 stroke-brown xl:w-[50px] xl:h-[50px]" />
 					</Link>
 				</div>
