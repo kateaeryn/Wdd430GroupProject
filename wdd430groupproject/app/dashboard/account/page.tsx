@@ -6,12 +6,14 @@ import FilteredItems from "../../ui/dashboard/filtered";
 import { AuthContext } from "../../lib/authContext";
 import Button from "../../ui/button";
 import Link from "next/link";
-import AccountGrid from '@/app/ui/dashboard/account';
+import ReviewGrid from '@/app/ui/dashboard/reviews';
+import FilteredLinks from '@/app/ui/dashboard/filtered';
 
 
 export default function Page() {
-//need to find way to access artist id number to show their products on account page
+	//need to find way to access artist id number to show their products on account page
 	
+
 	const router = useRouter();
 	const { isLoggedIn, logout, user, userType } = useContext(AuthContext);
 	const [loading, setLoading] = useState(true);
@@ -32,8 +34,12 @@ export default function Page() {
 	if (loading) {
 		return <div>Loading...</div>;
 	}
-
+	
+	console.log(user?.id);
+	
+	const id = user?.id as unknown as string;
 	return (
+		
 		<div className="flex flex-col">
 			<h1 className="text-4xl leading-tight mb-6">
 				Welcome, {user?.first_name +" "+user?.last_name}!
@@ -61,8 +67,8 @@ export default function Page() {
 			
 			{userType === "user" && (
 			<div className="flex flex-col">
-				<h2>Reviews</h2>
-				{/* <AccountGrid /> */}
+				<h2>Your Reviews</h2>
+					{/* <ReviewGrid params={id} /> */}
 				
 			</div>
 
