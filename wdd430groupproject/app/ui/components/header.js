@@ -54,7 +54,7 @@ export default function Header() {
 								
 							</Link>
 						) : (
-							<Link href="/dashboard/login">
+							<Link href="/dashboard/login" aria-label="accont">
 								<UserCircleIcon className="w-[40px] h-[40px] m-4 stroke-brown xl:w-[50px] xl:h-[50px]" />
 							</Link>
 						)

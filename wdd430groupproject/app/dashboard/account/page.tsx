@@ -56,18 +56,22 @@ export default function Page() {
 				Welcome, {user?.first_name} {user?.last_name}!
 			</h1>
 			
-			<div className="flex ">
+			<div className="flex flex-col">
 				{userType === "artisan" && (
-					<div className="flex flex-col">
-						<h2>Your Products</h2>
-						<div className="flex flex-col mb-6">
+					<div className="flex flex-col text-center">
+						<h2 className="text-5xl">Your Products</h2>
+						<div className="flex flex-row flex-wrap">
 							<FilteredItems items={products} />
 						</div>
-						<Link href="/dashboard/products/add">
-							<Button>Add Products</Button>
-						</Link>
-					</div>
+						
+					</div>						
 				)}
+				{userType === "artisan" && (
+					<Link href="/dashboard/products/add">
+						<Button>Add Products</Button>
+					</Link>
+				)
+				}
 				{userType === "user" && (
 					<div className="flex flex-col">
 						<h2 className="text-3xl">Your Reviews</h2>

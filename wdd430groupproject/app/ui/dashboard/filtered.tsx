@@ -1,6 +1,7 @@
 import React from "react";
 import Button from "@/app/ui/button";
 import Link from "next/link";
+import Image from 'next/image';
 
 interface Item {
 	id: string;
@@ -14,19 +15,26 @@ interface ItemProps {
 
 const FilteredItems: React.FC<ItemProps> = ({ items }) => {
 	return (
-		<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+		<div className="flex flex-wrap gap-4 justify-evenly">
 			{items.map((item) => (
 				<div
 					key={item.id}
-					className="card"
+					className=" flex flex-col text-center justify-center"
 				>
-					<img
+					<Link key={item.id} href={'/dashboard/products/'+item.id+'/detail'}>
+						<Image
+							className="object-fill size-44 sm:size-48 md:size-80 lg:size-96"
 						src={item.image_url}
-						alt={item.title}
+							alt={item.title}
+							width={640}
+							height={640}
+							sizes="(min-width: 1040px) 384px, (min-width: 780px) 320px, (min-width: 640px) 192px, 144px"
 					/>
-					<h3>{item.title}</h3>
+					</Link>
+					
+					<p className="text-2xl">{item.title}</p>
 					<Link href={`/dashboard/products/${item.id}/edit`}>
-						<Button>Edit/Delete</Button>
+						<Button >Edit/Delete</Button>
 					</Link>
 				</div>
 			))}
@@ -36,38 +44,3 @@ const FilteredItems: React.FC<ItemProps> = ({ items }) => {
 
 export default FilteredItems;
 
-// import Link from 'next/link';
-
-// import clsx from 'clsx';
-// import blankBox from '/public/images/blank-box.png';
-// import Image from 'next/image';
-// import { fetchArtistItems } from '@/app/lib/data';
-
-// export default async function FilteredProducts({params}: {params: {id: string}}) {
-
-//   const id = params as unknown as string;
-//   const items = await fetchArtistItems(id);
-
-//   return (
-//     <>
-//           {items.map((link) => {
-
-//         return (
-//           <div className="" key={link.id}>
-
-//             <Link
-//             key={link.title}
-//             href={link.href}
-//             className={clsx(' text-brown',
-
-//             )}
-//             >
-
-//             <p className=" text-2xl">{link.name}</p>
-//           </Link>
-//             </div>
-//         );
-//       })}
-//     </>
-//   );
-// }
