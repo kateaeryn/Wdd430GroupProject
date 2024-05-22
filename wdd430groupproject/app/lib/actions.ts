@@ -52,7 +52,7 @@ export async function createProduct(prevState: State, formData: FormData) {
     image_url: formData.get("image_url") ,
     status: formData.get("status") ,
   });
-console.log(formData);
+
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,

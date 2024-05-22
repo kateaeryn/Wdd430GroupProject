@@ -19,7 +19,7 @@ export default function AddProductForm({
 }) {
   const initialState = { message: "", errors: {} };
   const [state, dispatch] = useFormState(createProduct, initialState);
-  console.log(dispatch);
+ 
   return (
     <form action={dispatch}>
       <div className=" rounded-md bg-tan p-4 md:p-6 text-darkBrown">

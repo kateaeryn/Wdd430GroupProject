@@ -25,11 +25,10 @@ export default function Header() {
 					<Link href="/">
 						<Image
 							className="object-scale-down size-60 "
-							width="1000"
-							height="800"
 							src={logo}
 							alt="Logo"
 							priority
+							sizes="240px"
 						/>
 					</Link>
 				</div>
