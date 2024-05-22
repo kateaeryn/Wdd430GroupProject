@@ -1,4 +1,4 @@
-'use client';
+ 'use client';
 
 import "@/app/ui/globals.css";
 import Head from "next/head";
@@ -7,7 +7,13 @@ import Header from "./ui/components/header.js";
 import Footer from "./ui/components/footer.js";
 import { quattrocento } from "@/app/ui/fonts";
 import { AuthProvider } from './lib/authContext';
+import { Metadata } from 'next';
 
+// export const metadata: Metadata = {
+//   title: "Handcrafted Haven",
+
+//   description: 'Your source for all crafty and artsy needs',
+// };
 
 export default function RootLayout({
   children,

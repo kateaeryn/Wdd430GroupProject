@@ -8,6 +8,7 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
 	title: 'Handcrafted Haven',
+	description: "Your source for all things crafty and arsty."
 };
 
 export default function LandingPage() {
