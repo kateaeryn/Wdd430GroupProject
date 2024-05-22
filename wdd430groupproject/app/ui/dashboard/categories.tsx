@@ -1,5 +1,5 @@
 import Link from "next/link";
-import homedecor from '@/public/images/homedecor.png';
+import homedecor from '@/public/images/homedecor-large.png';
 import art from '@/public/images/art.png';
 import textiles from '@/public/images/textiles.png';
 import accessories from '@/public/images/accessories.png';
@@ -23,8 +23,8 @@ export default async function CatLinks() {
           src={homedecor}
           alt="Home Decor"
           className="object-scale-down size-40 sm:size-60 -my-8 xl:size-72 2xl:size-96"
-          height={500}
-          width={500}
+          sizes="(min-width: 1540px) 384px, (min-width: 1280px) 288px, (min-width: 640px) 240px, 160px"
+          
         />
         
       </Link>
@@ -33,8 +33,8 @@ export default async function CatLinks() {
           src={textiles}
           alt="Textiles"
           className="object-scale-down size-40 sm:size-60 -my-8 xl:size-72 2xl:size-96"
-          height={500}
-          width={500}
+          sizes="(min-width: 1540px) 384px, (min-width: 1280px) 288px, (min-width: 640px) 240px, 160px"
+          
         />
        
       </Link>
@@ -43,8 +43,8 @@ export default async function CatLinks() {
           src={art}
           alt="Art"
           className="object-scale-down size-40 sm:size-60 -my-8 xl:size-72 2xl:size-96"
-          height={500}
-          width={500}
+          sizes="(min-width: 1540px) 384px, (min-width: 1280px) 288px, (min-width: 640px) 240px, 160px"
+          
         />
         
       </Link>
@@ -53,8 +53,8 @@ export default async function CatLinks() {
           src={accessories}
           alt="Accessories"
           className="object-scale-down size-40 sm:size-60 -my-8 xl:size-72 2xl:size-96"
-          height={500}
-          width={500}
+          sizes="(min-width: 1540px) 384px, (min-width: 1280px) 288px, (min-width: 640px) 240px, 160px"
+          
         />
         
       </Link>

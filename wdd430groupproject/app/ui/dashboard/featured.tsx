@@ -21,11 +21,10 @@ export default async function FeaturedLinks() {
             <Link
               key={link.id}
               href={'/dashboard/products/' + link.id + '/detail'}
-              className={clsx(' text-brown ',
               
-            )}
+              className={clsx(' text-brown ')}
             >
-              <Image src={link.image_url} alt={link.id} priority={true} className="md:my-4 sm:size-44 md:size-60 xl:size-80 2xl:size-[24rem]"  width={2250} height={4000} />
+              <Image src={link.image_url} alt={link.id} sizes="(min-width: 1540px) 384px, (min-width: 1280px) 320px, (min-width: 780px) 240px, 176px" priority={true} className="md:my-4 sm:size-44 md:size-60 xl:size-80 2xl:size-[24rem]"  width={2250} height={4000} />
             <p className=" text-2xl">{link.title}</p>
           </Link>
             </div>
