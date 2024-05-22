@@ -16,7 +16,7 @@ export default function LandingPage() {
 					</h3>
 					<Image
 						src={heroimage}
-						
+						sizes="400px"
 						className="w-full h-full"
 						alt="vintage crafting supplies"
 						priority={true}
@@ -30,6 +30,7 @@ export default function LandingPage() {
 						alt="Handcrafted Haven Logo"
 						width={1000}
 						height={750}
+						sizes="600px"
 					></Image>
 				</div>
 			</div>

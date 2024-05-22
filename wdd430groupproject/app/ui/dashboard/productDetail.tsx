@@ -24,7 +24,7 @@ export default async function ProductDetail({
   if (average > 0) {
     rating = average;
   }
-  console.log(average);
+  
   return (
     <>
       {links.map((link) => {
