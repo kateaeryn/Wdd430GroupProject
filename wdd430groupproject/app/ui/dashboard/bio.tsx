@@ -23,7 +23,7 @@ export default async function ArtistDetail({params}: {params: {id: string}}) {
                   <Image className="object-scale-down md:size-96 lg:size-[36rem] xl:size-[40rem]" src={link.image_url} alt="person placeholder" height={3700}
                     width={3700} />
                   <div className="text-brown">
-                    <h3 className="md:ml-4">Artist Biography</h3>
+                    <h2 className="md:ml-4">Biography</h2>
                     <p className="text-2xl text-brown md:text-xl md:mx-4">{link.story}</p>
                   </div>
                 </div>

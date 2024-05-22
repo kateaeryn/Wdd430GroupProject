@@ -1,5 +1,5 @@
 import Link from "next/link";
-import homedecor from '@/public/images/homedecor-large.png';
+import homedecor from '@/public/images/homedecor.png';
 import art from '@/public/images/art.png';
 import textiles from '@/public/images/textiles.png';
 import accessories from '@/public/images/accessories.png';

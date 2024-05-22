@@ -32,7 +32,7 @@ export default async function ProductDetail({
           <div className="flex flex-col " key={link.id}>
             <h1 className="text-5xl text-brown">{link.title}</h1>
             <div className="flex flex-row justify-between">
-              <h3 className="text-2xl text-brown">{link.first_name +" "+link.last_name}</h3>
+              <h2 className="text-2xl text-brown">{link.first_name +" "+link.last_name}</h2>
               
                 <p className="text-base self-center">Rating: {rating} Stars</p>         
                 

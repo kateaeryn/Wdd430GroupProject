@@ -1,14 +1,13 @@
 
 
 import Link from "next/link";
-// import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import Image from "next/image";
 import { ArtisanGrid } from "@/app/lib/definitions";
 
 
 export default function ArtistGrid({ artisans }: { artisans: ArtisanGrid[] }) {
-//   const pathname = usePathname();
+
   
   return (
     <>

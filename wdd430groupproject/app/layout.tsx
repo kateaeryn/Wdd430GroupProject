@@ -17,13 +17,13 @@ export default function RootLayout({
   return (
     <AuthProvider>
       <html lang="en">
-        <Head>
-          <title>Handcrafted Haven</title>
-          <meta
-            title="Handcrafted Haven"
+       <title>Handcrafted Haven</title> 
+         <meta
+            name="Handcrafted Haven"
             content="Welcome to the Handcrafted Haven online store"
+            
           />
-        </Head>
+        
         <body className={`${quattrocento.className}`}>
           <div>
             <Header />
