@@ -29,7 +29,8 @@ const FilteredItems: React.FC<ItemProps> = ({ items }) => {
 							width={640}
 							height={640}
 							sizes="(min-width: 1040px) 384px, (min-width: 780px) 320px, (min-width: 640px) 192px, 144px"
-					/>
+							priority={true}
+						/>
 					</Link>
 					
 					<p className="text-2xl">{item.title}</p>
