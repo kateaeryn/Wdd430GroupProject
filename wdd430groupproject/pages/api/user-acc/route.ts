@@ -8,6 +8,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         try {
             const reviews = await getCustomerReviews(id as string);
             res.status(200).json(reviews);
+            console.log(reviews);
         } catch (error) {
             console.error("Error fetching user reviews:", error);
             res.status(500).json({ error: "Failed to fetch user reviews" });
@@ -16,4 +17,5 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         res.setHeader("Allow", ["GET"]);
         res.status(405).end(`Method ${req.method} Not Allowed`);
     }
+    
 }

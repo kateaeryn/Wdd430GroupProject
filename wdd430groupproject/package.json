@@ -32,6 +32,7 @@
     "nextjs": "^0.0.3",
     "react": "^18",
     "react-dom": "^18",
+    "react-helmet-async": "^2.0.5",
     "react-hook-form": "^7.51.4",
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.23.1",

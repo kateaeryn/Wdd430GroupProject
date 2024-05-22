@@ -52,15 +52,11 @@ export default function Page() {
 
 	return (
 		<div className="flex flex-col">
-			<h1 className="text-4xl leading-tight mb-6">
+			<h1 className="text-5xl leading-tight mb-6">
 				Welcome, {user?.first_name} {user?.last_name}!
 			</h1>
-			{isLoggedIn && (
-				<Button onClick={handleLogout} className="mt-4">
-					Logout
-				</Button>
-			)}
-			<div className="flex flex-col sm:flex-row sm:justify-between">
+			
+			<div className="flex ">
 				{userType === "artisan" && (
 					<div className="flex flex-col">
 						<h2>Your Products</h2>
@@ -74,11 +70,16 @@ export default function Page() {
 				)}
 				{userType === "user" && (
 					<div className="flex flex-col">
-						<h2>Your Reviews</h2>
+						<h2 className="text-3xl">Your Reviews</h2>
 						<ReviewGrid reviews={reviews} />
 					</div>
 				)}
 			</div>
+			{isLoggedIn && (
+				<Button onClick={handleLogout} className="mt-4">
+					Logout
+				</Button>
+			)}
 		</div>
 	);
 }

@@ -17,12 +17,14 @@ export default function RootLayout({
   return (
     <AuthProvider>
       <html lang="en">
-       <title>Handcrafted Haven</title> 
-         <meta
-            name="Handcrafted Haven"
+        <Head>
+          <meta name="Handcrafted Haven"
             content="Welcome to the Handcrafted Haven online store"
-            
           />
+          <meta property="og:title" content="Handcrafted Haven"/>
+          <title>Handcrafted Haven</title> 
+
+       </Head>
         
         <body className={`${quattrocento.className}`}>
           <div>

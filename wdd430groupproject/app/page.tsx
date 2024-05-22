@@ -4,6 +4,11 @@ import CatLinks from "../app/ui/dashboard/categories";
 import heroimage from "/public/images/heroimage.jpg";
 import FeaturedLinks from "../app/ui/dashboard/featured";
 import logo from "/public/images/blurb.png";
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+	title: 'Handcrafted Haven',
+};
 
 export default function LandingPage() {
 	return (
