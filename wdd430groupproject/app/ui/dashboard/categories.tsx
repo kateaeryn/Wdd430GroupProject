@@ -12,9 +12,6 @@ export default async function CatLinks() {
   const artCategory = await fetchCategory("art");
   const accessoriesCategory = await fetchCategory("accessories");
 
-
-
-
   return (
     <>
 
@@ -23,43 +20,43 @@ export default async function CatLinks() {
         href={`/dashboard/categories/${homeCategory[0].category}`}
       >
         <Image
-          src={homeCategory[0].image_url}
+          src={homedecor}
           alt="Home Decor"
-          className="sm:w-[250px] sm:h-[150px] md:w-[350px] md:h-[200px] lg:w-[400px] lg:h-[350px]"
-          height={100}
-          width={150}
+          className="object-scale-down size-40 sm:size-60 -my-8 xl:size-72 2xl:size-96"
+          height={500}
+          width={500}
         />
-        <p className=" text-2xl">Home Decor</p>
+        
       </Link>
-      <Link key={"textiles"} href={`/dashboard/categories/textiles`}>
+      <Link key={"textiles"} href={`/dashboard/categories/${textilesCategory[0].category}`}>
         <Image
-          src={textilesCategory[1].image_url}
+          src={textiles}
           alt="Textiles"
-          className="sm:w-[250px] sm:h-[150px] md:w-[350px] md:h-[200px] lg:w-[400px] lg:h-[350px]"
-          height={100}
-          width={150}
+          className="object-scale-down size-40 sm:size-60 -my-8 xl:size-72 2xl:size-96"
+          height={500}
+          width={500}
         />
-        <p className=" text-2xl">Textiles</p>
+       
       </Link>
-      <Link key={"art"} href={`/dashboard/categories/art`}>
+      <Link key={"art"} href={`/dashboard/categories/${artCategory[0].category}`}>
         <Image
-          src={artCategory[0].image_url}
+          src={art}
           alt="Art"
-          className="sm:w-[250px] sm:h-[150px] md:w-[350px] md:h-[200px] lg:w-[400px] lg:h-[350px]"
-          height={100}
-          width={150}
+          className="object-scale-down size-40 sm:size-60 -my-8 xl:size-72 2xl:size-96"
+          height={500}
+          width={500}
         />
-        <p className=" text-2xl">Art</p>
+        
       </Link>
-      <Link key={"accessories"} href={`/dashboard/categories/accessories`}>
+      <Link key={"accessories"} href={`/dashboard/categories/${accessoriesCategory[0].category}`}>
         <Image
-          src={accessoriesCategory[1].image_url}
+          src={accessories}
           alt="Accessories"
-          className="sm:w-[250px] sm:h-[150px] md:w-[350px] md:h-[200px] lg:w-[400px] lg:h-[350px]"
-          height={100}
-          width={150}
+          className="object-scale-down size-40 sm:size-60 -my-8 xl:size-72 2xl:size-96"
+          height={500}
+          width={500}
         />
-        <p className=" text-2xl">Accessories</p>
+        
       </Link>
 
     </>

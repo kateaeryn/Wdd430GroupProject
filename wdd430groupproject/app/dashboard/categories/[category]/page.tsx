@@ -46,7 +46,7 @@ export default async function Page({
       <div className="flex flex-col space-y-10 ">
         <Search placeholder="Search the Haven..." />
         <h1 className="text-brown text-5xl text-center">{title}</h1>
-        <div className="flex flex-row flex-wrap justify-between sm:justify-center md:justify-evenly">
+        <div className="flex flex-row flex-wrap justify-evenly 2xl:gap-6">
           <Suspense key={query} fallback={<ProductsSkeleton />}>
             <ProductGrid items={items} />
           </Suspense>

@@ -25,7 +25,7 @@ export default function ProductGrid({ items }: { items: Item[] }) {
               <Image
                 src={item.image_url}
                 alt="Product Image"
-                className="object-fill size-24 sm:size-96"
+                className="object-fill size-36 sm:size-48 md:size-80 lg:size-96"
                 height={4000}
                 width={2250}
               />
