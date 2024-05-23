@@ -7,7 +7,6 @@ import Image from "next/image";
 import { Item } from "@/app/lib/definitions";
 
 export default function ProductGrid({ items }: { items: Item[] }) {
-  console.log(items);
   return (
     <>
       {items.map((item) => {
