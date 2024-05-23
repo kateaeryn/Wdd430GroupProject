@@ -12,24 +12,24 @@ import Image from "next/image";
 export default function Header() {
 	const { isLoggedIn, user } = useContext(AuthContext);
 	const [hydrated, setHydrated] = useState(false);
-	const image = user?.image_url;
 
 	useEffect(() => {
 		setHydrated(true);
 	}, []);
-	console.log(image);
+
 	return (
-		<header className="flex flex-col space-y-2 bg-tan">
+		<header className="flex flex-col space-y-2 bg-tan max-height-[170px]">
 			<div className="flex flex-col sm:flex-row">
-				<div className="relative flex justify-center">
+				<div className="relative flex justify-center -mt-8 -mb-10 2xl:ml-5">
 					<Link href="/">
 						<Image
-							className="w-full"
-							width="1562"
-							height="1562"
+							className="object-scale-down size-60 "
 							src={logo}
 							alt="Logo"
 							priority
+							sizes="240px"
+							width={240}
+							height={240}
 						/>
 					</Link>
 				</div>
@@ -40,27 +40,33 @@ export default function Header() {
 					{hydrated ? (
 						isLoggedIn ? (
 							<Link href="/dashboard/account">
-								{user?.image_url &&
-								<Image
-									className="w-[40px] h-[40px] m-4 stroke-brown xl:w-[50px] xl:h-[50px] rounded-full hover:shadow-black hover:shadow-md cursor-pointer"
-									src={image}
-									alt="User Image"
-									width={500}
-									height={500}
-									
-								/>
-								}
-								
+								{user?.image_url ? (
+									<Image
+										className="w-[40px] h-[40px] m-4 stroke-brown xl:w-[50px] xl:h-[50px] rounded-full hover:shadow-black hover:shadow-md cursor-pointer"
+										src={user.image_url}
+										alt="User Image"
+										width={640}
+										height={640}
+									/>
+								) : (
+									<UserCircleIcon className="w-[40px] h-[40px] m-4 stroke-brown xl:w-[50px] xl:h-[50px]" />
+								)}
 							</Link>
 						) : (
-							<Link href="/dashboard/login">
+							<Link
+								href="/dashboard/login"
+								aria-label="account"
+							>
 								<UserCircleIcon className="w-[40px] h-[40px] m-4 stroke-brown xl:w-[50px] xl:h-[50px]" />
 							</Link>
 						)
 					) : (
 						<UserCircleIcon className="w-[40px] h-[40px] m-4 stroke-brown xl:w-[50px] xl:h-[50px]" />
 					)}
-					<Link href="/dashboard/cart">
+					<Link
+						href="/dashboard/cart"
+						aria-label="shopping cart"
+					>
 						<ShoppingCartIcon className="w-[40px] h-[40px] m-4 stroke-brown xl:w-[50px] xl:h-[50px]" />
 					</Link>
 				</div>

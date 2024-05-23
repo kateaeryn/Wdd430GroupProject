@@ -32,6 +32,7 @@ export default function Search({ placeholder }: { placeholder: string }) {
           handleSearch(e.target.value);
         }}
         defaultValue={params.get("query")?.toString()}
+        name="search bar"
       />
     </div>
   );

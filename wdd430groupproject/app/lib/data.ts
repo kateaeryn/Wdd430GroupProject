@@ -324,6 +324,7 @@ export async function fetchArtistItems(id: string) {
 }
 
 export async function getCustomerReviews(id: string) {
+<<<<<<< HEAD
   try {
     const data = await sql`SELECT * FROM reviews WHERE user_id=${id}`;
     return data.rows;
@@ -331,6 +332,19 @@ export async function getCustomerReviews(id: string) {
     console.error("Database Error", error);
     throw new Error("Failed to fetch customer's reviews");
   }
+=======
+	try {
+		const data = await sql`SELECT 
+		reviews.id, user_id, item_id, text, date, rate, items.title
+		FROM reviews
+		JOIN items on reviews.item_id = items.id
+		WHERE user_id=${id}`;
+		return data.rows;
+	} catch (error) {
+		console.error("Database Error", error);
+		throw new Error("Failed to fetch customer's reviews");
+	}
+>>>>>>> 3c125f65fa556af29247e2fbdf308ab8ff05c54c
 }
 
 export async function postItemReview(

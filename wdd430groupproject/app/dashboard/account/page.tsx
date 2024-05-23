@@ -2,20 +2,19 @@
 
 import React, { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import FilteredItems from "../../ui/dashboard/filtered";
 import { AuthContext } from "../../lib/authContext";
 import Button from "../../ui/button";
 import Link from "next/link";
-import AccountGrid from '@/app/ui/dashboard/account';
-
+import ReviewGrid from '@/app/ui/dashboard/reviews';
+import FilteredItems from "../../ui/dashboard/filtered";
 
 export default function Page() {
-//need to find way to access artist id number to show their products on account page
-	
 	const router = useRouter();
 	const { isLoggedIn, logout, user, userType } = useContext(AuthContext);
 	const [loading, setLoading] = useState(true);
-	
+	const [products, setProducts] = useState([]);
+	const [reviews, setReviews] = useState([]);
+
 	useEffect(() => {
 		if (!isLoggedIn) {
 			router.push("/dashboard/login");
@@ -23,6 +22,24 @@ export default function Page() {
 			setLoading(false);
 		}
 	}, [isLoggedIn, router]);
+
+	useEffect(() => {
+		const fetchData = async () => {
+			if (userType === "artisan") {
+				const response = await fetch(`/api/artisan-acc/route?id=${user?.id}`);
+				const data = await response.json();
+				setProducts(data);
+			} else if (userType === "user") {
+				const response = await fetch(`/api/user-acc/route?id=${user?.id}`);
+				const data = await response.json();
+				setReviews(data);
+			}
+		};
+
+		if (user && user.id) {
+			fetchData();
+		}
+	}, [user, userType]);
 
 	const handleLogout = () => {
 		logout();
@@ -35,44 +52,35 @@ export default function Page() {
 
 	return (
 		<div className="flex flex-col">
-			<h1 className="text-4xl leading-tight mb-6">
-				Welcome, {user?.first_name +" "+user?.last_name}!
+			<h1 className="text-5xl leading-tight mb-6">
+				Welcome, {user?.first_name} {user?.last_name}!
 			</h1>
-			<div className="flex flex-col sm:flex-row sm:justify-between">
+			
+			<div className="flex flex-col">
 				{userType === "artisan" && (
-					<div className="flex flex-col">
-					<h2>Your Products</h2>
-					<div className="flex flex-col mb-6">
-							
-								{/* <FilteredItems params={user?.id} /> */}
+					<div className="flex flex-col text-center">
+						<h2 className="text-5xl">Your Products</h2>
+						<div className="flex flex-row flex-wrap">
+							<FilteredItems items={products} />
+						</div>
 						
-							
-							
-					</div>
-				</div>
-
+					</div>						
 				)}
 				{userType === "artisan" && (
 					<Link href="/dashboard/products/add">
 						<Button>Add Products</Button>
 					</Link>
+				)
+				}
+				{userType === "user" && (
+					<div className="flex flex-col">
+						<h2 className="text-3xl">Your Reviews</h2>
+						<ReviewGrid reviews={reviews} />
+					</div>
 				)}
 			</div>
-			
-			{userType === "user" && (
-			<div className="flex flex-col">
-				<h2>Reviews</h2>
-				{/* <AccountGrid /> */}
-				
-			</div>
-
-			)}
-			
 			{isLoggedIn && (
-				<Button
-					onClick={handleLogout}
-					className="mt-4"
-				>
+				<Button onClick={handleLogout} className="mt-4">
 					Logout
 				</Button>
 			)}

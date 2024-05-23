@@ -99,7 +99,17 @@ export default function LoginForm() {
 						</div>
 					</div>
 				</div>
-				<Button type="submit">Log in</Button>
+				<div className="flex flex-col items-center space-y-4 mt-4">
+					<Button type="submit">Log in</Button>
+					<Button
+						onClick={() =>
+							(window.location.href = "/dashboard/registration")
+						}
+						className="mt-4"
+					>
+						Register Here
+					</Button>
+				</div>
 				{error && (
 					<div className="flex h-8 items-end space-x-1">
 						<p

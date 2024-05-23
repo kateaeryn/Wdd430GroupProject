@@ -1,4 +1,4 @@
-'use client';
+ 'use client';
 
 import "@/app/ui/globals.css";
 import Head from "next/head";
@@ -7,7 +7,13 @@ import Header from "./ui/components/header.js";
 import Footer from "./ui/components/footer.js";
 import { quattrocento } from "@/app/ui/fonts";
 import { AuthProvider } from './lib/authContext';
+import { Metadata } from 'next';
 
+// export const metadata: Metadata = {
+//   title: "Handcrafted Haven",
+
+//   description: 'Your source for all crafty and artsy needs',
+// };
 
 export default function RootLayout({
   children,
@@ -18,12 +24,14 @@ export default function RootLayout({
     <AuthProvider>
       <html lang="en">
         <Head>
-          <title>Handcrafted Haven</title>
-          <meta
-            title="Handcrafted Haven"
+          <meta name="Handcrafted Haven"
             content="Welcome to the Handcrafted Haven online store"
           />
-        </Head>
+          <meta property="og:title" content="Handcrafted Haven"/>
+          <title>Handcrafted Haven</title> 
+
+       </Head>
+        
         <body className={`${quattrocento.className}`}>
           <div>
             <Header />

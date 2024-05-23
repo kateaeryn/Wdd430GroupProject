@@ -1,5 +1,10 @@
 import React from 'react';
 import RegistrationForm from '@/app/ui/registration-form';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Registration Page',
+};
 
 export default function Page() {
   return (
