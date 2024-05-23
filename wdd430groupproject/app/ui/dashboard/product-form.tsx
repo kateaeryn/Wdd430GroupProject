@@ -41,7 +41,7 @@ export default function AddProductForm({
               </option>
               {artisans.map((artist) => (
                 <option key={artist.id} value={artist.id}>
-                  {artist.first_name +" "+artist.last_name}
+                  {artist.first_name + " " + artist.last_name}
                 </option>
               ))}
             </select>

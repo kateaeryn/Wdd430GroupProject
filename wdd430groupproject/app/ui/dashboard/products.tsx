@@ -1,13 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import { formatCurrency } from "@/app/lib/utils";
 import clsx from "clsx";
 import Image from "next/image";
 import { Item } from "@/app/lib/definitions";
 
 export default function ProductGrid({ items }: { items: Item[] }) {
-
-
+  console.log(items);
   return (
     <>
       {items.map((item) => {
@@ -16,9 +16,7 @@ export default function ProductGrid({ items }: { items: Item[] }) {
             <Link
               key={item.id}
               href={"/dashboard/products/" + item.id + "/detail"}
-              className={clsx("", {
-               
-              })}
+              className={clsx("", {})}
             >
               <Image
                 src={item.image_url}
@@ -29,7 +27,14 @@ export default function ProductGrid({ items }: { items: Item[] }) {
                 sizes="(min-width: 1040px) 384px, (min-width: 780px) 320px, (min-width: 640px) 192px, 144px"
                 priority={true}
               />
-              <p className="text-brown text-lg pt-2 pb-10 sm:text-xl md:text-2xl xl:text-3xl">{item.title}</p>
+              <div className="flow-root">
+                <p className="text-brown text-lg pt-2 pb-10 sm:text-xl md:text-2xl xl:text-3xl float-left">
+                  {item.title}
+                </p>
+                <p className="text-brown text-lg pt-2 pb-10 sm:text-xl md:text-2xl xl:text-3xl float-right">
+                  {formatCurrency(item.price)}
+                </p>
+              </div>
             </Link>
           </div>
         );

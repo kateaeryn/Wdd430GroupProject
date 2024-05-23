@@ -18,13 +18,13 @@ export default async function ProductDetail({
   let rating = 0;
   //messy but functional calculating the rating and adding it to the product details
   const rate = await getRating(id);
-  const array = rate.map(num => num.rate);
+  const array = rate.map((num) => num.rate);
   const sum = array.reduce((num, curr) => num + curr, 0);
-  const average = sum/rate.length;
+  const average = sum / rate.length;
   if (average > 0) {
     rating = average;
   }
-  
+
   return (
     <>
       {links.map((link) => {
@@ -32,11 +32,11 @@ export default async function ProductDetail({
           <div className="flex flex-col " key={link.id}>
             <h1 className="text-5xl text-brown">{link.title}</h1>
             <div className="flex flex-row justify-between">
-              <h2 className="text-2xl text-brown">{link.first_name +" "+link.last_name}</h2>
-              
-                <p className="text-base self-center">Rating: {rating} Stars</p>         
-                
-              
+              <h2 className="text-2xl text-brown">
+                {link.first_name + " " + link.last_name}
+              </h2>
+
+              <p className="text-base self-center">Rating: {rating} Stars</p>
             </div>
 
             <Image
@@ -65,7 +65,9 @@ export default async function ProductDetail({
                   return (
                     <div className="flex flex-col " key={review.id}>
                       <div className="flex flex-row justify-between">
-                        <p className="text-3xl">{review.first_name +" "+review.last_name}</p>
+                        <p className="text-3xl">
+                          {review.first_name + " " + review.last_name}
+                        </p>
                         <p>Rating: {review.rate} Stars</p>
                       </div>
                       <div className="text-xl">
