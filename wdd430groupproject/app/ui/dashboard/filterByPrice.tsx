@@ -3,11 +3,7 @@
 import { usePathname, useRouter } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
 
-export default function FilterByPrice({
-  placeholder,
-}: {
-  placeholder: string;
-}) {
+export default function FilterByPrice() {
   const params = new URLSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
@@ -35,7 +31,7 @@ export default function FilterByPrice({
         id="filter"
         name="filter"
         className="peer block w-3/8 cursor-pointer rounded-md border  border-gray-200 py-2 pl-5 text-xl outline-2 placeholder:text-darkBrown"
-        defaultValue="Filter by Price"
+        defaultValue={"FilterByPrice"}
         onChange={(e) => {
           handleFilter(e.target.value);
         }}

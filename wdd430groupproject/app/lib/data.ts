@@ -136,36 +136,7 @@ export async function getSingleArtisan(id: string) {
   }
 }
 
-export async function fetchFilteredItems(query: string) {
-  noStore();
-  try {
-    const data = await sql<Item>`
-    SELECT 
-    id,
-    artisan_id,
-    title,
-    price,
-    category,
-    description,
-    image_url,
-    status
-      FROM items
-      WHERE
-        title ILIKE ${`%${query}%`} OR
-        price::text ILIKE ${`%${query}%`} OR
-        category ILIKE ${`%${query}%`} OR
-        description ILIKE ${`%${query}%`} OR
-        status ILIKE ${`%${query}%`}
-    `;
-
-    const items = data.rows;
-    return items;
-  } catch (error) {
-    console.error("Database Error:", error);
-    throw new Error("Failed to fetch items.");
-  }
-}
-
+//used in the all products page to filter items in the search and by price
 export async function fetchItemsByPriceOrSearch(query: string, price: string) {
   noStore();
   if (price == "LowToHigh") {
@@ -254,6 +225,7 @@ export async function fetchItemsByPriceOrSearch(query: string, price: string) {
   }
 }
 
+//used in the categories component
 export async function fetchCategory(category: string) {
   noStore();
   try {
@@ -280,19 +252,17 @@ export async function fetchCategory(category: string) {
   }
 }
 
-export async function filteredCategory(category: string, query: string) {
+//used in the categories pages to filter by category, price, and search
+export async function filteredCategory(
+  category: string,
+  query: string,
+  price: string
+) {
   noStore();
-  try {
-    const data = await sql<Item>`
-    SELECT 
-    id,
-    artisan_id,
-    title,
-    price,
-    category,
-    description,
-    image_url,
-    status
+  if (price == "LowToHigh") {
+    try {
+      const data = await sql<Item>`
+    SELECT *
       FROM items
       WHERE
         category = ${category}
@@ -301,13 +271,56 @@ export async function filteredCategory(category: string, query: string) {
           price::text ILIKE ${`%${query}%`} OR
           description ILIKE ${`%${query}%`} OR
           status ILIKE ${`%${query}%`})
+          Order by CAST(price AS Float)  asc
     `;
 
-    const items = data.rows;
-    return items;
-  } catch (error) {
-    console.error("Database Error:", error);
-    throw new Error("Failed to fetch items.");
+      const items = data.rows;
+      return items;
+    } catch (error) {
+      console.error("Database Error:", error);
+      throw new Error("Failed to fetch items.");
+    }
+  } else if (price == "HighToLow") {
+    try {
+      const data = await sql<Item>`
+    SELECT *
+      FROM items
+      WHERE
+      category = ${category}
+      AND
+        (title ILIKE ${`%${query}%`} OR
+        price::text ILIKE ${`%${query}%`} OR
+        description ILIKE ${`%${query}%`} OR
+        status ILIKE ${`%${query}%`})
+        Order by CAST(price AS Float)  desc
+    `;
+
+      const items = data.rows;
+      return items;
+    } catch (error) {
+      console.error("Database Error:", error);
+      throw new Error("Failed to fetch items.");
+    }
+  } else {
+    try {
+      const data = await sql<Item>`
+    SELECT *
+      FROM items
+      WHERE
+      category = ${category}
+        AND
+          (title ILIKE ${`%${query}%`} OR
+          price::text ILIKE ${`%${query}%`} OR
+          description ILIKE ${`%${query}%`} OR
+          status ILIKE ${`%${query}%`})
+    `;
+
+      const items = data.rows;
+      return items;
+    } catch (error) {
+      console.error("Database Error:", error);
+      throw new Error("Failed to fetch items.");
+    }
   }
 }
 

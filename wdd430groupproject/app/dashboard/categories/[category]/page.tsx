@@ -3,7 +3,7 @@ import ProductGrid from "@/app/ui/dashboard/products";
 import { filteredCategory } from "@/app/lib/data";
 import Search from "@/app/ui/dashboard/search";
 import { Suspense } from "react";
-import { ProductsSkeleton } from "@/app/ui/skeletons";
+import FilterByPrice from "@/app/ui/dashboard/filterByPrice";
 
 export const metadata: Metadata = {
   title: "Category",
@@ -16,12 +16,13 @@ export default async function Page({
   params: { category: string };
   searchParams?: {
     query?: string;
-    page?: string;
+    price?: string;
   };
 }) {
   const category = params.category;
+  const price = searchParams?.price || "";
   const query = searchParams?.query || "";
-  const items = await filteredCategory(category, query);
+  const items = await filteredCategory(category, query, price);
   let title = "";
 
   switch (category) {
@@ -45,9 +46,10 @@ export default async function Page({
     <>
       <div className="flex flex-col space-y-10 ">
         <Search placeholder="Search the Haven..." />
+        <FilterByPrice />
         <h1 className="text-brown text-5xl text-center">{title}</h1>
         <div className="flex flex-row flex-wrap justify-evenly 2xl:gap-6">
-          <Suspense key={query} fallback={<ProductsSkeleton />}>
+          <Suspense key={query} fallback={<div>Loading...</div>}>
             <ProductGrid items={items} />
           </Suspense>
         </div>
