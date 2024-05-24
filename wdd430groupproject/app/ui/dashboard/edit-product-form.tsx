@@ -247,7 +247,6 @@ export default function EditProductForm({
           Cancel
         </Link>
         <Button type="submit">Update Product</Button>
-        <Button type="submit">Delete Product</Button>
       </div>
     </form>
   );
