@@ -1,14 +1,16 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Review } from "@/app/lib/definitions";
 import Button from "@/app/ui/button";
 import { usePathname, useRouter } from "next/navigation";
+import { useAuth } from "@/app/lib/authContext"; // Import the useAuth hook
 
 const ProductReviewForm: React.FC = () => {
 	const router = useRouter();
 	const pathname = usePathname();
 	const item_id = pathname ? pathname.split("/")[3] : "";
+	const { user, isLoggedIn } = useAuth(); // Access user and isLoggedIn from context
 
 	const [review, setReview] = useState<Omit<Review, "id" | "user_id">>({
 		item_id: item_id,
@@ -29,6 +31,11 @@ const ProductReviewForm: React.FC = () => {
 
 	const handleSubmit = async (event: React.FormEvent) => {
 		event.preventDefault();
+		if (!isLoggedIn || !user?.id) {
+			console.error("User is not logged in or user ID is missing");
+			return;
+		}
+
 		try {
 			const currentDate = new Date();
 			const isoDate = currentDate.toISOString();
@@ -38,7 +45,7 @@ const ProductReviewForm: React.FC = () => {
 				headers: {
 					"Content-Type": "application/json",
 				},
-				body: JSON.stringify({ ...review, date: isoDate }),
+				body: JSON.stringify({ ...review, date: isoDate, user_id: user.id }), // Add user_id to the review
 			});
 
 			if (!response.ok) {

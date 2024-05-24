@@ -8,8 +8,15 @@ export default async function handler(
 	if (req.method === "POST") {
 		const { item_id, user_id, text, rate } = req.body;
 
+		console.log("Request Body:", req.body); // Log the request body
+
 		// Get the current date and time from the system
 		const currentDate = new Date();
+
+		if (!item_id || !user_id || !text || typeof rate === "undefined") {
+			res.status(400).json({ error: "Missing required fields" });
+			return;
+		}
 
 		try {
 			const review = await postItemReview(
