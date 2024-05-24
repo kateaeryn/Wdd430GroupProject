@@ -26,6 +26,8 @@ const FormNewProductSchema = z.object({
 
 const CreateProduct = FormNewProductSchema.omit({ id: true });
 
+const UpdateProduct = FormNewProductSchema.omit({ id: true });
+
 export type State = {
   errors?: {
     id?: string[];
@@ -41,16 +43,15 @@ export type State = {
 };
 
 export async function createProduct(prevState: State, formData: FormData) {
-  
   // Validate form fields using Zod
   const validatedFields = CreateProduct.safeParse({
     artisan_id: formData.get("artisan_id"),
-    title: formData.get("title") ,
-    price: formData.get("price") ,
+    title: formData.get("title"),
+    price: formData.get("price"),
     category: formData.get("category"),
     description: formData.get("description"),
-    image_url: formData.get("image_url") ,
-    status: formData.get("status") ,
+    image_url: formData.get("image_url"),
+    status: formData.get("status"),
   });
 
   if (!validatedFields.success) {
@@ -77,6 +78,48 @@ export async function createProduct(prevState: State, formData: FormData) {
     };
   }
   // Revalidate the cache for the invoices page and redirect the user.
+  revalidatePath("/dashboard/account");
+  redirect("/dashboard/account");
+}
+
+export async function updateProduct(
+  id: string,
+  prevState: State,
+  formData: FormData
+) {
+  const validatedFields = UpdateProduct.safeParse({
+    artisan_id: formData.get("artisan_id"),
+    title: formData.get("title"),
+    price: formData.get("price"),
+    category: formData.get("category"),
+    description: formData.get("description"),
+    image_url: formData.get("image_url"),
+    status: formData.get("status"),
+  });
+
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: "Missing Fields. Failed to Update Invoice.",
+    };
+  }
+
+  const { artisan_id, title, price, category, description, image_url, status } =
+    validatedFields.data;
+
+  const priceInCents = price * 100;
+
+  try {
+    await sql`
+      UPDATE items
+      SET artisan_id = ${artisan_id}, title = ${title}, price = ${priceInCents}, category = ${category},
+      description = ${description}, image_url = ${image_url}, status = ${status}
+      WHERE id = ${id}
+    `;
+  } catch (error) {
+    return { message: "Database Error: Failed to Update Product." };
+  }
+
   revalidatePath("/dashboard/account");
   redirect("/dashboard/account");
 }
