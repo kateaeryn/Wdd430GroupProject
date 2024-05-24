@@ -1,5 +1,5 @@
 import { sql } from "@vercel/postgres";
-import { User, Item, Artisans, Review } from "./definitions";
+import { User, Item, Artisans, Review, ProductForm } from "./definitions";
 import { unstable_noStore as noStore } from "next/cache";
 
 export async function getUser(email: string) {
@@ -377,5 +377,27 @@ export async function getRating(id: string) {
   } catch (error) {
     console.error("Database Error", error);
     throw new Error("Failed to get Ratings");
+  }
+}
+
+export async function fetchProductByID(id: string) {
+  noStore();
+  try {
+    const data =
+      await sql<ProductForm>`SELECT items.id, items.artisan_id, items.title, items.price,
+    items.category, items.description, items.image_url, items.status
+        FROM items
+        WHERE id = ${id}`;
+
+    const product = data.rows.map((product) => ({
+      ...product,
+      // Convert amount from cents to dollars
+      price: product.price / 100,
+    }));
+    console.log(product); // product is an empty array []
+    return product[0];
+  } catch (error) {
+    console.error("Database Error", error);
+    throw new Error("Failed to fetch Product Details");
   }
 }
