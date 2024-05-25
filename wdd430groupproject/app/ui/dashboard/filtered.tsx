@@ -5,7 +5,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { DeleteProduct, EditProduct } from "./deleteEditButtons";
 import { TrashIcon } from "@heroicons/react/24/outline";
-import router from "next/router";
 
 interface Item {
   id: string;

@@ -4,7 +4,6 @@ import { sql } from "@vercel/postgres";
 import z from "zod";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
-import router from "next/router";
 
 const FormNewProductSchema = z.object({
   id: z.string(),
