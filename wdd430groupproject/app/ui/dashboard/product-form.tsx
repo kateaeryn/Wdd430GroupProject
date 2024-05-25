@@ -19,7 +19,7 @@ export default function AddProductForm({
 }) {
   const initialState = { message: "", errors: {} };
   const [state, dispatch] = useFormState(createProduct, initialState);
- 
+
   return (
     <form action={dispatch}>
       <div className=" rounded-md bg-tan p-4 md:p-6 text-darkBrown">
@@ -93,7 +93,7 @@ export default function AddProductForm({
                 id="price"
                 name="price"
                 type="number"
-                step=".01"
+                step="0.01"
                 placeholder="Enter Price"
                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-5 text-xl outline-2 placeholder:text-darkBrown"
                 aria-describedby="price-error"
@@ -152,6 +152,7 @@ export default function AddProductForm({
                 placeholder="Enter item description"
                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-5 text-xl outline-2 placeholder:text-darkBrown"
                 aria-describedby="description-error"
+                required
               />
               <div id="description-error" aria-live="polite" aria-atomic="true">
                 {state.errors?.description &&

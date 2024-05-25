@@ -1,8 +1,11 @@
-import React from "react";
-import Button from "@/app/ui/button";
+"use client";
+import React, { useEffect, useState } from "react";
+import Modal from "./modal";
 import Link from "next/link";
 import Image from "next/image";
-import { DeleteProduct } from "./deleteProduct";
+import { DeleteProduct, EditProduct } from "./deleteEditButtons";
+import { TrashIcon } from "@heroicons/react/24/outline";
+import router from "next/router";
 
 interface Item {
   id: string;
@@ -15,6 +18,16 @@ interface ItemProps {
 }
 
 const FilteredItems: React.FC<ItemProps> = ({ items }) => {
+  const [open, setOpen] = useState(false);
+  const [deleteItem, setDeleteItem] = useState(false);
+
+  useEffect(() => {
+    if (deleteItem) {
+      setOpen(false);
+      window.location.reload();
+    }
+  }, [deleteItem]);
+
   return (
     <div className="flex flex-wrap gap-4 justify-evenly">
       {items.map((item) => (
@@ -36,13 +49,49 @@ const FilteredItems: React.FC<ItemProps> = ({ items }) => {
               priority={true}
             />
           </Link>
+          <div className="flow-root">
+            <p className="text-brown text-lg pt-2 pb-10 sm:text-xl md:text-2xl xl:text-3xl float-left">
+              {item.title}
+            </p>
+            <div className="mt-2 flex justify-end gap-1">
+              <Link href={`/dashboard/products/${item.id}/edit`}>
+                <EditProduct id={item.id} />
+              </Link>
 
-          <p className="text-2xl">{item.title}</p>
-          <div className="mt-6 flex justify-evenly gap-4">
-            <Link href={`/dashboard/products/${item.id}/edit`}>
-              <Button>Edit</Button>
-            </Link>
-            <DeleteProduct id={item.id} />
+              <button
+                className={`bg-green text-tan text-opacity-99 text-xl font-bold py-2 px-2 rounded focus:outline-none focus:shadow-outline`}
+                onClick={() => setOpen(true)}
+              >
+                <TrashIcon className="w-6" />
+              </button>
+
+              <Modal open={open} onClose={() => setOpen(false)}>
+                <div className="text-center w-56">
+                  <div className="mx-auto my-4 w-48">
+                    <h3 className="text-lg font-black text-gray-800">
+                      Confirm Delete
+                    </h3>
+                    <p className="text-sm text-gray-500">
+                      Are you sure you want to delete this item?
+                    </p>
+                  </div>
+                  <div className="flex gap-4">
+                    <button
+                      className="btn btn-danger w-full"
+                      onClick={() => setDeleteItem(true)}
+                    >
+                      <DeleteProduct id={item.id} />
+                    </button>
+                    <button
+                      className="btn btn-light w-full"
+                      onClick={() => setOpen(false)}
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              </Modal>
+            </div>
           </div>
         </div>
       ))}

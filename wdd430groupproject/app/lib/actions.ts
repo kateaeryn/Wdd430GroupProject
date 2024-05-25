@@ -4,6 +4,7 @@ import { sql } from "@vercel/postgres";
 import z from "zod";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
+import router from "next/router";
 
 const FormNewProductSchema = z.object({
   id: z.string(),
@@ -127,6 +128,7 @@ export async function updateProduct(
 export async function deleteProduct(id: string) {
   try {
     await sql`DELETE FROM items WHERE id = ${id}`;
+    window.location.reload();
     revalidatePath("/dashboard/account");
     return { message: "Deleted Product." };
   } catch (error) {
