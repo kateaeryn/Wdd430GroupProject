@@ -123,3 +123,14 @@ export async function updateProduct(
   revalidatePath("/dashboard/account");
   redirect("/dashboard/account");
 }
+
+export async function deleteProduct(id: string) {
+  try {
+    await sql`DELETE FROM items WHERE id = ${id}`;
+    window.location.reload();
+    revalidatePath("/dashboard/account");
+    return { message: "Deleted Product." };
+  } catch (error) {
+    return { message: "Database Error: Failed to Delete Product." };
+  }
+}

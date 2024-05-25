@@ -96,7 +96,7 @@ export default function EditProductForm({
                 id="price"
                 name="price"
                 type="number"
-                step=".01"
+                step="0.01"
                 defaultValue={product.price}
                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-5 text-xl outline-2 placeholder:text-darkBrown"
                 aria-describedby="price-error"
@@ -247,7 +247,6 @@ export default function EditProductForm({
           Cancel
         </Link>
         <Button type="submit">Update Product</Button>
-        <Button type="submit">Delete Product</Button>
       </div>
     </form>
   );
