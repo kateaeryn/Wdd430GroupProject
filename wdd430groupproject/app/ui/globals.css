@@ -4,7 +4,7 @@
 
 body {
   font-family: 'Roboto', sans-serif;
-  color: #73503C;
+  color: #73503c;
   font-size: 30px;
   margin: 0;
   padding: 0;
@@ -20,5 +20,14 @@ h3,
 h4,
 h5 {
   font-family: 'Quattrocento', serif;
-  color: #73503C,
+  color: #73503c;
+}
+
+.star-rating {
+  display: flex;
+  gap: 5px;
+}
+
+.star {
+  cursor: pointer;
 }
