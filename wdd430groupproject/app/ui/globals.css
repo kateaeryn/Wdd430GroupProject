@@ -31,3 +31,7 @@ h5 {
 .star {
   cursor: pointer;
 }
+
+.hidden {
+  display: none;
+}
