@@ -1,6 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import { FaStar } from 'react-icons/fa';
+import {StarIcon } from '@heroicons/react/24/outline';
 
 export default function OStars(props: any) {
   const [rating, setRating] = useState<number | null>(props.currentStar);
@@ -23,9 +23,8 @@ export default function OStars(props: any) {
               onClick={() => setRating(updatedRating)}
               style={{ display: 'none' }}
             />
-            <FaStar
-              className="star"
-              size={50}
+            <StarIcon
+              className="h-6 w-6 text-darkBrown"
               color={updatedRating <= (hover || rating) ? '#ffc107' : '#e4e5e9'}
               onMouseEnter={() => setHover(updatedRating)}
               onMouseLeave={() => setHover(null)}
