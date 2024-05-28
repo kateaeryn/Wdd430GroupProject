@@ -7,8 +7,17 @@ export default function OStars(props: any) {
   const [hover, setHover] = useState<number | null>(null);
 
   useEffect(() => {
-    setRating(props.currentStar);
-  }, [props.currentStar]);
+    if (props.currentStar !== rating) {
+      setRating(props.currentStar);
+    }
+  }, [props.currentStar, rating]);
+
+  const handleClick = (newRating: number) => {
+    setRating(newRating);
+    if (props.onRatingChange) {
+      props.onRatingChange(newRating);
+    }
+  };
 
   return (
     <div className="star-rating">
@@ -20,7 +29,7 @@ export default function OStars(props: any) {
               type="radio"
               name="rating"
               value={updatedRating}
-              onClick={() => setRating(updatedRating)}
+              onClick={() => handleClick(updatedRating)}
               style={{ display: 'none' }}
             />
             <StarIcon

@@ -16,10 +16,6 @@ interface ReviewProps {
   reviews: Review[];
 }
 
-export const passReviewId = (data: Review) => {
-  console.log(data);
-};
-
 const ReviewGrid: React.FC<ReviewProps> = ({ reviews }) => {
   console.log(reviews);
   return (
@@ -35,11 +31,21 @@ const ReviewGrid: React.FC<ReviewProps> = ({ reviews }) => {
           </small>
           <div className="text-xl -mt-2">Rating: {review.rate}</div>
           <p className="text-xl">{review.text}</p>
-          <Link href={`/dashboard/products/${review.id}/detail/review/edit`}>
-            <Button
-              className="-mt-0.5 -mb-0.5"
-              onClick={() => passReviewId(review)}
-            >
+          <Link
+            href={{
+              pathname: `/dashboard/products/${review.id}/detail/review/edit`,
+              query: {
+                id: review.id,
+                user_id: review.user_id,
+                item_id: review.item_id,
+                text: review.text,
+                date: review.date,
+                rate: review.rate,
+                title: review.title,
+              },
+            }}
+          >
+            <Button className="-mt-0.5 -mb-0.5" onClick={() => review}>
               Edit/Delete
             </Button>
           </Link>
