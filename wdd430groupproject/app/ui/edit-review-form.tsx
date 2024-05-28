@@ -6,10 +6,10 @@ import { useForm } from 'react-hook-form';
 import type { FieldValues } from 'react-hook-form';
 import { updateReview } from '../lib/actions';
 import { useRouter } from 'next/navigation';
+import { deleteReview } from '../lib/actions';
 
 export default function EditReviewForm(props: any) {
   const router = useRouter();
-  let bruh3;
   let bruh4 = JSON.stringify(props.bruh2);
   let bruh5 = JSON.parse(bruh4);
   const {
@@ -44,6 +44,11 @@ export default function EditReviewForm(props: any) {
     await updateReview(JSON.stringify(data2));
     router.push(`/dashboard/account`);
   };
+
+  async function onDelete(data: string) {
+    await deleteReview(data);
+    router.push(`/dashboard/account`);
+  }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-y-2">
@@ -87,7 +92,7 @@ export default function EditReviewForm(props: any) {
       <button
         className="bg-red-500 rounded-md border border-black-800 disabled:bg-red-1000 disabled:text-white disabled={false}"
         type="button"
-        onClick={bruh3}
+        onClick={() => onDelete(bruh5.id)}
       >
         Delete Review
       </button>
