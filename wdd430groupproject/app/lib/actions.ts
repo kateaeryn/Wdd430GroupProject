@@ -163,3 +163,14 @@ export async function updateReview(data: any) {
     return { message: 'Review update failed.' };
   }
 }
+
+export async function deleteReview(id: string) {
+  try {
+    await sql`DELETE FROM reviews WHERE reviews.id = ${id}`;
+    console.log('success');
+    return { message: 'Deleted Product.' };
+  } catch (error) {
+    console.log('royal failure');
+    return { message: 'Database Error: Failed to Delete Product.' };
+  }
+}
