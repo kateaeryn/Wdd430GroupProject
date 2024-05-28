@@ -20,7 +20,8 @@ export default async function ProductDetail({
   const rate = await getRating(id);
   const array = rate.map((num) => num.rate);
   const sum = array.reduce((num, curr) => num + curr, 0);
-  const average = sum / rate.length;
+  const total = sum / rate.length;
+  const average = parseFloat(total.toFixed(1));
   if (average > 0) {
     rating = average;
   }

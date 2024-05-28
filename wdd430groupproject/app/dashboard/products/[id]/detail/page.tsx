@@ -4,7 +4,7 @@ import ProductDetail from '@/app/ui/dashboard/productDetail';
 import { useParams } from 'react-router-dom';
 
 export const metadata: Metadata = {
-  title: 'Add Product',
+  title: 'Product Details',
 };
 
 export default function Page({params}: {params: {id: string}}) {

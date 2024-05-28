@@ -8,6 +8,7 @@ import Footer from "./ui/components/footer.js";
 import { quattrocento } from "@/app/ui/fonts";
 import { AuthProvider } from './lib/authContext';
 import { Metadata } from 'next';
+import Favicon from "react-favicon";
 
 // export const metadata: Metadata = {
 //   title: "Handcrafted Haven",
@@ -29,7 +30,7 @@ export default function RootLayout({
           />
           <meta property="og:title" content="Handcrafted Haven"/>
           <title>Handcrafted Haven</title> 
-
+          <link rel="shortcut icon" href="/public/favicon.ico"></link>
        </Head>
         
         <body className={`${quattrocento.className}`}>
