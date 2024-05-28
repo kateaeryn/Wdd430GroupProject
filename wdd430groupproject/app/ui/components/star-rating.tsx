@@ -1,6 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import {StarIcon } from '@heroicons/react/24/outline';
+import { FaStar } from 'react-icons/fa';
 
 export default function OStars(props: any) {
   const [rating, setRating] = useState<number | null>(props.currentStar);
@@ -23,18 +23,25 @@ export default function OStars(props: any) {
     <div className="star-rating">
       {[...Array(5)].map((_, index) => {
         const updatedRating = index + 1;
+        let labelId = `rating-${updatedRating}`;
         return (
-          <label key={index}>
+          <label key={index} htmlFor={labelId}>
             <input
               type="radio"
               name="rating"
+              id={labelId}
               value={updatedRating}
               onClick={() => handleClick(updatedRating)}
-              style={{ display: 'none' }}
+              className="hidden"
             />
-            <StarIcon
+
+            <FaStar
               className="h-6 w-6 text-darkBrown"
-              color={updatedRating <= (hover || rating) ? '#ffc107' : '#e4e5e9'}
+              color={
+                updatedRating <= ((hover || rating) ?? 0)
+                  ? '#ffc107'
+                  : '#e4e5e9'
+              }
               onMouseEnter={() => setHover(updatedRating)}
               onMouseLeave={() => setHover(null)}
             />
