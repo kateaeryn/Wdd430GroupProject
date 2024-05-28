@@ -401,17 +401,3 @@ export async function fetchProductByID(id: string) {
     throw new Error('Failed to fetch Product Details');
   }
 }
-
-export async function getSingleCustomerReview(id: string) {
-  try {
-    const data = await sql`SELECT 
-		reviews.id, user_id, item_id, text, date, rate, items.title
-		FROM reviews
-		JOIN items on reviews.item_id = items.id
-		WHERE reviews.id=${id}`;
-    return data.rows;
-  } catch (error) {
-    console.error('Database Error', error);
-    throw new Error("Failed to fetch customer's reviews");
-  }
-}

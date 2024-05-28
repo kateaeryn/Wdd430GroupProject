@@ -1,26 +1,27 @@
-"use server";
+'use server';
 
-import { sql } from "@vercel/postgres";
-import z from "zod";
-import { redirect } from "next/navigation";
-import { revalidatePath } from "next/cache";
+import { sql } from '@vercel/postgres';
+import z from 'zod';
+import { redirect } from 'next/navigation';
+import { revalidatePath } from 'next/cache';
+import exp from 'constants';
 
 const FormNewProductSchema = z.object({
   id: z.string(),
   artisan_id: z.string({
-    invalid_type_error: "Please select a artist.",
+    invalid_type_error: 'Please select a artist.',
   }),
   title: z.string({
-    invalid_type_error: "Please type a title.",
+    invalid_type_error: 'Please type a title.',
   }),
   price: z.coerce
     .number()
-    .gt(0, { message: "Please enter an amount greater than $0." }),
-  category: z.string({ invalid_type_error: "Please type a category." }),
-  description: z.string({ invalid_type_error: "Please type a description." }),
-  image_url: z.string({ invalid_type_error: "Please enter a image url." }),
-  status: z.enum(["available", "unavailable"], {
-    invalid_type_error: "Please select a status.",
+    .gt(0, { message: 'Please enter an amount greater than $0.' }),
+  category: z.string({ invalid_type_error: 'Please type a category.' }),
+  description: z.string({ invalid_type_error: 'Please type a description.' }),
+  image_url: z.string({ invalid_type_error: 'Please enter a image url.' }),
+  status: z.enum(['available', 'unavailable'], {
+    invalid_type_error: 'Please select a status.',
   }),
 });
 
@@ -45,19 +46,19 @@ export type State = {
 export async function createProduct(prevState: State, formData: FormData) {
   // Validate form fields using Zod
   const validatedFields = CreateProduct.safeParse({
-    artisan_id: formData.get("artisan_id"),
-    title: formData.get("title"),
-    price: formData.get("price"),
-    category: formData.get("category"),
-    description: formData.get("description"),
-    image_url: formData.get("image_url"),
-    status: formData.get("status"),
+    artisan_id: formData.get('artisan_id'),
+    title: formData.get('title'),
+    price: formData.get('price'),
+    category: formData.get('category'),
+    description: formData.get('description'),
+    image_url: formData.get('image_url'),
+    status: formData.get('status'),
   });
 
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
-      message: "Missing Fields. Failed to Create Product.",
+      message: 'Missing Fields. Failed to Create Product.',
     };
   }
 
@@ -74,12 +75,12 @@ export async function createProduct(prevState: State, formData: FormData) {
     VALUES (${artisan_id}, ${title}, ${priceInCents}, ${category}, ${description}, ${image_url}, ${status})`;
   } catch (error) {
     return {
-      message: "Database Error: Failed to create product",
+      message: 'Database Error: Failed to create product',
     };
   }
   // Revalidate the cache for the invoices page and redirect the user.
-  revalidatePath("/dashboard/account");
-  redirect("/dashboard/account");
+  revalidatePath('/dashboard/account');
+  redirect('/dashboard/account');
 }
 
 export async function updateProduct(
@@ -88,19 +89,19 @@ export async function updateProduct(
   formData: FormData
 ) {
   const validatedFields = UpdateProduct.safeParse({
-    artisan_id: formData.get("artisan_id"),
-    title: formData.get("title"),
-    price: formData.get("price"),
-    category: formData.get("category"),
-    description: formData.get("description"),
-    image_url: formData.get("image_url"),
-    status: formData.get("status"),
+    artisan_id: formData.get('artisan_id'),
+    title: formData.get('title'),
+    price: formData.get('price'),
+    category: formData.get('category'),
+    description: formData.get('description'),
+    image_url: formData.get('image_url'),
+    status: formData.get('status'),
   });
 
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
-      message: "Missing Fields. Failed to Update Invoice.",
+      message: 'Missing Fields. Failed to Update Invoice.',
     };
   }
 
@@ -117,20 +118,48 @@ export async function updateProduct(
       WHERE id = ${id}
     `;
   } catch (error) {
-    return { message: "Database Error: Failed to Update Product." };
+    return { message: 'Database Error: Failed to Update Product.' };
   }
 
-  revalidatePath("/dashboard/account");
-  redirect("/dashboard/account");
+  revalidatePath('/dashboard/account');
+  redirect('/dashboard/account');
 }
 
 export async function deleteProduct(id: string) {
   try {
     await sql`DELETE FROM items WHERE id = ${id}`;
     window.location.reload();
-    revalidatePath("/dashboard/account");
-    return { message: "Deleted Product." };
+    revalidatePath('/dashboard/account');
+    return { message: 'Deleted Product.' };
   } catch (error) {
-    return { message: "Database Error: Failed to Delete Product." };
+    return { message: 'Database Error: Failed to Delete Product.' };
+  }
+}
+
+const ReviewSchema = z.object({
+  id: z.string().uuid(),
+  text: z.string(),
+  rate: z.number().min(1).max(5),
+});
+
+export async function updateReview(data: any) {
+  try {
+    const parsedData = ReviewSchema.parse(JSON.parse(data));
+    const { id, text, rate } = parsedData;
+    console.log(`line sql ${id}, ${text}, ${rate}`);
+    await sql`
+      UPDATE reviews
+      SET text = ${text}, rate = ${rate}
+      WHERE id = ${id}
+    `;
+    return { message: 'Updated successfully.' };
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      return {
+        message: 'Invalid Data',
+        details: error.errors,
+      };
+    }
+    return { message: 'Review update failed.' };
   }
 }
