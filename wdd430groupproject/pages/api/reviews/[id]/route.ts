@@ -25,8 +25,30 @@ export default async function handler(
         }
     } else if (req.method === "PUT") {
         try {
-            const reviewData = req.body;
-            const updatedReview = await updateReviewById(id, reviewData);
+            const { item_id, user_id, text, rate, date } = req.body;
+
+            // Validate input data
+            if (
+                typeof item_id !== "string" ||
+                typeof user_id !== "string" ||
+                typeof text !== "string" ||
+                typeof rate !== "number" ||
+                !(date instanceof Date || typeof date === "string")
+            ) {
+                return res.status(400).json({ error: "Invalid input data" });
+            }
+
+            // If date is a string, convert it to a Date object
+            const dateObj = typeof date === "string" ? new Date(date) : date;
+
+            const updatedReview = await updateReviewById(
+                id,
+                item_id,
+                user_id,
+                text,
+                rate,
+                dateObj
+            );
             res.status(200).json(updatedReview);
         } catch (error) {
             console.error("Error updating review:", error);

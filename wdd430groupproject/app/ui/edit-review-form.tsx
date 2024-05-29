@@ -9,14 +9,23 @@ const EditReviewForm = () => {
     const searchParams = useSearchParams();
     const id = searchParams?.get("id");
     const user_id = searchParams?.get("user_id");
-    const [formData, setFormData] = useState({ text: "", rate: 0 });
+    const item_id = searchParams?.get("item_id"); // Assuming item_id is also passed via URL
+    const [formData, setFormData] = useState({
+        text: "",
+        rate: 0,
+        date: new Date(),
+    });
 
     useEffect(() => {
         if (id) {
             fetch(`/api/reviews/${id}/route`)
                 .then((res) => res.json())
                 .then((data) =>
-                    setFormData({ text: data.text, rate: data.rate })
+                    setFormData({
+                        text: data.text,
+                        rate: data.rate,
+                        date: new Date(data.date),
+                    })
                 );
         }
     }, [id]);
@@ -25,23 +34,28 @@ const EditReviewForm = () => {
         e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
     ) => {
         const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+        setFormData({
+            ...formData,
+            [name]: name === "rate" ? Number(value) : value,
+        });
     };
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log("Form submitted");
-        console.log("ID:", id);
-        console.log("FormData:", formData);
-        console.log("Text:", user_id);
         try {
+            const updatedData = {
+                ...formData,
+                user_id,
+                item_id,
+                date: new Date().toISOString(),
+            };
             await fetch(`/api/reviews/${id}/route`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(formData),
+                body: JSON.stringify(updatedData),
             });
             router.push("/dashboard/account");
-          } catch (error) {
+        } catch (error) {
             console.error("Failed to update review:", error);
         }
     };
@@ -52,7 +66,7 @@ const EditReviewForm = () => {
                 method: "DELETE",
             });
             router.push("/dashboard/account");
-          } catch (error) {
+        } catch (error) {
             console.error("Failed to delete review:", error);
         }
     };

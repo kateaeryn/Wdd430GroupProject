@@ -412,32 +412,8 @@ export async function getReviewById(id: string) {
   }
 }
 
-export async function updateReviewById(id: string, reviewData: Partial<Review>) {
-  const { item_id, user_id, text, rate, date } = reviewData;
-  const formattedDate = date ? date.toISOString() : new Date().toISOString(); // Ensure date is a string
-
-  try {
-    const review = await sql`
-      UPDATE reviews
-      SET item_id = ${item_id}, user_id = ${user_id}, text = ${text}, rate = ${rate}, date = ${formattedDate}
-      WHERE id = ${id}
-      RETURNING *;
-    `;
-    return review.rows[0] as Review;
-  } catch (error) {
-    console.error('Failed to update review by ID:', error);
-    throw new Error('Failed to update review by ID.');
-  }
-}
-
-// export async function updateReviewById(
-//   id: string,
-//   item_id: string,
-//   user_id: string,
-//   text: string,
-//   rate: number,
-//   date: Date
-// ) {
+// export async function updateReviewById(id: string, reviewData: Partial<Review>) {
+//   const { item_id, user_id, text, rate, date } = reviewData;
 //   const formattedDate = date ? date.toISOString() : new Date().toISOString(); // Ensure date is a string
 
 //   try {
@@ -453,6 +429,31 @@ export async function updateReviewById(id: string, reviewData: Partial<Review>) 
 //     throw new Error('Failed to update review by ID.');
 //   }
 // }
+
+
+export async function updateReviewById(
+  id: string,
+  item_id: string,
+  user_id: string,
+  text: string,
+  rate: number,
+  date: Date
+) {
+  const formattedDate = date ? date.toISOString() : new Date().toISOString();
+
+  try {
+    const review = await sql`
+      UPDATE reviews
+      SET item_id = ${item_id}, user_id = ${user_id}, text = ${text}, rate = ${rate}, date = ${formattedDate}
+      WHERE id = ${id}
+      RETURNING *;
+    `;
+    return review.rows[0] as Review;
+  } catch (error) {
+    console.error('Failed to update review by ID:', error);
+    throw new Error('Failed to update review by ID.');
+  }
+}
 
 export async function deleteReviewById(id: string) {
   try {
