@@ -1,101 +1,117 @@
 "use client";
 
-import OStars from "@/app/ui/components/star-rating";
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import type { FieldValues } from "react-hook-form";
-import { updateReview } from "../lib/actions";
-import { useRouter } from "next/navigation";
-import { deleteReview } from "../lib/actions";
+import React, { useState, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import Button from "@/app/ui/button";
 
-export default function EditReviewForm(props: any) {
-  const router = useRouter();
-  let bruh4 = JSON.stringify(props.bruh2);
-  let bruh5 = JSON.parse(bruh4);
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-    watch,
-    reset,
-    setValue,
-    getValues,
-  } = useForm({ defaultValues: { rate: bruh5.rate, text: bruh5.text } });
+const EditReviewForm = () => {
+    const router = useRouter();
+    const searchParams = useSearchParams();
+    const id = searchParams?.get("id");
+    const user_id = searchParams?.get("user_id");
+    const [formData, setFormData] = useState({ text: "", rate: 0 });
 
-  const rating = watch("rate", bruh5.rate);
-  const handleRatingChange = (newRating: number) => {
-    setValue("rate", newRating);
-  };
+    useEffect(() => {
+        if (id) {
+            fetch(`/api/reviews/${id}/route`)
+                .then((res) => res.json())
+                .then((data) =>
+                    setFormData({ text: data.text, rate: data.rate })
+                );
+        }
+    }, [id]);
 
-  const onSubmit = async (data: FieldValues) => {
-    const sanitizedData = {
-      ...data,
-      text: data.text.replace(/\s+/g, " ").trim(),
+    const handleChange = (
+        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
     };
 
-    if (sanitizedData) {
-      console.log("Submitted Data:", sanitizedData);
-    }
-    let data2 = {
-      ...sanitizedData,
-      id: bruh5.id,
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        console.log("Form submitted");
+        console.log("ID:", id);
+        console.log("FormData:", formData);
+        console.log("Text:", user_id);
+        try {
+            await fetch(`/api/reviews/${id}/route`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData),
+            });
+            router.push("/dashboard/account");
+          } catch (error) {
+            console.error("Failed to update review:", error);
+        }
     };
-    console.log(`line 39${JSON.stringify(data2)}`);
-    await updateReview(JSON.stringify(data2));
-    router.push(`/dashboard/account`);
-  };
 
-  async function onDelete(data: string) {
-    await deleteReview(data);
-    router.push(`/dashboard/account`);
-  }
+    const handleDelete = async () => {
+        try {
+            await fetch(`/api/reviews/${id}/route`, {
+                method: "DELETE",
+            });
+            router.push("/dashboard/account");
+          } catch (error) {
+            console.error("Failed to delete review:", error);
+        }
+    };
 
-  return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-y-2">
-      <strong>Edit Review</strong>
-      <strong>Review Date: {new Date(bruh5.date).toLocaleDateString()}</strong>
-      <textarea
-        {...register("text", {
-          maxLength: {
-            value: 100,
-            message: "Cannot exceed 100 characters",
-          },
-        })}
-        className="w-[400px] h-[300px]"
-        placeholder={bruh5.text}
-      ></textarea>
-      {errors.text && (
-        <p className="text-red-500">{`${errors.text.message}`}</p>
-      )}
-      <hr />
-      <label>Stars Rated</label>
-      <OStars
-        currentStar={Number(rating)}
-        onRatingChange={handleRatingChange}
-        register={register("rate", {
-          validate: (value) =>
-            value !== bruh5.rate ||
-            getValues("text") !== bruh5.text ||
-            "No changes submitted",
-        })}
-      />
-      {errors.rate && (
-        <p className="text-red-500">{`${errors.rate.message}`}</p>
-      )}
-      <button
-        disabled={isSubmitting}
-        type="submit"
-        className="bg-blue-200 rounded-md border border-gray-200 disabled:bg-red-800 disabled:text-white disabled={false}"
-      >
-        Submit Review Edit
-      </button>
-      <button
-        className="bg-red-500 rounded-md border border-black-800 disabled:bg-red-1000 disabled:text-white disabled={false}"
-        type="button"
-        onClick={() => onDelete(bruh5.id)}
-      >
-        Delete Review
-      </button>
-    </form>
-  );
-}
+    const handleCancel = () => {
+        router.push("/dashboard/account");
+    };
+
+    return (
+        <div>
+            <form
+                onSubmit={handleSubmit}
+                className="bg-tan shadow-2xl w-auto border rounded px-8 pt-6 pb-8 mb-4"
+            >
+                <div className="mb-4">
+                    <label
+                        htmlFor="rating"
+                        className="block text-black text-2xl font-bold mb-2"
+                    >
+                        Rating:
+                    </label>
+                    <input
+                        type="number"
+                        name="rate"
+                        value={formData.rate}
+                        onChange={handleChange}
+                        min="1"
+                        max="5"
+                        className="shadow appearance-none border rounded w-10 min-w-16 py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
+                        required
+                    />
+                </div>
+                <div className="mb-4">
+                    <label
+                        htmlFor="text"
+                        className="block text-black text-2xl font-bold mb-2"
+                    >
+                        Comment:
+                    </label>
+                    <textarea
+                        name="text"
+                        value={formData.text}
+                        onChange={handleChange}
+                        className="shadow appearance-none border rounded w-95 min-w-80 h-72 py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
+                        required
+                    />
+                </div>
+                <Button type="submit" className="mr-2">
+                    Submit Review
+                </Button>
+                <Button type="button" onClick={handleDelete} className="mr-2">
+                    Delete
+                </Button>
+                <Button type="button" onClick={handleCancel} className="mr-2">
+                    Cancel
+                </Button>
+            </form>
+        </div>
+    );
+};
+
+export default EditReviewForm;
