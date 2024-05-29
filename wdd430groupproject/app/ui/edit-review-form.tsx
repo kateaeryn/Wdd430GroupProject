@@ -1,101 +1,85 @@
 "use client";
+import { ReviewForm } from '@/app/lib/definitions';
+import { updateReview } from '@/app/lib/actions';
+import { useFormState } from 'react-dom';
+import Link from 'next/link';
+import Button from "@/app/ui/button";
 
-import OStars from "@/app/ui/components/star-rating";
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import type { FieldValues } from "react-hook-form";
-import { updateReview } from "../lib/actions";
-import { useRouter } from "next/navigation";
-import { deleteReview } from "../lib/actions";
+export default function EditReviewForm({ review }: { review: ReviewForm }) {
+  
+const initialState = { message: "", errors: {} };
+  const updateProductWithId = updateReview.bind(null, review.id);
+  const [state, dispatch] = useFormState(updateProductWithId, initialState);
+  console.log(review);
 
-export default function EditReviewForm(props: any) {
-  const router = useRouter();
-  let bruh4 = JSON.stringify(props.bruh2);
-  let bruh5 = JSON.parse(bruh4);
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-    watch,
-    reset,
-    setValue,
-    getValues,
-  } = useForm({ defaultValues: { rate: bruh5.rate, text: bruh5.text } });
-
-  const rating = watch("rate", bruh5.rate);
-  const handleRatingChange = (newRating: number) => {
-    setValue("rate", newRating);
+  const handleRateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    ({ ...review, rate: parseInt(event.target.value) });
   };
-
-  const onSubmit = async (data: FieldValues) => {
-    const sanitizedData = {
-      ...data,
-      text: data.text.replace(/\s+/g, " ").trim(),
-    };
-
-    if (sanitizedData) {
-      console.log("Submitted Data:", sanitizedData);
-    }
-    let data2 = {
-      ...sanitizedData,
-      id: bruh5.id,
-    };
-    console.log(`line 39${JSON.stringify(data2)}`);
-    await updateReview(JSON.stringify(data2));
-    router.push(`/dashboard/account`);
-  };
-
-  async function onDelete(data: string) {
-    await deleteReview(data);
-    router.push(`/dashboard/account`);
-  }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-y-2">
-      <strong>Edit Review</strong>
-      <strong>Review Date: {new Date(bruh5.date).toLocaleDateString()}</strong>
-      <textarea
-        {...register("text", {
-          maxLength: {
-            value: 100,
-            message: "Cannot exceed 100 characters",
-          },
-        })}
-        className="w-[400px] h-[300px]"
-        placeholder={bruh5.text}
-      ></textarea>
-      {errors.text && (
-        <p className="text-red-500">{`${errors.text.message}`}</p>
-      )}
-      <hr />
-      <label>Stars Rated</label>
-      <OStars
-        currentStar={Number(rating)}
-        onRatingChange={handleRatingChange}
-        register={register("rate", {
-          validate: (value) =>
-            value !== bruh5.rate ||
-            getValues("text") !== bruh5.text ||
-            "No changes submitted",
-        })}
-      />
-      {errors.rate && (
-        <p className="text-red-500">{`${errors.rate.message}`}</p>
-      )}
-      <button
-        disabled={isSubmitting}
-        type="submit"
-        className="bg-blue-200 rounded-md border border-gray-200 disabled:bg-red-800 disabled:text-white disabled={false}"
-      >
-        Submit Review Edit
-      </button>
-      <button
-        className="bg-red-500 rounded-md border border-black-800 disabled:bg-red-1000 disabled:text-white disabled={false}"
-        type="button"
-        onClick={() => onDelete(bruh5.id)}
-      >
-        Delete Review
-      </button>
-    </form>
-  );
+    <form action={dispatch}>
+      <div className="rounded-md bg-tan p4 md:p-6 text-darkBrown">
+        {/*review editing form */}
+        <label htmlFor="text" className="mb-2 block text-2xl">
+         {review.title}
+      </label>
+        <div className="relative mt-2 rounded-md">
+          <div className="relative">
+            <textarea 
+              id="text"
+              name="text"
+              placeholder="Review Text"
+              defaultValue={review.text}
+              className="peer block w-full rounded-md border border-gray-200 py-2 pl-5 text-xl outline-2 placeholder:text-darkBrown"
+              aria-describedby="text-error"
+            />
+            <div id="text-error" aria-live="polite" aria-atomic="true">
+              {state.errors?.text &&
+                state.errors.text.map((error: string) => (
+                  <p className="mt-2 text-sm text-red-500" key={error}>
+                    {error}
+                </p>
+
+              ))}
+            </div>
+          </div>
+      </div>
+        <label htmlFor="rate">
+          Rating</label>      
+        <div className="relative mt-2 rounded-md">
+          <div className="relative">
+             <input
+          type="number"
+          id="rate"
+          min={1}
+          max={5}
+              value={String(review.rate)}
+              onChange={handleRateChange}
+          className="shadow appearance-none border rounded w-10 min-w-16 py-2 px-3 text-black-700 leading-tight focus:outline-none focus:shadow-outline"
+        />{' '}
+          </div>
+          <div id="rate-error" aria-live="polite" aria-atomic="true">
+            {state.errors?.rate &&
+              state.errors.rate.map((error: string) => (
+                <p className="mt-2 text-sm text-red-500" key={error}>
+                  {error}
+              </p>
+            ))}
+          </div>
+        </div>
+ <div className="mt-6 flex justify-evenly gap-4">
+        <Link
+          href="/dashboard/account"
+          className="flex h-10 items-center rounded-lg bg-green px-6  py-2 text-xl text-tan transition-colors self-center hover:bg-gray-200"
+        >
+          Cancel
+        </Link>
+        <Button type="submit">Update Review</Button>
+      </div>
+
+      </div>
+
+
+  </form>
+)
 }
