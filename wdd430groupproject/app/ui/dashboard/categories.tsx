@@ -9,7 +9,7 @@ import { fetchCategory } from "@/app/lib/data";
 export default async function CatLinks() {
   const homeCategory = await fetchCategory("decor");
   const textilesCategory = await fetchCategory("textiles");
-  const artCategory = await fetchCategory("arts");
+  const artCategory = await fetchCategory("art");
   const accessoriesCategory = await fetchCategory("accessories");
 
   return (
