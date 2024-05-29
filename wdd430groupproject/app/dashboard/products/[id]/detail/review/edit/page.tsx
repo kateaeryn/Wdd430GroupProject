@@ -20,7 +20,8 @@ export default function EditReviewPage() {
 				isLoggedIn ? (
 					<EditReviewForm />
 				) : (
-					<p>You must log in to edit a review</p>
+						<p>You must log in to edit a review</p>
+						
 				)
 			) : (
 				<p>You must log in to edit a review</p>
