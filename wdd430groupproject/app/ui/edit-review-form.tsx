@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import OStars from '@/app/ui/components/star-rating';
-import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import type { FieldValues } from 'react-hook-form';
-import { updateReview } from '../lib/actions';
-import { useRouter } from 'next/navigation';
-import { deleteReview } from '../lib/actions';
+import OStars from "@/app/ui/components/star-rating";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import type { FieldValues } from "react-hook-form";
+import { updateReview } from "../lib/actions";
+import { useRouter } from "next/navigation";
+import { deleteReview } from "../lib/actions";
 
 export default function EditReviewForm(props: any) {
   const router = useRouter();
@@ -22,19 +22,19 @@ export default function EditReviewForm(props: any) {
     getValues,
   } = useForm({ defaultValues: { rate: bruh5.rate, text: bruh5.text } });
 
-  const rating = watch('rate', bruh5.rate);
+  const rating = watch("rate", bruh5.rate);
   const handleRatingChange = (newRating: number) => {
-    setValue('rate', newRating);
+    setValue("rate", newRating);
   };
 
   const onSubmit = async (data: FieldValues) => {
     const sanitizedData = {
       ...data,
-      text: data.text.replace(/\s+/g, ' ').trim(),
+      text: data.text.replace(/\s+/g, " ").trim(),
     };
 
     if (sanitizedData) {
-      console.log('Submitted Data:', sanitizedData);
+      console.log("Submitted Data:", sanitizedData);
     }
     let data2 = {
       ...sanitizedData,
@@ -42,12 +42,12 @@ export default function EditReviewForm(props: any) {
     };
     console.log(`line 39${JSON.stringify(data2)}`);
     await updateReview(JSON.stringify(data2));
-    router.push(`/dashboard/account`);
+    //router.push(`/dashboard/account`);
   };
 
   async function onDelete(data: string) {
     await deleteReview(data);
-    router.push(`/dashboard/account`);
+    //router.push(`/dashboard/account`);
   }
 
   return (
@@ -55,10 +55,10 @@ export default function EditReviewForm(props: any) {
       <strong>Edit Review</strong>
       <strong>Review Date: {new Date(bruh5.date).toLocaleDateString()}</strong>
       <textarea
-        {...register('text', {
+        {...register("text", {
           maxLength: {
             value: 100,
-            message: 'Cannot exceed 100 characters',
+            message: "Cannot exceed 100 characters",
           },
         })}
         className="w-[400px] h-[300px]"
@@ -72,11 +72,11 @@ export default function EditReviewForm(props: any) {
       <OStars
         currentStar={Number(rating)}
         onRatingChange={handleRatingChange}
-        register={register('rate', {
+        register={register("rate", {
           validate: (value) =>
             value !== bruh5.rate ||
-            getValues('text') !== bruh5.text ||
-            'No changes submitted',
+            getValues("text") !== bruh5.text ||
+            "No changes submitted",
         })}
       />
       {errors.rate && (
