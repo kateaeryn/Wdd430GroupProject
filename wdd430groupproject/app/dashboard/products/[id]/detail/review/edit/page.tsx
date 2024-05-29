@@ -1,23 +1,31 @@
+"use client";
+
 import EditReviewForm from '@/app/ui/edit-review-form';
-import { Metadata } from 'next';
-import { getReviewBasics } from '@/app/lib/data';
 
+import React, { useContext, useState, useEffect } from "react";
+import { AuthContext } from "@/app/lib/authContext";
 
-export const metadata: Metadata = {
-  title: "Edit Review",
-};
+export default function EditReviewPage() {
+	const { isLoggedIn } = useContext(AuthContext);
+	const [hydrated, setHydrated] = useState(false);
 
-export default async function EditReviewPage({params}: {params: {id:string}}) {
-  const id = params.id;
-  const [review] = await Promise.all([getReviewBasics(id)]); 
-  console.log(review);
-  return (
-    <>
-      <div className="flex flex-col grow max-w-4xl  text-center">
-        <h1>Edit Review</h1>
+	useEffect(() => {
+		setHydrated(true);
+	}, []);
 
-        <EditReviewForm review={review} />
-      </div>
-    </>
-  );
+	return (
+		<div className="flex flex-col items-center">
+			<h2>Edit Review</h2>
+			{hydrated ? (
+				isLoggedIn ? (
+					<EditReviewForm />
+				) : (
+					<p>You must log in to edit a review</p>
+				)
+			) : (
+				<p>You must log in to edit a review</p>
+			)}
+		</div>
+	);
+
 }
