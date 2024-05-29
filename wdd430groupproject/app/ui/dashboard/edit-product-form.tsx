@@ -186,8 +186,8 @@ export default function EditProductForm({
               />
             </div>
             <div id="image-error" aria-live="polite" aria-atomic="true">
-              {state.errors?.description &&
-                state.errors.description.map((error: string) => (
+              {state.errors?.image_url &&
+                state.errors.image_url.map((error: string) => (
                   <p className="mt-2 text-sm text-red-500" key={error}>
                     {error}
                   </p>

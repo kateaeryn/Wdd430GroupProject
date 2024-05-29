@@ -17,7 +17,6 @@ interface ReviewProps {
 }
 
 const ReviewGrid: React.FC<ReviewProps> = ({ reviews }) => {
-  console.log(reviews);
   return (
     <div className="flex flex-col gap-4">
       {reviews.map((review) => (

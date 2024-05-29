@@ -1,5 +1,5 @@
 import { sql } from '@vercel/postgres';
-import { User, Item, Artisans, Review, ProductForm } from './definitions';
+import { User, Item, Artisans, Review, ProductForm, ReviewForm } from './definitions';
 import { unstable_noStore as noStore } from 'next/cache';
 
 export async function getUser(email: string) {
@@ -349,6 +349,28 @@ export async function getCustomerReviews(id: string) {
     throw new Error("Failed to fetch customer's reviews");
   }
 }
+
+export async function getReviewBasics(id: string) {
+  noStore();
+  try {
+    const data = await sql<ReviewForm>`SELECT
+    reviews.id, text, rate, items.title
+    FROM reviews
+    JOIN items on reviews.item_id = items.id
+    WHERE reviews.id=${id}`;
+    
+    const review = data.rows.map((review) => ({
+      ...review,
+    }))
+    console.log(review);
+    return review[0];
+  
+  } catch (error) {
+    console.error("Database Error", error);
+    throw new Error("Failed to update review");
+  }
+}
+
 
 export async function postItemReview(
   item_id: string,
