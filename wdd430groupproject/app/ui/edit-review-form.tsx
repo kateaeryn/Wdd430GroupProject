@@ -114,14 +114,15 @@ const EditReviewForm = () => {
                         required
                     />
                 </div>
-                <Button type="submit" className="mr-2">
-                    Submit Review
-                </Button>
-                <Button type="button" onClick={handleDelete} className="mr-2">
+                
+                {/* <Button type="button" onClick={handleDelete} className="mr-2">
                     Delete
-                </Button>
+                </Button> */}
                 <Button type="button" onClick={handleCancel} className="mr-2">
                     Cancel
+          </Button>
+          <Button type="submit" className="mr-2">
+                    Submit Review
                 </Button>
             </form>
         </div>
