@@ -20,6 +20,7 @@ interface ReviewProps {
 }
 
 const ReviewGrid: React.FC<ReviewProps> = ({ reviews }) => {
+
     console.log(reviews);
     const [open, setOpen] = useState(false);
     const [deleteItem, setDeleteItem] = useState(false);
@@ -113,6 +114,7 @@ const ReviewGrid: React.FC<ReviewProps> = ({ reviews }) => {
                     </Link> */}
                 </div>
             ))}
+
         </div>
     );
 };

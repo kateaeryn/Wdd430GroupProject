@@ -70,3 +70,10 @@ export type ProductForm = {
   image_url: string;
   status: "available" | "unavailable";
 };
+
+export type ReviewForm = {
+  id: string;
+  text: string;
+  rate: string;
+  title: string;
+}

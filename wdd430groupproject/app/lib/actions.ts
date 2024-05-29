@@ -5,6 +5,7 @@ import z from "zod";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import exp from "constants";
+import { unstable_noStore as noStore } from 'next/cache';
 
 const FormNewProductSchema = z.object({
   id: z.string(),
@@ -140,28 +141,41 @@ const ReviewSchema = z.object({
   id: z.string().uuid(),
   text: z.string(),
   rate: z.number().min(1).max(5),
+  title: z.string()
 });
 
-export async function updateReview(data: any) {
+export async function updateReview(
+  id: string,
+  prevState: State,
+  formData: FormData
+) {
+  const validatedFields = ReviewSchema.safeParse({
+    text: formData.get('text'),
+    rate: formData.get('rate'),
+    title: formData.get('title'),
+  });
+
+if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: "Missing Fields. Failed to Update Review.",
+    };
+  }
+
+  const { text, rate } = validatedFields.data;
+
   try {
-    const parsedData = ReviewSchema.parse(JSON.parse(data));
-    const { id, text, rate } = parsedData;
-    console.log(`line sql ${id}, ${text}, ${rate}`);
+    
     await sql`
       UPDATE reviews
       SET text = ${text}, rate = ${rate}
       WHERE id = ${id}
     `;
-    return { message: "Updated successfully." };
   } catch (error) {
-    if (error instanceof z.ZodError) {
-      return {
-        message: "Invalid Data",
-        details: error.errors,
-      };
-    }
     return { message: "Review update failed." };
   }
+  revalidatePath('/dashboard/account');
+  redirect('/dashboard/account');
 }
 
 export async function deleteReview(id: string) {
