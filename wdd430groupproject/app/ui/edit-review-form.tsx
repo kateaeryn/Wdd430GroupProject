@@ -73,10 +73,10 @@ export default function EditReviewForm(props: any) {
         currentStar={Number(rating)}
         onRatingChange={handleRatingChange}
         register={register("rate", {
-          validate: (value) =>
-            value !== bruh5.rate ||
-            getValues("text") !== bruh5.text ||
-            "No changes submitted",
+          // validate: (value) =>
+          //   value !== bruh5.rate ||
+          //   getValues("text") !== bruh5.text ||
+          //   "No changes submitted",
         })}
       />
       {errors.rate && (
