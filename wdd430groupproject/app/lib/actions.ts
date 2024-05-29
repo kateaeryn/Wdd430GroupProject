@@ -160,18 +160,14 @@ export async function updateReview(data: any) {
         details: error.errors,
       };
     }
-    //return { message: "Review update failed." };
+    return { message: "Review update failed." };
   }
-  revalidatePath("/dashboard/account");
-  redirect("/dashboard/account");
 }
 
 export async function deleteReview(id: string) {
   try {
     await sql`DELETE FROM reviews WHERE reviews.id = ${id}`;
     console.log("success");
-    revalidatePath("/dashboard/account");
-    redirect("/dashboard/account");
     return { message: "Deleted Product." };
   } catch (error) {
     console.log("royal failure");
