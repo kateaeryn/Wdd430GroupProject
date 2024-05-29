@@ -42,12 +42,12 @@ export default function EditReviewForm(props: any) {
     };
     console.log(`line 39${JSON.stringify(data2)}`);
     await updateReview(JSON.stringify(data2));
-    //router.push(`/dashboard/account`);
+    router.push(`/dashboard/account`);
   };
 
   async function onDelete(data: string) {
     await deleteReview(data);
-    //router.push(`/dashboard/account`);
+    router.push(`/dashboard/account`);
   }
 
   return (
