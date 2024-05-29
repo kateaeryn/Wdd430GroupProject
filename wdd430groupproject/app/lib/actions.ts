@@ -5,6 +5,7 @@ import z from "zod";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import exp from "constants";
+import { unstable_noStore as noStore } from 'next/cache';
 
 const FormNewProductSchema = z.object({
   id: z.string(),
@@ -143,6 +144,7 @@ const ReviewSchema = z.object({
 });
 
 export async function updateReview(data: any) {
+  noStore();
   try {
     const parsedData = ReviewSchema.parse(JSON.parse(data));
     const { id, text, rate } = parsedData;
