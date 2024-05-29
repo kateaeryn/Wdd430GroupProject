@@ -5,7 +5,7 @@ import z from "zod";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import exp from "constants";
-import { unstable_noStore as noStore } from 'next/cache';
+import { unstable_noStore as noStore } from "next/cache";
 
 const FormNewProductSchema = z.object({
   id: z.string(),
@@ -141,7 +141,7 @@ const ReviewSchema = z.object({
   id: z.string().uuid(),
   text: z.string(),
   rate: z.number().min(1).max(5),
-  title: z.string()
+  title: z.string(),
 });
 
 export async function updateReview(
@@ -150,12 +150,12 @@ export async function updateReview(
   formData: FormData
 ) {
   const validatedFields = ReviewSchema.safeParse({
-    text: formData.get('text'),
-    rate: formData.get('rate'),
-    title: formData.get('title'),
+    text: formData.get("text"),
+    rate: formData.get("rate"),
+    title: formData.get("title"),
   });
 
-if (!validatedFields.success) {
+  if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
       message: "Missing Fields. Failed to Update Review.",
@@ -165,7 +165,6 @@ if (!validatedFields.success) {
   const { text, rate } = validatedFields.data;
 
   try {
-    
     await sql`
       UPDATE reviews
       SET text = ${text}, rate = ${rate}
@@ -174,14 +173,16 @@ if (!validatedFields.success) {
   } catch (error) {
     return { message: "Review update failed." };
   }
-  revalidatePath('/dashboard/account');
-  redirect('/dashboard/account');
+  revalidatePath("/dashboard/account");
+  redirect("/dashboard/account");
 }
 
 export async function deleteReview(id: string) {
   try {
     await sql`DELETE FROM reviews WHERE reviews.id = ${id}`;
     console.log("success");
+    window.location.reload();
+    revalidatePath("/dashboard/account");
     return { message: "Deleted Product." };
   } catch (error) {
     console.log("royal failure");
