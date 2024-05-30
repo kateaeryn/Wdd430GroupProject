@@ -20,23 +20,23 @@ export default function Header() {
 	return (
 		<header className="flex flex-col space-y-2 bg-tan max-height-[170px]">
 			<div className="flex flex-col sm:flex-row">
-				<div className="relative flex justify-center -mt-8 -mb-10 2xl:ml-5">
-					<Link href="/">
+				<div className="relative flex justify-center 2xl:ml-5 " >
+					<Link href="/" >
 						<Image
-							className="object-scale-down size-60 "
+							className="object-scale-down w-[240px] h-[158px] "
 							src={logo}
 							alt="Logo"
-							priority
-							sizes="240px"
+							priority={true}
+							
 							width={240}
-							height={240}
+							height={158}
 						/>
 					</Link>
 				</div>
 				<div className="hidden sm:flex justify-evenly grow flex-wrap flex-row ">
 					<NavLinks />
 				</div>
-				<div className="flex flex-row justify-evenly sm:self-center">
+				<div className="flex flex-row justify-evenly sm:self-center -mt-4" >
 					{hydrated ? (
 						isLoggedIn ? (
 							<Link href="/dashboard/account">
