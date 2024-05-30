@@ -20,9 +20,9 @@ export default async function ArtistDetail({params}: {params: {id: string}}) {
                   
                 </div>
                 <div className="md:flex md:flex-row">
-                  <Image className="object-scale-down md:size-96 lg:size-[36rem] xl:size-[40rem]" src={link.image_url} alt="person placeholder" height={3700}
+                  <Image className="object-scale-down md:size-96 lg:size-[36rem] xl:size-[40rem]" priority={true}  src={link.image_url} alt="Artist" height={3700}
                     width={3700}
-                  sizes="(min-width: 2240px) 21.18vw, (min-width: 1280px) calc(2.45vw + 396px), (min-width: 1040px) 384px, (min-width: 780px) 256px, calc(100vw - 96px)"/>
+                  sizes="(min-width: 2240px) calc(15.67vw + 170px), (min-width: 1280px) calc(2.64vw + 478px), (min-width: 1040px) 461px, (min-width: 780px) 307px, calc(100vw - 96px)"/>
                   <div className="text-brown">
                     <h2 className="md:ml-4">Biography</h2>
                     <p className="text-2xl text-brown md:text-xl md:mx-4">{link.story}</p>
