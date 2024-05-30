@@ -21,7 +21,8 @@ export default async function ArtistDetail({params}: {params: {id: string}}) {
                 </div>
                 <div className="md:flex md:flex-row">
                   <Image className="object-scale-down md:size-96 lg:size-[36rem] xl:size-[40rem]" src={link.image_url} alt="person placeholder" height={3700}
-                    width={3700} />
+                    width={3700}
+                  sizes="(min-width: 2240px) 21.18vw, (min-width: 1280px) calc(2.45vw + 396px), (min-width: 1040px) 384px, (min-width: 780px) 256px, calc(100vw - 96px)"/>
                   <div className="text-brown">
                     <h2 className="md:ml-4">Biography</h2>
                     <p className="text-2xl text-brown md:text-xl md:mx-4">{link.story}</p>
@@ -36,7 +37,8 @@ export default async function ArtistDetail({params}: {params: {id: string}}) {
                           key={link.id}
                           href={'/dashboard/products/' + link.id + '/detail'}
                           className="" >
-                          <Image src={link.image_url} alt={link.id} priority={true} className="md:my-4 sm:size-44 md:size-60 xl:size-80 2xl:size-[24rem]" width={2250} height={4000} />
+                          <Image src={link.image_url} alt={link.id} priority={true} className="md:my-4 sm:size-44 md:size-60 xl:size-80 2xl:size-[24rem]" width={2250} height={4000}
+                          sizes="(min-width: 1540px) 384px, (min-width: 1280px) 320px, (min-width: 780px) 240px, (min-width: 640px) 176px, calc(100vw - 96px)"/>
                           <p className=" text-2xl">{link.title}</p>
                         </Link>
                       </div>

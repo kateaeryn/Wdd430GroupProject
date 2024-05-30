@@ -3,6 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { TRegistrationSchema, registrationSchema } from '../lib/type';
+import Button from '@/app/ui/button';
 
 // React hook form to handle validation and to do away with useState
 export default function RegistrationForm() {
@@ -79,7 +80,7 @@ export default function RegistrationForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-y-2">
-      <div className="block w-full rounded-md border border-gray-200 py-[9px] pl-5 text-sm outline-2 placeholder:text-gray-400">
+      <div className="flex flex-col w-full rounded-md border border-gray-200 py-[9px] pl-5 text-sm outline-2 placeholder:text-gray-400">
         <label className="mr-2">
           <input
             {...register('registrationType')}
@@ -100,7 +101,7 @@ export default function RegistrationForm() {
             name="registrationType"
             className="mr-1"
           />
-          Vendor
+          Artist
         </label>
       </div>
       {errors.registrationType && (
@@ -160,13 +161,13 @@ export default function RegistrationForm() {
       {errors.confirmPassword && (
         <p className="text-red-500">{`${errors.confirmPassword.message}`}</p>
       )}
-      <button
+      <Button
         disabled={isSubmitting}
         type="submit"
-        className="bg-blue-200 rounded-md border border-gray-200 disabled:bg-red-800 disabled:text-white disabled={false}"
+        className="rounded-md w-full border disabled:bg-red-800 disabled:text-white disabled={false}"
       >
         Submit
-      </button>
+      </Button>
     </form>
   );
 }

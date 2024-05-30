@@ -27,6 +27,7 @@ export default function FilterByPrice() {
 
   return (
     <div className="flex ">
+      <label hidden>Filter By Price</label>
       <select
         id="filter"
         name="filter"

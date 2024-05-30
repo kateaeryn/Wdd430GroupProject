@@ -53,7 +53,7 @@ export default function LoginForm() {
 			className="bg-tan shadow-2xl w-auto border rounded px-8 pt-6 pb-8 mb-4"
 		>
 			<div className="block text-black-700 font-bold mb-2">
-				<h1 className="text-2xl text-gray-500 mb-10">
+				<h1 className="text-2xl text-darkBrown mb-10">
 					Please log in to continue.
 				</h1>
 				<div className="w-full">
