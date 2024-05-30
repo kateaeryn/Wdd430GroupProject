@@ -4,13 +4,13 @@ import React, { useState, useEffect } from 'react';
 import { Review } from '@/app/lib/definitions';
 import Button from '@/app/ui/button';
 import { usePathname, useRouter } from 'next/navigation';
-import { useAuth } from '@/app/lib/authContext'; // Import the useAuth hook
+import { useAuth } from '@/app/lib/authContext'; 
 
 const ProductReviewForm: React.FC = () => {
   const router = useRouter();
   const pathname = usePathname();
   const item_id = pathname ? pathname.split('/')[3] : '';
-  const { user, isLoggedIn } = useAuth(); // Access user and isLoggedIn from context
+  const { user, isLoggedIn } = useAuth(); 
 
   const [review, setReview] = useState<Omit<Review, 'id' | 'user_id'>>({
     item_id: item_id,
