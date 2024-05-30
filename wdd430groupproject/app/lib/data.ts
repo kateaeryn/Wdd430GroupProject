@@ -1,5 +1,5 @@
 import { sql } from '@vercel/postgres';
-import { User, Item, Artisans, Review, ProductForm } from './definitions';
+import { User, Item, Artisans, Review, ProductForm, ReviewForm } from './definitions';
 import { unstable_noStore as noStore } from 'next/cache';
 
 export async function getUser(email: string) {
@@ -350,6 +350,28 @@ export async function getCustomerReviews(id: string) {
   }
 }
 
+export async function getReviewBasics(id: string) {
+  noStore();
+  try {
+    const data = await sql<ReviewForm>`SELECT
+    reviews.id, text, rate, items.title
+    FROM reviews
+    JOIN items on reviews.item_id = items.id
+    WHERE reviews.id=${id}`;
+    
+    const review = data.rows.map((review) => ({
+      ...review,
+    }))
+    console.log(review);
+    return review[0];
+  
+  } catch (error) {
+    console.error("Database Error", error);
+    throw new Error("Failed to update review");
+  }
+}
+
+
 export async function postItemReview(
   item_id: string,
   user_id: string,
@@ -399,5 +421,67 @@ export async function fetchProductByID(id: string) {
   } catch (error) {
     console.error('Database Error', error);
     throw new Error('Failed to fetch Product Details');
+  }
+}
+
+export async function getReviewById(id: string) {
+  try {
+    const review = await sql`SELECT * FROM reviews WHERE id = ${id}`;
+    return review.rows[0] as Review;
+  } catch (error) {
+    console.error('Failed to fetch review by ID:', error);
+    throw new Error('Failed to fetch review by ID.');
+  }
+}
+
+// export async function updateReviewById(id: string, reviewData: Partial<Review>) {
+//   const { item_id, user_id, text, rate, date } = reviewData;
+//   const formattedDate = date ? date.toISOString() : new Date().toISOString(); // Ensure date is a string
+
+//   try {
+//     const review = await sql`
+//       UPDATE reviews
+//       SET item_id = ${item_id}, user_id = ${user_id}, text = ${text}, rate = ${rate}, date = ${formattedDate}
+//       WHERE id = ${id}
+//       RETURNING *;
+//     `;
+//     return review.rows[0] as Review;
+//   } catch (error) {
+//     console.error('Failed to update review by ID:', error);
+//     throw new Error('Failed to update review by ID.');
+//   }
+// }
+
+
+export async function updateReviewById(
+  id: string,
+  item_id: string,
+  user_id: string,
+  text: string,
+  rate: number,
+  date: Date
+) {
+  const formattedDate = date ? date.toISOString() : new Date().toISOString();
+
+  try {
+    const review = await sql`
+      UPDATE reviews
+      SET item_id = ${item_id}, user_id = ${user_id}, text = ${text}, rate = ${rate}, date = ${formattedDate}
+      WHERE id = ${id}
+      RETURNING *;
+    `;
+    return review.rows[0] as Review;
+  } catch (error) {
+    console.error('Failed to update review by ID:', error);
+    throw new Error('Failed to update review by ID.');
+  }
+}
+
+export async function deleteReviewById(id: string) {
+  try {
+      await sql`DELETE FROM reviews WHERE id = ${id}`;
+  } catch (error) {
+      console.error('Failed to delete review by ID:', error);
+      throw new Error('Failed to delete review by ID.');
   }
 }

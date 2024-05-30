@@ -3,6 +3,8 @@
 import React, { useContext, useState, useEffect } from "react";
 import ProductReviewForm from "./review-form";
 import { AuthContext } from "@/app/lib/authContext";
+import Button  from '@/app/ui/button';
+import Link from 'next/link';
 
 export default function ProductPage() {
     const { isLoggedIn, userType } = useContext(AuthContext);
@@ -25,11 +27,19 @@ export default function ProductPage() {
                         </>
                     )
                 ) : (
-                    <p>You must log in to leave a review</p>
-                )
-            ) : (
-                <p>Loading...</p>
-            )}
+					<div className="flex flex-col text-center">
+					<p>You must log in to leave a review</p>
+					<Link href="/dashboard/login"><Button>Log In</Button>
+					</Link>
+					</div>
+			)
+		) : (
+				<div className="flex flex-col text-center">
+				<p>You must log in to leave a review</p>
+				<Link href="/dashboard/login"><Button>Log In</Button>
+					</Link>
+					</div>
+		)}
         </div>
     );
 }
