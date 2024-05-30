@@ -7,33 +7,39 @@ import Button  from '@/app/ui/button';
 import Link from 'next/link';
 
 export default function ProductPage() {
-	const { isLoggedIn } = useContext(AuthContext);
-	const [hydrated, setHydrated] = useState(false);
+    const { isLoggedIn, userType } = useContext(AuthContext);
+    const [hydrated, setHydrated] = useState(false);
 
-	useEffect(() => {
-		setHydrated(true);
-	}, []);
+    useEffect(() => {
+        setHydrated(true);
+    }, []);
 
-	return (
-		<div className="flex flex-col items-center">
-			<h2>Write a Review</h2>
-			{hydrated ? (
-				isLoggedIn ? (
-					<ProductReviewForm />
-				) : (
-						<div className="flex flex-col text-center">
-						<p>You must log in to leave a review</p>
-						<Link href="/dashboard/login"><Button>Log In</Button>
-						</Link>
-						</div>
-				)
-			) : (
+    return (
+        <div className="flex flex-col items-center">
+            {hydrated ? (
+                isLoggedIn ? (
+                    userType === "artisan" ? (
+                        <p>Artisans cannot review a product</p>
+                    ) : (
+                        <>
+                            <h2>Write a Review</h2>
+                            <ProductReviewForm />
+                        </>
+                    )
+                ) : (
 					<div className="flex flex-col text-center">
 					<p>You must log in to leave a review</p>
 					<Link href="/dashboard/login"><Button>Log In</Button>
-						</Link>
-						</div>
-			)}
-		</div>
-	);
+					</Link>
+					</div>
+			)
+		) : (
+				<div className="flex flex-col text-center">
+				<p>You must log in to leave a review</p>
+				<Link href="/dashboard/login"><Button>Log In</Button>
+					</Link>
+					</div>
+		)}
+        </div>
+    );
 }
