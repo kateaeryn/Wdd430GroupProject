@@ -1,9 +1,9 @@
-'use client';
-import { zodResolver } from '@hookform/resolvers/zod';
-import React from 'react';
-import { useForm } from 'react-hook-form';
-import { TRegistrationSchema, registrationSchema } from '../lib/type';
-import Button from '@/app/ui/button';
+"use client";
+import { zodResolver } from "@hookform/resolvers/zod";
+import React from "react";
+import { useForm } from "react-hook-form";
+import { TRegistrationSchema, registrationSchema } from "../lib/type";
+import Button from "@/app/ui/button";
 
 // React hook form to handle validation and to do away with useState
 export default function RegistrationForm() {
@@ -18,8 +18,8 @@ export default function RegistrationForm() {
   });
 
   const onSubmit = async (data: TRegistrationSchema) => {
-    const response = await fetch('/api/registration', {
-      method: 'POST',
+    const response = await fetch("/api/registration", {
+      method: "POST",
       body: JSON.stringify({
         registrationType: data.registrationType,
         firstName: data.firstName,
@@ -30,50 +30,50 @@ export default function RegistrationForm() {
         confirmPassword: data.confirmPassword,
       }),
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     });
 
     const responseData = await response.json();
     if (!response.ok) {
-      alert('Form submission Failed!');
+      alert("Form submission Failed!");
       return;
     }
 
     if (responseData.errors) {
       const errors = responseData.errors;
       if (errors.firstName) {
-        setError('firstName', {
-          type: 'server',
+        setError("firstName", {
+          type: "server",
           message: errors.firstName,
         });
       } else if (errors.lastName) {
-        setError('lastName', {
-          type: 'server',
+        setError("lastName", {
+          type: "server",
           message: errors.lastName,
         });
       } else if (errors.email) {
-        setError('email', {
-          type: 'server',
+        setError("email", {
+          type: "server",
           message: errors.email,
         });
       } else if (errors.image) {
-        setError('image', {
-          type: 'server',
+        setError("image", {
+          type: "server",
           message: errors.image,
         });
       } else if (errors.password) {
-        setError('password', {
-          type: 'server',
+        setError("password", {
+          type: "server",
           message: errors.password,
         });
       } else if (errors.confirmPassword) {
-        setError('confirmPassword', {
-          type: 'server',
+        setError("confirmPassword", {
+          type: "server",
           message: errors.confirmPassord,
         });
       } else {
-        alert('Something went wrong!');
+        alert("Something went wrong!");
       }
     }
   };
@@ -83,8 +83,8 @@ export default function RegistrationForm() {
       <div className="flex flex-col w-full rounded-md border border-gray-200 py-[9px] pl-5 text-sm outline-2 placeholder:text-gray-400">
         <label className="mr-2">
           <input
-            {...register('registrationType')}
-            value={'customer'}
+            {...register("registrationType")}
+            value={"customer"}
             type="radio"
             title="customer"
             name="registrationType"
@@ -94,8 +94,8 @@ export default function RegistrationForm() {
         </label>
         <label className="mr-2">
           <input
-            {...register('registrationType')}
-            value={'vendor'}
+            {...register("registrationType")}
+            value={"vendor"}
             type="radio"
             title="vendor"
             name="registrationType"
@@ -108,7 +108,7 @@ export default function RegistrationForm() {
         <p className="text-red-500">{`${errors.registrationType.message}`}</p>
       )}
       <input
-        {...register('firstName')}
+        {...register("firstName")}
         type="text"
         placeholder="First Name"
         className="block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm  placeholder:text-gray-400"
@@ -117,7 +117,7 @@ export default function RegistrationForm() {
         <p className="text-red-500">{`${errors.firstName.message}`}</p>
       )}
       <input
-        {...register('lastName')}
+        {...register("lastName")}
         type="text"
         placeholder="Last Name"
         className="block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-400"
@@ -126,7 +126,7 @@ export default function RegistrationForm() {
         <p className="text-red-500">{`${errors.lastName.message}`}</p>
       )}
       <input
-        {...register('email')}
+        {...register("email")}
         type="email"
         placeholder="Email"
         className="block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-400"
@@ -135,16 +135,16 @@ export default function RegistrationForm() {
         <p className="text-red-500">{`${errors.email.message}`}</p>
       )}
       <input
-        {...register('image')}
-        type="url"
-        placeholder="image/url"
+        {...register("image")}
+        type="text"
+        placeholder="Profile Picture"
         className="block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-400"
       />
       {errors.image && (
         <p className="text-red-500">{`${errors.image.message}`}</p>
       )}
       <input
-        {...register('password')}
+        {...register("password")}
         type="password"
         placeholder="Password"
         className="block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-400"
@@ -153,7 +153,7 @@ export default function RegistrationForm() {
         <p className="text-red-500">{`${errors.password.message}`}</p>
       )}
       <input
-        {...register('confirmPassword')}
+        {...register("confirmPassword")}
         type="password"
         placeholder="Confirm password"
         className="block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-400"
