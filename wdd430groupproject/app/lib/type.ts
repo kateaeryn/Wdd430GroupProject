@@ -21,7 +21,7 @@ export const registrationSchema = z
       .trim()
       .regex(/^[a-zA-Z]+$/, "Last name must contain only letters"),
     email: z.string().email(),
-    image: z.string().url().optional(), // Make image optional
+    image: z.string().optional(), // Make image optional
     password: z.string().min(5, "Minimum 10 characters"),
     confirmPassword: z.string(),
   })
