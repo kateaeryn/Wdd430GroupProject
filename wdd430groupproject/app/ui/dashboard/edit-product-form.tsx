@@ -21,7 +21,7 @@ export default function EditProductForm({
   const initialState = { message: "", errors: {} };
   const updateProductWithId = updateProduct.bind(null, product.id);
   const [state, dispatch] = useFormState(updateProductWithId, initialState);
-  console.log(product.id);
+  
   return (
     <form action={dispatch}>
       <div className=" rounded-md bg-tan p-4 md:p-6 text-darkBrown">

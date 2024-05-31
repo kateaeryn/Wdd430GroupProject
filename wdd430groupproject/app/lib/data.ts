@@ -122,8 +122,7 @@ export async function fetchArtisan() {
 		story
         FROM artisans
         `;
-		console.log(data.rows
-		);
+		
 		return data.rows;
 	} catch (err) {
 		console.error("Database Error:", err);
