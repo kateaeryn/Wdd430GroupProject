@@ -126,7 +126,7 @@ const ArtisanForm = () => {
 				<label htmlFor="image_url" className="block text-xl">Image</label>	
 
 			<input
-				type="url"
+				type="text"
 				name="image_url"
 				placeholder="Image URL (optional)"
 				value={formData.image_url}

@@ -110,6 +110,7 @@ export async function fetchItems() {
 }
 
 export async function fetchArtisan() {
+	noStore();
 	try {
 		const data = await sql<Artisans>`
         SELECT 
@@ -117,10 +118,12 @@ export async function fetchArtisan() {
         first_name,
 		last_name, 
         email, 
-        image_url
+        image_url,
+		story
         FROM artisans
         `;
-
+		console.log(data.rows
+		);
 		return data.rows;
 	} catch (err) {
 		console.error("Database Error:", err);
