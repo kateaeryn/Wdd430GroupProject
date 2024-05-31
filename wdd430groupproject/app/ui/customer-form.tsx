@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from "react";
+import Button from '@/app/ui/button';
 
 const CustomerForm = () => {
 	const [formData, setFormData] = useState({
@@ -48,14 +49,22 @@ const CustomerForm = () => {
 
 	return (
 		<form onSubmit={handleSubmit}>
-			<input
+			<h1 className="text-5xl">Customer Registration</h1>
+			<div className="flex flex-col bg-tan p-4 md:p-6 text-darkBrown  rounded-md ">
+				<div className="mb-4">
+				<label htmlFor="first_name" className="block text-xl">First Name</label>
+				<input
 				type="text"
 				name="first_name"
 				placeholder="First Name"
 				value={formData.first_name}
 				onChange={handleChange}
-				required
-			/>
+					required
+					className=""
+				/>	
+				</div>
+				<div className="mb-4">
+				<label htmlFor="last_name" className="block text-xl">Last Name</label>	
 			<input
 				type="text"
 				name="last_name"
@@ -63,7 +72,11 @@ const CustomerForm = () => {
 				value={formData.last_name}
 				onChange={handleChange}
 				required
-			/>
+				/>
+				
+				</div>	
+				<div className="mb-4">
+				<label htmlFor="email" className="block text-xl">Email</label>
 			<input
 				type="email"
 				name="email"
@@ -71,31 +84,43 @@ const CustomerForm = () => {
 				value={formData.email}
 				onChange={handleChange}
 				required
-			/>
-			<input
-				type="password"
-				name="password"
-				placeholder="Password"
-				value={formData.password}
-				onChange={handleChange}
-				required
-			/>
-			<input
+				/>					
+				</div>
+				<div className="mb-4">
+					<label htmlFor="password" className="block text-xl">Password</label>
+					<input
+					type="password"
+					name="password"
+					placeholder="Password"
+					value={formData.password}
+					onChange={handleChange}
+					required
+					/>
+
+				</div>
+				<div className="mb-4">
+				<label htmlFor="confirm_password" className="block text-xl">Confirm Password</label>
+				<input
 				type="password"
 				name="confirm_password"
 				placeholder="Confirm Password"
 				value={formData.confirm_password}
 				onChange={handleChange}
 				required
-			/>
-			<input
+				/>
+				</div>
+				<div className="mb-4">
+				<label htmlFor="image_url" className="block text-xl">Image</label>
+				<input
 				type="url"
 				name="image_url"
 				placeholder="Image URL (optional)"
 				value={formData.image_url}
 				onChange={handleChange}
 			/>
-			<button type="submit">Register</button>
+				</div>
+				<Button type="submit" className="text-2xl">Register</Button>
+				</div>
 		</form>
 	);
 };
