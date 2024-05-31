@@ -102,6 +102,7 @@ export default function LoginForm() {
 				<div className="flex flex-col items-center space-y-4 mt-4">
 					<Button type="submit">Log in</Button>
 					<Button
+						type="button" // Change the type to "button"
 						onClick={() =>
 							(window.location.href = "/dashboard/registration")
 						}

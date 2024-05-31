@@ -1,16 +1,28 @@
+'use client';
+
 import React from 'react';
-import RegistrationForm from '@/app/ui/registration-form';
-import { Metadata } from 'next';
+import { useState } from 'react';
+import ArtisanForm from '../../ui/artisan-form';
+import CustomerForm from '../../ui/customer-form';
 
-export const metadata: Metadata = {
-  title: 'Registration Page',
-};
+const RegisterPage = () => {
+  const [registrationType, setRegistrationType] = useState<'customer' | 'artisan' | null>(null);
 
-export default function Page() {
   return (
-    <div className="flex flex-col items-center">
-      <h2 className="mb-4">Registration</h2>
-      <RegistrationForm />
+    <div>
+      <h1>Register Here</h1>
+      {!registrationType ? (
+        <div>
+          <button onClick={() => setRegistrationType('customer')}>Register as Customer</button>
+          <button onClick={() => setRegistrationType('artisan')}>Register as Artisan</button>
+        </div>
+      ) : (
+        <div>
+          {registrationType === 'customer' ? <CustomerForm /> : <ArtisanForm />}
+        </div>
+      )}
     </div>
   );
-}
+};
+
+export default RegisterPage;
