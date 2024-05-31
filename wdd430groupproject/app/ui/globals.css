@@ -22,16 +22,3 @@ h5 {
   font-family: 'Quattrocento', serif;
   color: #73503c;
 }
-
-.star-rating {
-  display: flex;
-  gap: 5px;
-}
-
-.star {
-  cursor: pointer;
-}
-
-.hidden {
-  display: none;
-}

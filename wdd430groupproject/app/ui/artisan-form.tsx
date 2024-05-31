@@ -52,7 +52,7 @@ const ArtisanForm = () => {
 
 	return (
 		<form onSubmit={handleSubmit}>
-			<h1 className="text-5xl">Artistan Registration</h1>
+			<h1 className="text-5xl">Artisan Registration</h1>
 			<div className="flex flex-col bg-tan p-4 md:p-6 text-darkBrown  rounded-md ">	
 			<div className="mb-4">
 				<label htmlFor="first_name" className="block text-xl">First Name</label>
